@@ -32,12 +32,27 @@ function toggleDisable(){
     const bugTitle = document.getElementById("bugTitle");
     const bugDesc = document.getElementById("desc");
     const bugUser = document.getElementById("user");
+    const scenario = document.getElementById("scenario");
+    const product = document.getElementById("product");
+    const enviornment = document.getElementById("enviornment");
+    const testing = document.getElementById("testing");
+    const rootcause = document.getElementById("rootcause");
+    const priority = document.getElementById("priority");
+    const assignee = document.getElementById("assignee");
+
 
     editable = !editable;
     bugTitle.disabled = !bugTitle.disabled;
     bugDesc.disabled = !bugDesc.disabled;
     bugUser.disabled = !bugUser.disabled;
-    
+    scenario.disabled = !scenario.disabled;
+    product.disabled = !product.disabled;
+    enviornment.disabled = !enviornment.disabled;
+    testing.disabled = !testing.disabled;
+    rootcause.disabled = !rootcause.disabled;
+    priority.disabled = !priority.disabled;
+    assignee.disabled = !assignee.disabled;
+
     
 }
 
@@ -87,7 +102,7 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col>
-                        <FormSelect  aria-label="Default select example">
+                        <FormSelect id="scenario" aria-label="Default select example">
                             <option>Scenario</option>
                             <option>Closed</option>
                             <option>Fixed</option>
@@ -96,7 +111,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect  aria-label="Default select example">
+                        <FormSelect id = "product" aria-label="Default select example">
                             <option>Product Name</option>
                             <option>Closed</option>
                             <option>Fixed</option>
@@ -105,7 +120,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect  aria-label="Default select example">
+                        <FormSelect  id = "enviornment"aria-label="Default select example">
                             <option>Enviornment</option>
                             <option>Closed</option>
                             <option>Fixed</option>
@@ -114,7 +129,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect  aria-label="Default select example">
+                        <FormSelect id = "testing" aria-label="Default select example">
                             <option>Testing Medium</option>
                             <option>Closed</option>
                             <option>Fixed</option>
@@ -123,7 +138,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect  aria-label="Default select example">
+                        <FormSelect id="rootcause" aria-label="Default select example">
                             <option>Root Cause Location</option>
                             <option>Closed</option>
                             <option>Fixed</option>
@@ -135,7 +150,7 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col >
-                    <FormSelect  aria-label="Default select example">
+                    <FormSelect id="priority" aria-label="Default select example">
                             <option>Priority</option>
                             <option>Closed</option>
                             <option>Fixed</option>
@@ -143,7 +158,7 @@ function BugAddContent() {
                         </FormSelect>
                     </Col>
                     <Col >
-                        <FormSelect  aria-label="Default select example">
+                        <FormSelect id="assignee" aria-label="Default select example">
                             <option>Assignee</option>
                             <option>Closed</option>
                             <option>Fixed</option>

@@ -1,7 +1,7 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {Container} from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
+import {Col} from 'react-bootstrap';
 
 
 function BugAddHeader() {
@@ -9,21 +9,17 @@ function BugAddHeader() {
     <div>
         <Container>
             <Row>
-                <Col>
+                <Col md = {2}>
                     <button>Back Arrow</button>
                 </Col>
-                <Col>
-                    <h1>Create Bug</h1>
+                <Col md = {2}>
+                    <p>Create Bug</p>
                 </Col>
-                <Col>
+                <Col md={{ span: 2, offset: 6 }}>
                     <button>Save</button>
                 </Col>
             </Row>
-
         </Container>
-        
-        
-      
     </div>
   )
 }

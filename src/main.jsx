@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import AdminRouter from "./routes/Admin.jsx";
 import UserRouter from "./routes/user.jsx";
 import PublicRouter from "./routes/Public.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Configurable routes
 const RouteHandler = {

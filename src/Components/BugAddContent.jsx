@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,6 +7,7 @@ import { Formik, Field, Form } from 'formik';
 import { FormSelect } from 'react-bootstrap';
 
 let editable = true;
+
 function validateTitle(value) {
     let error;
     if (!value){
@@ -53,13 +55,147 @@ function toggleDisable(){
     priority.disabled = !priority.disabled;
     assignee.disabled = !assignee.disabled;
 
+    //go back to original page after
     
 }
 
 
 
 
+
+
 function BugAddContent() {
+    const [scenarioErrors, setscenarioErrors] = useState("");
+    const [productErrors, setproductErrors] = useState("");
+    const [enviornmentErrors, setenviornmentErrors] = useState("");
+    const [testingErrors, settestingErrors] = useState("");
+    const [rootcauseErrors, setrootErrors] = useState("");
+    const [priorityErrors, setpriorityErrors] = useState("");
+    const [assigneeErrors, setassigneeErrors] = useState("");
+   
+
+    function valudate(){
+        if(scenarioErrors === "base"|| scenarioErrors === ""){
+            setscenarioErrors("Required");
+            
+        }
+        if(productErrors === "base"|| productErrors === ""){
+            setproductErrors("Required");
+            
+        }
+        if(enviornmentErrors === "base"|| enviornmentErrors === ""){
+            setenviornmentErrors("Required");
+            
+        }
+        if(testingErrors === "base"|| testingErrors === ""){
+            settestingErrors("Required");
+            
+        }
+        if(rootcauseErrors === "base"|| rootcauseErrors === ""){
+            setrootErrors("Required");
+            
+        }
+        if(priorityErrors === "base"|| priorityErrors === ""){
+            setpriorityErrors("Required");
+            
+        }
+        if(assigneeErrors === "base"|| assigneeErrors === ""){
+            setassigneeErrors("Required");
+            
+        }
+
+    }
+    
+
+    function changeScenario(){
+    
+
+        const scenarioElement = document.getElementById("scenario");
+        let scenarioValue = scenarioElement.value;
+        if(scenarioValue === "base"|| scenarioValue === ""){
+            setscenarioErrors("Required");
+            
+        }
+        else{
+            setscenarioErrors("");
+        
+        }
+    
+    }
+    function changeProduct(){
+        const productElement = document.getElementById("product");
+        let productValue = productElement.value;
+        if(productValue === "base"|| productValue === ""){
+            setproductErrors("Required");
+            
+        }
+        else{
+            setproductErrors("");
+        
+        }
+    }
+    function changeEnviornment(){
+        const enviornmentElement = document.getElementById("enviornment");
+        let enviornmentValue = enviornmentElement.value;
+        if(enviornmentValue === "base"|| enviornmentValue === ""){
+            setenviornmentErrors("Required");
+            
+        }
+        else{
+            setenviornmentErrors("");
+        
+        }
+    }
+    function changeTesting(){
+        const testingElement = document.getElementById("testing");
+        let testingValue = testingElement.value;
+        if(testingValue === "base"|| testingValue === ""){
+            settestingErrors("Required");
+            
+        }
+        else{
+            settestingErrors("");
+        
+        }
+    }
+    function changeRootCause(){
+        const rootcauseElement = document.getElementById("rootcause");
+        let rootcauseValue = rootcauseElement.value;
+        if(rootcauseValue === "base"|| rootcauseValue === ""){
+            setrootErrors("Required");
+            
+        }
+        else{
+            setrootErrors("");
+        
+        }
+    }
+    function changePriority(){
+        const priorityElement = document.getElementById("priority");
+        let priorityValue = priorityElement.value;
+        if(priorityValue === "base"|| priorityValue === ""){
+            setpriorityErrors("Required");
+            
+        }
+        else{
+            setpriorityErrors("");
+        
+        }
+    }
+    function changeAssignee(){
+        const assigneeElement = document.getElementById("assignee");
+        let assigneeValue = assigneeElement.value;
+        if(assigneeValue === "base"|| assigneeValue === ""){
+            setassigneeErrors("Required");
+            
+        }
+        else{
+            setassigneeErrors("");
+        
+        }
+    }
+
+
 
     
   return (
@@ -67,7 +203,7 @@ function BugAddContent() {
         <Container>
             <Row>
                 <Col md = {2}>
-                    <button>Back Arrow</button>
+                    <button id = "backArrow"> &larr;</button>
                 </Col>
                 <Col md = {2}>
                     <p>Create Bug</p>
@@ -82,7 +218,7 @@ function BugAddContent() {
        initialValues={{
          title: '',
          desc: '',
-         user:''
+         user:'',
        }}
        
      >
@@ -90,7 +226,7 @@ function BugAddContent() {
          <Form>
             <Container>
                 <Row>
-                    <Col md ={2}>
+                    <Col md ={6}>
                         
                         <Field name = "title" id = "bugTitle" placeholder= "Bug Title" validate={validateTitle} />
                         
@@ -102,68 +238,89 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col>
-                        <FormSelect id="scenario" aria-label="Default select example">
-                            <option>Scenario</option>
-                            <option>Closed</option>
-                            <option>Fixed</option>
-                            <option>Reopen</option>
+                        <FormSelect  onChange={changeScenario}  id="scenario" aria-label="Default select example">
+                            <option value = "base">Scenario</option>
+                            <option value = "Closed">Closed</option>
+                            <option value = "fixed">Fixed</option>
+                            <option value = "reopen">Reopen</option>
                         </FormSelect>
+                        <div>
+                            <p>{scenarioErrors}</p>
+                        </div>
                         
                     </Col>
                     <Col>
-                        <FormSelect id = "product" aria-label="Default select example">
-                            <option>Product Name</option>
-                            <option>Closed</option>
-                            <option>Fixed</option>
-                            <option>Reopen</option>
+                        <FormSelect onChange= {changeProduct} id = "product" aria-label="Default select example">
+                            <option value = "base">Product Name</option>
+                            <option value = "Closed">Closed</option>
+                            <option value = "fixed">Fixed</option>
+                            <option value = "reopen">Reopen</option>
                         </FormSelect>
+                        <div>
+                            <p>{productErrors}</p>
+                        </div>
                         
                     </Col>
                     <Col>
-                        <FormSelect  id = "enviornment"aria-label="Default select example">
-                            <option>Enviornment</option>
-                            <option>Closed</option>
-                            <option>Fixed</option>
-                            <option>Reopen</option>
+                        <FormSelect onChange={changeEnviornment} id = "enviornment"aria-label="Default select example">
+                            <option value = "base">Enviornment</option>
+                            <option value = "Closed">Closed</option>
+                            <option value = "fixed">Fixed</option>
+                            <option value = "reopen">Reopen</option>
                         </FormSelect>
+                        <div>
+                            <p>{enviornmentErrors}</p>
+                        </div>
                         
                     </Col>
                     <Col>
-                        <FormSelect id = "testing" aria-label="Default select example">
-                            <option>Testing Medium</option>
-                            <option>Closed</option>
-                            <option>Fixed</option>
-                            <option>Reopen</option>
+                        <FormSelect onChange={changeTesting} id = "testing" aria-label="Default select example">
+                            <option value = "base">Testing Medium</option>
+                            <option value = "Closed">Closed</option>
+                            <option value = "fixed">Fixed</option>
+                            <option value = "reopen">Reopen</option>
                         </FormSelect>
+                        <div>
+                            <p>{testingErrors}</p>
+                        </div>
                         
                     </Col>
                     <Col>
-                        <FormSelect id="rootcause" aria-label="Default select example">
-                            <option>Root Cause Location</option>
-                            <option>Closed</option>
-                            <option>Fixed</option>
-                            <option>Reopen</option>
+                        <FormSelect onChange={changeRootCause} id="rootcause" aria-label="Default select example">
+                            <option value = "base">Root Cause Location</option>
+                            <option value = "Closed">Closed</option>
+                            <option value = "fixed">Fixed</option>
+                            <option value = "reopen">Reopen</option>
                         </FormSelect>
+                        <div>
+                            <p>{rootcauseErrors}</p>
+                        </div>
                         
                     </Col>
 
                 </Row>
                 <Row>
                     <Col >
-                    <FormSelect id="priority" aria-label="Default select example">
-                            <option>Priority</option>
-                            <option>Closed</option>
-                            <option>Fixed</option>
-                            <option>Reopen</option>
+                    <FormSelect onChange={changePriority} id="priority" aria-label="Default select example">
+                            <option value = "base">Priority</option>
+                            <option value = "Closed">Closed</option>
+                            <option value = "fixed">Fixed</option>
+                            <option value = "reopen">Reopen</option>
                         </FormSelect>
+                        <div>
+                            <p>{priorityErrors}</p>
+                        </div>
                     </Col>
                     <Col >
-                        <FormSelect id="assignee" aria-label="Default select example">
-                            <option>Assignee</option>
-                            <option>Closed</option>
-                            <option>Fixed</option>
-                            <option>Reopen</option>
+                        <FormSelect onChange={changeAssignee} id="assignee" aria-label="Default select example">
+                            <option value = "base">Assignee</option>
+                            <option value = "Closed">Closed</option>
+                            <option value = "fixed">Fixed</option>
+                            <option value = "reopen">Reopen</option>
                         </FormSelect>
+                        <div>
+                            <p>{assigneeErrors}</p>
+                        </div>
                     </Col>
                     <Col>
                     </Col>
@@ -186,7 +343,7 @@ function BugAddContent() {
                     </Col>
                 </Row>
 
-                <button type="submit">Submit</button>
+                <button onClick = {valudate}type="submit">Submit</button>
            </Container>
          </Form>
        )}

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table, Badge } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
+import Bug from './Bug';
 
 const BugList = () => {
   // This would typically come from a state or props
@@ -15,20 +16,6 @@ const BugList = () => {
     { id: 'IQBS-001', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'High', assignee: 'AJ' },
   ];
 
-  const getStatusBadge = (status) => {
-    const statusColors = {
-      Open: 'danger',
-      Wip: 'warning',
-      Fixed: 'success',
-      Closed: 'success',
-      Deferred: 'info',
-      Rejected: 'secondary',
-      Medium: 'warning',
-      Low: 'info',
-      High: 'danger'
-    };
-    return <Badge bg={statusColors[status]}>{status}</Badge>;
-  };
 
   return (
     <Table hover>
@@ -41,18 +28,8 @@ const BugList = () => {
         </tr>
       </thead>
       <tbody>
-        {bugs.map((bug) => (
-          <tr key={bug.id}>
-            <td>
-              <div>{bug.id}</div>
-              <div>{bug.description}</div>
-            </td>
-            <td>{bug.scenario}</td>
-            <td>{getStatusBadge(bug.status)}</td>
-            <td>
-              <Badge bg="secondary" pill>{bug.assignee}</Badge>
-            </td>
-          </tr>
+        {bugs.map((bugInd) => (
+            <Bug indbug={bugInd} />
         ))}
       </tbody>
     </Table>

@@ -1,7 +1,7 @@
 import React from 'react'
-
+import './App.css';
 import BugAddContent from './Components/BugAddContent'
-import './App.css'
+
 
 export default function App() {
   return (

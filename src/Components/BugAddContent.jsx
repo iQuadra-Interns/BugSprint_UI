@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import { Formik, Field, Form } from 'formik';
 import { FormSelect } from 'react-bootstrap';
 
+
 let editable = true;
 
 function validateTitle(value) {
@@ -75,6 +76,7 @@ function BugAddContent() {
    
 
     function valudate(){
+        toggleDisable();
         if(scenarioErrors === "base"|| scenarioErrors === ""){
             setscenarioErrors("Required");
             
@@ -206,10 +208,11 @@ function BugAddContent() {
                     <button id = "backArrow"> &larr;</button>
                 </Col>
                 <Col md = {2}>
-                    <p>Create Bug</p>
+                    <p id = "create">Create Bug</p>
                 </Col>
                 <Col md={{ span: 2, offset: 6 }}>
-                    <button onClick={toggleDisable}>Save</button>
+                    <button id="save" onClick = {valudate}type="submit">Save</button>
+                    
                 </Col>
             </Row>
         </Container>
@@ -238,7 +241,7 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col>
-                        <FormSelect  onChange={changeScenario}  id="scenario" aria-label="Default select example">
+                        <FormSelect  onChange={changeScenario}  className = "drop" id="scenario" aria-label="Default select example">
                             <option value = "base">Scenario</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -250,7 +253,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect onChange= {changeProduct} id = "product" aria-label="Default select example">
+                        <FormSelect onChange= {changeProduct} className = "drop"id = "product" aria-label="Default select example">
                             <option value = "base">Product Name</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -262,7 +265,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect onChange={changeEnviornment} id = "enviornment"aria-label="Default select example">
+                        <FormSelect onChange={changeEnviornment}className = "drop" id = "enviornment"aria-label="Default select example">
                             <option value = "base">Enviornment</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -274,7 +277,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect onChange={changeTesting} id = "testing" aria-label="Default select example">
+                        <FormSelect onChange={changeTesting}className = "drop" id = "testing" aria-label="Default select example">
                             <option value = "base">Testing Medium</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -286,7 +289,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect onChange={changeRootCause} id="rootcause" aria-label="Default select example">
+                        <FormSelect onChange={changeRootCause} className = "drop"id="rootcause" aria-label="Default select example">
                             <option value = "base">Root Cause Location</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -301,7 +304,7 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col >
-                    <FormSelect onChange={changePriority} id="priority" aria-label="Default select example">
+                    <FormSelect onChange={changePriority} className = "drop"id="priority" aria-label="Default select example">
                             <option value = "base">Priority</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -312,7 +315,7 @@ function BugAddContent() {
                         </div>
                     </Col>
                     <Col >
-                        <FormSelect onChange={changeAssignee} id="assignee" aria-label="Default select example">
+                        <FormSelect onChange={changeAssignee} className = "drop" id="assignee" aria-label="Default select example">
                             <option value = "base">Assignee</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -332,18 +335,18 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col>
-                        <Field name = "desc" id = "desc" placeholder= "Description" validate={validateDesc} />
+                        <Field className = "text" name = "desc" id = "desc" placeholder= "Description" validate={validateDesc} />
                             
                             {errors.desc && touched.desc && <div>{errors.desc}</div>}
                     </Col>
                     <Col>
-                        <Field name = "user" id = "user" placeholder= "User Data (Optional)" validate={validateUser} />
+                        <Field className = "text" name = "user" id = "user" placeholder= "User Data (Optional)" validate={validateUser} />
                             
                             {errors.user && touched.user && <div>{errors.user}</div>}
                     </Col>
                 </Row>
 
-                <button onClick = {valudate}type="submit">Submit</button>
+                
            </Container>
          </Form>
        )}

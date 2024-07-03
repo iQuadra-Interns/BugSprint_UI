@@ -10,10 +10,14 @@ import { FormSelect } from 'react-bootstrap';
 let editable = true;
 
 function validateTitle(value) {
+    console.log("happened");
+    console.log(value);
     let error;
     if (!value){
         error = 'Required';
+    
     }
+    console.log(error)
     return error;
 }
 function validateDesc(value) {
@@ -42,6 +46,7 @@ function toggleDisable(){
     const rootcause = document.getElementById("rootcause");
     const priority = document.getElementById("priority");
     const assignee = document.getElementById("assignee");
+        
 
 
     editable = !editable;
@@ -73,10 +78,12 @@ function BugAddContent() {
     const [rootcauseErrors, setrootErrors] = useState("");
     const [priorityErrors, setpriorityErrors] = useState("");
     const [assigneeErrors, setassigneeErrors] = useState("");
+    
    
 
     function valudate(){
         let boo = true;
+        
         
         const scenarioElement = document.getElementById("scenario");
         let scenarioValue = scenarioElement.value;
@@ -257,20 +264,7 @@ function BugAddContent() {
     
   return (
     <div>
-        <Container>
-            <Row>
-                <Col md = {2}>
-                    <button id = "backArrow"> &larr;</button>
-                </Col>
-                <Col md = {2}>
-                    <p id = "create">Create Bug</p>
-                </Col>
-                <Col md={{ span: 2, offset: 6 }}>
-                    <button id="save" onClick = {valudate}type="submit">Save</button>
-                    
-                </Col>
-            </Row>
-        </Container>
+        
      
      <Formik
        initialValues={{
@@ -282,6 +276,23 @@ function BugAddContent() {
      >
        {({ errors, touched, isValidating }) => (
          <Form>
+            <Container>
+            <Row>
+                <Col md = {2}>
+                    <button id = "backArrow"> &larr;</button>
+                </Col>
+                <Col md = {2}>
+                    <p id = "create">Create Bug</p>
+                    
+                    
+                </Col>
+                <Col md={{ span: 2, offset: 6 }}>
+                    <button id="save" onClick = {valudate}type="submit">Save</button>
+                    
+                    
+                </Col>
+            </Row>
+        </Container>
             <Container>
                 <Row>
                     <Col md ={6}>

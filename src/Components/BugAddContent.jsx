@@ -76,35 +76,90 @@ function BugAddContent() {
    
 
     function valudate(){
-        toggleDisable();
-        if(scenarioErrors === "base"|| scenarioErrors === ""){
+        let boo = true;
+        
+        const scenarioElement = document.getElementById("scenario");
+        let scenarioValue = scenarioElement.value;
+        if(scenarioValue === "base"|| scenarioValue === ""){
             setscenarioErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
             
         }
-        if(productErrors === "base"|| productErrors === ""){
+        const productElement = document.getElementById("product");
+        let productValue = productElement.value;
+        if(productValue === "base"|| productValue === ""){
             setproductErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
             
         }
-        if(enviornmentErrors === "base"|| enviornmentErrors === ""){
+        const enviornmentElement = document.getElementById("enviornment");
+        let enviornmentValue = enviornmentElement.value;
+        if(enviornmentValue === "base"|| enviornmentValue === ""){
             setenviornmentErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
             
         }
-        if(testingErrors === "base"|| testingErrors === ""){
+        const testingElement = document.getElementById("testing");
+        let testingValue = testingElement.value;
+        if(testingValue === "base"|| testingValue === ""){
             settestingErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
             
         }
-        if(rootcauseErrors === "base"|| rootcauseErrors === ""){
+        const rootcauseElement = document.getElementById("rootcause");
+        let rootcauseValue = rootcauseElement.value;
+        if(rootcauseValue === "base"|| rootcauseValue === ""){
             setrootErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
             
         }
-        if(priorityErrors === "base"|| priorityErrors === ""){
+        const priorityElement = document.getElementById("priority");
+        let priorityValue = priorityElement.value;
+        if(priorityValue === "base"|| priorityValue === ""){
             setpriorityErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
             
         }
-        if(assigneeErrors === "base"|| assigneeErrors === ""){
+        const assigneeElement = document.getElementById("assignee");
+        let assigneeValue = assigneeElement.value;
+        if(assigneeValue === "base"|| assigneeValue === ""){
             setassigneeErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
             
         }
+        if(boo){
+            toggleDisable();
+
+        }
+        
+        
 
     }
     

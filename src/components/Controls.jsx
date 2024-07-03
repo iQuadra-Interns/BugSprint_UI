@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, InputGroup, Button, Row, Col } from 'react-bootstrap';
-import { Search } from 'lucide-react';
+import { Search, Filter, ArrowUpDown } from 'lucide-react';
 
 
 function Controls() {
@@ -16,11 +16,21 @@ function Controls() {
             className="border-start-0"
             style={{ boxShadow: 'none', borderRight: 'none' }}
           />
-      </InputGroup>
+        </InputGroup>
         </Col>
-        <Col xs={12} md={6} lg={8}>
-            Rest of the Controls
-        </Col>
+        <Col xs={12} md={6} lg={8} className="d-flex justify-content-md-end">
+        <Button variant="outline-secondary" className="me-2">
+          <Filter size={18} className="me-2" />
+          Filter
+        </Button>
+        <Button variant="outline-secondary" className="me-2">
+          <ArrowUpDown size={18} className="me-2" />
+          Sort
+        </Button>
+        <Button variant="success">
+          + Create Bug
+        </Button>
+      </Col>
     </Row>
   );
 }

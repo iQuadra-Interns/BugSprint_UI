@@ -1,0 +1,67 @@
+.SignInIcons {
+    color: #50BB27;
+}
+
+.SignInTitle {
+    font-size: 45px;
+    font-weight: 600;
+    padding-top: 17vh;
+}
+
+.SignInText {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.error {
+    color: red;
+}
+
+.SignInFormCard {
+    border-radius: 34px;
+    border-width: 1px;
+    border-color: linear-gradient(#32920D, #49B51F);
+    background-image: linear-gradient(#F4F4F4, #E0FED3);
+    border-color: linear-gradient(#F4F4F4, #E0FED3);
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    width: 65vh;
+    text-align: center;
+    align-content: right;
+}
+
+.SignInFormSubmit {
+    background-image: linear-gradient(to right, #1CCA38, #309D06);
+    border-radius: 8.41px;
+    width: 60vh;
+    height: 8vh;
+    text-align: center;
+}
+
+.SignInFormInput {
+    width: 60vh;
+    height: 8vh;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+.logoLight {
+    text-align: left;
+    align-items: left;
+    height: 20vh;
+}
+
+.logoLightSignInForm {
+    height: 8vh;
+}
+
+.SignInFormContainer {
+    text-align: right;
+    align-content: right;
+}
+
+.SignInFormForgotPassword {
+    text-align: right;
+    color: #50BB27;
+}
+

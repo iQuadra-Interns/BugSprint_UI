@@ -13,12 +13,8 @@ const SignIn = () => {
         <>
             <Container>
                 <Row>
-                    <Col>
-                        <img src={logoLight} className="logoLight" alt = "logo"/>
-                    </Col>
-                </Row>
-                <Row>
                     <Col md={8}>
+                        <img src={logoLight} className="logoLight" alt = "logo"/>
                         <h1 class="SignInTitle">Effortless Bug Tracking and Collaboration</h1>
                         <h2 class="SignInText">Unveiling the Bug Hunt: Tracking, Squashing, and Enhancing for a Glitch-Free Experience!</h2>
                     </Col>

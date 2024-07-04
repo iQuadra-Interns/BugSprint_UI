@@ -31,8 +31,8 @@ const SignInForm = () => {
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {(props) => {
                 return (
-                    <Card>
-                        <Container class="SignInFormCard">
+                    <Card class="SignInFormCard">
+                        <Container>
                             <Form>
                                 <img src={logoLight} className="logoLightSignInForm" alt = "logo"/>
                                 <p>

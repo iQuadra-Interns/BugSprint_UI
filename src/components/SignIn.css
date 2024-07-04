@@ -22,13 +22,15 @@
 .SignInTitle {
     font-size: 45px;
     font-weight: 600;
-    padding-top: 17vh;
+    padding-top: 13vh;
     margin-bottom: 5vh;
+    margin-left: -5vh;
 }
 
 .SignInText {
     font-size: 25px;
     font-weight: 400;
+    margin-left: -5vh;
 }
 
 .error {
@@ -40,13 +42,13 @@
     border-width: 1px;
     border-color: linear-gradient(#32920D, #49B51F);
     background-image: linear-gradient(#F4F4F4, #E0FED3);
-    border-color: linear-gradient(#F4F4F4, #E0FED3);
-    padding-top: 7.5vh;
-    padding-bottom: 7.5vh;
+    padding-top: 11vh;
+    padding-bottom: 11vh;
     width: 65vh;
     text-align: center;
     align-content: right;
     position: relative;
+    margin-top: 8vh;
 }
 
 .SignInFormSubmit {
@@ -72,7 +74,7 @@
     text-align: left;
     align-items: left;
     height: 20vh;
-    margin-left: -5vh;
+    margin-left: -10vh;
 }
 
 .logoLightSignInForm {

@@ -340,16 +340,7 @@ function BugAddContent() {
     <div>
         
      
-     <Formik
-       initialValues={{
-         title: '',
-         desc: '',
-         user:'',
-       }}
-       
-     >
-       {({ errors, touched, isValidating }) => (
-         <Form>
+     
             <Container>
             <Row>
                 <Col md = {2}>
@@ -495,9 +486,7 @@ function BugAddContent() {
 
                 
            </Container>
-         </Form>
-       )}
-     </Formik>
+    
    </div>
   )
 }

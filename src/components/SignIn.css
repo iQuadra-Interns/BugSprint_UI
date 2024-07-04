@@ -15,7 +15,7 @@
 .SignInIconsEye {
     color: #50BB27;
     position: absolute;
-    margin-left: -5vh;
+    margin-left: -6vh;
     margin-top: 2.5vh;
 }
 
@@ -52,13 +52,14 @@
 .SignInFormSubmit {
     background-image: linear-gradient(to right, #1CCA38, #309D06);
     border-radius: 8.41px;
-    width: 60vh;
+    width: 50vh;
     height: 8vh;
     text-align: center;
+    color: white;
 }
 
 .SignInFormInput {
-    width: 60vh;
+    width: 50vh;
     height: 8vh;
     border-radius: 10px;
     border-width: 1px;
@@ -87,7 +88,7 @@
 .SignInFormForgotPassword {
     text-align: right;
     color: #50BB27;
-    padding-left: 35vh;
+    padding-left: 25vh;
     margin-bottom: 1.5vh;
 }
 

@@ -20,7 +20,7 @@ const SignIn = () => {
                 <Row>
                     <Col md={8}>
                         <h1 class="SignInTitle">Effortless Bug Tracking and Collaboration</h1>
-                        <h2 class="SignInText">Unveiling the Bug Hunt: Tracking, Squashing, and Enhancing for a Glitch-Free Experience</h2>
+                        <h2 class="SignInText">Unveiling the Bug Hunt: Tracking, Squashing, and Enhancing for a Glitch-Free Experience!</h2>
                     </Col>
                     <Col md={4}>
                         <SignInForm/>

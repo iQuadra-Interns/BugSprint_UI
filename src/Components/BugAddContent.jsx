@@ -71,6 +71,9 @@ function toggleDisable(){
 
 
 function BugAddContent() {
+    const [titleErrors, settitleErrors] = useState("");
+    const [descErrors, setdescErrors] = useState("");
+    const [userErrors, setuserErrors] = useState("");
     const [scenarioErrors, setscenarioErrors] = useState("");
     const [productErrors, setproductErrors] = useState("");
     const [enviornmentErrors, setenviornmentErrors] = useState("");
@@ -83,6 +86,39 @@ function BugAddContent() {
 
     function valudate(){
         let boo = true;
+        const bugTitle = document.getElementById("bugTitle");
+        let titleValue = bugTitle.value;
+        if(titleValue === ""){
+            settitleErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
+        }
+        const bugDesc = document.getElementById("desc");
+        let description = bugDesc.value;
+        if(description === ""){
+            setdescErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
+        }
+
+    
+        const bugUser = document.getElementById("user");
+        let user = bugUser.value;
+        if(user === ""){
+            setuserErrors("Required");
+            if(boo){
+                boo=false;
+
+            }
+            
+        }
+       
         
         
         const scenarioElement = document.getElementById("scenario");
@@ -170,8 +206,46 @@ function BugAddContent() {
 
     }
     
-
+    function changeTitle(){
+        const bugTitle = document.getElementById("bugTitle");
+        let titleValue = bugTitle.value;
+        if(titleValue === ""){
+            settitleErrors("Required");
+            
+        }
+        else{
+            settitleErrors("");
+        
+        }
+    }
+    function changeDesc(){
+        const bugDesc = document.getElementById("desc");
+        let description = bugDesc.value;
+        if(description === ""){
+            setdescErrors("Required");
+            
+        }
+        else{
+            setdescErrors("");
+        
+        }
+    }
+    function changeUser(){
+        const bugUser = document.getElementById("user");
+        let user = bugUser.value;
+        if(user === ""){
+            setuserErrors("Required");
+            
+        }
+        else{
+            setuserErrors("");
+        
+        }
+    }
     function changeScenario(){
+        
+    
+
     
 
         const scenarioElement = document.getElementById("scenario");
@@ -297,9 +371,12 @@ function BugAddContent() {
                 <Row>
                     <Col md ={6}>
                         
-                        <Field name = "title" id = "bugTitle" placeholder= "Bug Title" validate={validateTitle} />
                         
-                        {errors.title && touched.title && <div>{errors.title}</div>}
+                        <input onChange= {changeTitle}id= "bugTitle" type = "text" placeholder = "Bug Title"className = "text"></input>
+                        
+                        <div>
+                            <p>{titleErrors}</p>
+                        </div>
                 
                         
                         
@@ -401,14 +478,18 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col>
-                        <Field className = "text" name = "desc" id = "desc" placeholder= "Description" validate={validateDesc} />
-                            
-                            {errors.desc && touched.desc && <div>{errors.desc}</div>}
+
+                        <input onChange={changeDesc}className = "text" id = "desc" placeholder= "Description"></input>
+                        <div>
+                            <p>{descErrors}</p>
+                        </div>
                     </Col>
                     <Col>
-                        <Field className = "text" name = "user" id = "user" placeholder= "User Data (Optional)" validate={validateUser} />
-                            
-                            {errors.user && touched.user && <div>{errors.user}</div>}
+                        
+                        <input onChange = {changeUser}className = "text" id = "user" placeholder= "User Data (Optional)"></input>
+                        <div>
+                            <p>{userErrors}</p>
+                        </div>
                     </Col>
                 </Row>
 

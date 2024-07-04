@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Formik, Field, Form } from 'formik';
 import { FormSelect } from 'react-bootstrap';
 
 
@@ -71,6 +70,7 @@ function toggleDisable(){
 
 
 function BugAddContent() {
+    const [buttons, setButtons] = useState("Edit");
     const [titleErrors, settitleErrors] = useState("");
     const [descErrors, setdescErrors] = useState("");
     const [userErrors, setuserErrors] = useState("");
@@ -85,124 +85,134 @@ function BugAddContent() {
    
 
     function valudate(){
-        let boo = true;
-        const bugTitle = document.getElementById("bugTitle");
-        let titleValue = bugTitle.value;
-        if(titleValue === ""){
-            settitleErrors("Required");
-            if(boo){
-                boo=false;
+        if(buttons != "Edit"){
+            let boo = true;
+            const bugTitle = document.getElementById("bugTitle");
+            let titleValue = bugTitle.value;
+            if(titleValue === ""){
+                settitleErrors("Required");
+                if(boo){
+                    boo=false;
 
+                }
+                
             }
-            
-        }
-        const bugDesc = document.getElementById("desc");
-        let description = bugDesc.value;
-        if(description === ""){
-            setdescErrors("Required");
-            if(boo){
-                boo=false;
+            const bugDesc = document.getElementById("desc");
+            let description = bugDesc.value;
+            if(description === ""){
+                setdescErrors("Required");
+                if(boo){
+                    boo=false;
 
+                }
+                
             }
-            
-        }
 
-    
-        const bugUser = document.getElementById("user");
-        let user = bugUser.value;
-        if(user === ""){
-            setuserErrors("Required");
-            if(boo){
-                boo=false;
-
-            }
-            
-        }
-       
         
+            const bugUser = document.getElementById("user");
+            let user = bugUser.value;
+            if(user === ""){
+                setuserErrors("Required");
+                if(boo){
+                    boo=false;
+
+                }
+                
+            }
         
-        const scenarioElement = document.getElementById("scenario");
-        let scenarioValue = scenarioElement.value;
-        if(scenarioValue === "base"|| scenarioValue === ""){
-            setscenarioErrors("Required");
+            
+            
+            const scenarioElement = document.getElementById("scenario");
+            let scenarioValue = scenarioElement.value;
+            if(scenarioValue === "base"|| scenarioValue === ""){
+                setscenarioErrors("Required");
+                if(boo){
+                    boo=false;
+
+                }
+                
+            }
+            const productElement = document.getElementById("product");
+            let productValue = productElement.value;
+            if(productValue === "base"|| productValue === ""){
+                setproductErrors("Required");
+                if(boo){
+                    boo=false;
+
+                }
+                
+                
+            }
+            const enviornmentElement = document.getElementById("enviornment");
+            let enviornmentValue = enviornmentElement.value;
+            if(enviornmentValue === "base"|| enviornmentValue === ""){
+                setenviornmentErrors("Required");
+                if(boo){
+                    boo=false;
+
+                }
+                
+                
+            }
+            const testingElement = document.getElementById("testing");
+            let testingValue = testingElement.value;
+            if(testingValue === "base"|| testingValue === ""){
+                settestingErrors("Required");
+                if(boo){
+                    boo=false;
+
+                }
+                
+                
+            }
+            const rootcauseElement = document.getElementById("rootcause");
+            let rootcauseValue = rootcauseElement.value;
+            if(rootcauseValue === "base"|| rootcauseValue === ""){
+                setrootErrors("Required");
+                if(boo){
+                    boo=false;
+
+                }
+                
+                
+            }
+            const priorityElement = document.getElementById("priority");
+            let priorityValue = priorityElement.value;
+            if(priorityValue === "base"|| priorityValue === ""){
+                setpriorityErrors("Required");
+                if(boo){
+                    boo=false;
+
+                }
+                
+                
+            }
+            const assigneeElement = document.getElementById("assignee");
+            let assigneeValue = assigneeElement.value;
+            if(assigneeValue === "base"|| assigneeValue === ""){
+                setassigneeErrors("Required");
+                if(boo){
+                    boo=false;
+
+                }
+                
+                
+            }
             if(boo){
-                boo=false;
+                toggleDisable();
+                
+                setButtons("Edit");
 
             }
             
+           
         }
-        const productElement = document.getElementById("product");
-        let productValue = productElement.value;
-        if(productValue === "base"|| productValue === ""){
-            setproductErrors("Required");
-            if(boo){
-                boo=false;
-
-            }
-            
-            
-        }
-        const enviornmentElement = document.getElementById("enviornment");
-        let enviornmentValue = enviornmentElement.value;
-        if(enviornmentValue === "base"|| enviornmentValue === ""){
-            setenviornmentErrors("Required");
-            if(boo){
-                boo=false;
-
-            }
-            
-            
-        }
-        const testingElement = document.getElementById("testing");
-        let testingValue = testingElement.value;
-        if(testingValue === "base"|| testingValue === ""){
-            settestingErrors("Required");
-            if(boo){
-                boo=false;
-
-            }
-            
-            
-        }
-        const rootcauseElement = document.getElementById("rootcause");
-        let rootcauseValue = rootcauseElement.value;
-        if(rootcauseValue === "base"|| rootcauseValue === ""){
-            setrootErrors("Required");
-            if(boo){
-                boo=false;
-
-            }
-            
-            
-        }
-        const priorityElement = document.getElementById("priority");
-        let priorityValue = priorityElement.value;
-        if(priorityValue === "base"|| priorityValue === ""){
-            setpriorityErrors("Required");
-            if(boo){
-                boo=false;
-
-            }
-            
-            
-        }
-        const assigneeElement = document.getElementById("assignee");
-        let assigneeValue = assigneeElement.value;
-        if(assigneeValue === "base"|| assigneeValue === ""){
-            setassigneeErrors("Required");
-            if(boo){
-                boo=false;
-
-            }
-            
-            
-        }
-        if(boo){
+        else{
             toggleDisable();
-
+            setButtons("Save");
         }
-        
-        
+            
+            
 
     }
     
@@ -352,7 +362,7 @@ function BugAddContent() {
                     
                 </Col>
                 <Col md={{ span: 2, offset: 6 }}>
-                    <button id="save" onClick = {valudate}type="submit">Save</button>
+                    <button id="save" onClick = {valudate}type="submit">{buttons}</button>
                     
                     
                 </Col>
@@ -363,7 +373,7 @@ function BugAddContent() {
                     <Col md ={6}>
                         
                         
-                        <input onChange= {changeTitle}id= "bugTitle" type = "text" placeholder = "Bug Title"className = "text"></input>
+                        <input disabled onChange= {changeTitle}id= "bugTitle" type = "text" placeholder = "Bug Title"className = "text"></input>
                         
                         <div>
                             <p>{titleErrors}</p>
@@ -375,7 +385,7 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col>
-                        <FormSelect  onChange={changeScenario}  className = "drop" id="scenario" aria-label="Default select example">
+                        <FormSelect disabled onChange={changeScenario}  className = "drop" id="scenario" aria-label="Default select example">
                             <option value = "base">Scenario</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -387,7 +397,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect onChange= {changeProduct} className = "drop"id = "product" aria-label="Default select example">
+                        <FormSelect disabled onChange= {changeProduct} className = "drop"id = "product" aria-label="Default select example">
                             <option value = "base">Product Name</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -399,7 +409,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect onChange={changeEnviornment}className = "drop" id = "enviornment"aria-label="Default select example">
+                        <FormSelect  disabled onChange={changeEnviornment}className = "drop" id = "enviornment"aria-label="Default select example">
                             <option value = "base">Enviornment</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -411,7 +421,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect onChange={changeTesting}className = "drop" id = "testing" aria-label="Default select example">
+                        <FormSelect disabled onChange={changeTesting}className = "drop" id = "testing" aria-label="Default select example">
                             <option value = "base">Testing Medium</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -423,7 +433,7 @@ function BugAddContent() {
                         
                     </Col>
                     <Col>
-                        <FormSelect onChange={changeRootCause} className = "drop"id="rootcause" aria-label="Default select example">
+                        <FormSelect disabled onChange={changeRootCause} className = "drop"id="rootcause" aria-label="Default select example">
                             <option value = "base">Root Cause Location</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -438,7 +448,7 @@ function BugAddContent() {
                 </Row>
                 <Row>
                     <Col >
-                    <FormSelect onChange={changePriority} className = "drop"id="priority" aria-label="Default select example">
+                    <FormSelect disabled onChange={changePriority} className = "drop"id="priority" aria-label="Default select example">
                             <option value = "base">Priority</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -449,7 +459,7 @@ function BugAddContent() {
                         </div>
                     </Col>
                     <Col >
-                        <FormSelect onChange={changeAssignee} className = "drop" id="assignee" aria-label="Default select example">
+                        <FormSelect disabled onChange={changeAssignee} className = "drop" id="assignee" aria-label="Default select example">
                             <option value = "base">Assignee</option>
                             <option value = "Closed">Closed</option>
                             <option value = "fixed">Fixed</option>
@@ -470,18 +480,38 @@ function BugAddContent() {
                 <Row>
                     <Col>
 
-                        <input onChange={changeDesc}className = "text" id = "desc" placeholder= "Description"></input>
+                        <input disabled onChange={changeDesc}className = "text" id = "desc" placeholder= "Description"></input>
                         <div>
                             <p>{descErrors}</p>
                         </div>
                     </Col>
                     <Col>
                         
-                        <input onChange = {changeUser}className = "text" id = "user" placeholder= "User Data (Optional)"></input>
+                        <input disabled onChange = {changeUser}className = "text" id = "user" placeholder= "User Data (Optional)"></input>
                         <div>
                             <p>{userErrors}</p>
                         </div>
                     </Col>
+                </Row>
+                <Row>
+                    <hr/>
+                    <Row>
+                        <Col md = {{span:4, offset: 2}}>
+                            <p>
+                                Comments
+                            </p>
+                        </Col>
+                        
+                    </Row>
+                    <Row>
+                        <Col md = {{span:1, offset: 2}}>
+                            <img src = "https://via.placeholder.com/150" alt = "profile"></img>
+                        </Col>
+                        <Col md = {4}>
+                            <input className = "comment" placeholder = "Add a comment"></input>
+                        </Col>
+                    </Row>
+
                 </Row>
 
                 

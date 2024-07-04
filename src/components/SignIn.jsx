@@ -12,9 +12,11 @@ const SignIn = () => {
     return (
         <>
             <Container>
-                <div>
-                    <img src={logoLight} className="logoLight" alt = "logo"/>
-                </div>
+                <Row>
+                    <Col>
+                        <img src={logoLight} className="logoLight" alt = "logo"/>
+                    </Col>
+                </Row>
                 <Row>
                     <Col md={8}>
                         <h1 class="SignInTitle">Effortless Bug Tracking and Collaboration</h1>

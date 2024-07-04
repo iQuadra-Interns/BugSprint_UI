@@ -20,8 +20,8 @@ const SignInForm = () => {
     }
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().matches(/^[A-Za-z\s]+$/, "Please enter only letters and spaces").required("Please enter the email"),
-        password: Yup.string().min(8, 'Password must be atleast 8 characters').matches(/[0-9]/, "Password must contain atleast one number").required("Please enter the password"),
+        email: Yup.string().required("Please enter the email"),
+        password: Yup.string().required("Please enter the password"),
     });
 
     function handleSubmit(values, helders) {
@@ -36,18 +36,18 @@ const SignInForm = () => {
                             <Form>
                                 <img src={logoLight} className="logoLightSignInForm" alt = "logo"/>
                                 <p>
-                                    <FiUser class="SignInIcons"/>
+                                    <FiUser class="SignInIconsUser"/>
                                     <input type="text" name="email" value={props.values.email} onChange={props.handleChange} onBlur={props.handleBlur} placeholder="Email Id" class="SignInFormInput"/>
                                         {props.errors.email && props.touched.email && (
                                             <p className="error">{props.errors.email}</p>
                                         )}
                                 </p>
                                 <p>
-                                    <PiLockOpen class="SignInIcons"/>
+                                    <PiLockOpen class="SignInIconsLock"/>
                                     <input type="password" name="password" value={props.values.password} onChange={props.handleChange} onBlur={props.handleBlur} placeholder="Password" class="SignInFormInput"/>
                                         {props.errors.password && props.touched.password && (
                                         <p className="error">{props.errors.password}</p>)}
-                                    <AiOutlineEyeInvisible class="SignInIcons"/>
+                                    <AiOutlineEyeInvisible class="SignInIconsEye"/>
                                 </p>
                                 <p>
                                     <label class="SignInFormForgotPassword">Forgot Password?</label>

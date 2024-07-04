@@ -1,11 +1,29 @@
-.SignInIcons {
+.SignInIconsUser {
     color: #50BB27;
+    position: absolute;
+    margin-left: 3vh;
+    margin-top: 2.5vh;
+}
+
+.SignInIconsLock {
+    color: #50BB27;
+    position: absolute;
+    margin-left: 3vh;
+    margin-top: 2.5vh;
+}
+
+.SignInIconsEye {
+    color: #50BB27;
+    position: absolute;
+    margin-left: -5vh;
+    margin-top: 2.5vh;
 }
 
 .SignInTitle {
     font-size: 45px;
     font-weight: 600;
     padding-top: 17vh;
+    margin-bottom: 5vh;
 }
 
 .SignInText {
@@ -23,11 +41,12 @@
     border-color: linear-gradient(#32920D, #49B51F);
     background-image: linear-gradient(#F4F4F4, #E0FED3);
     border-color: linear-gradient(#F4F4F4, #E0FED3);
-    padding-top: 10vh;
-    padding-bottom: 10vh;
+    padding-top: 7.5vh;
+    padding-bottom: 7.5vh;
     width: 65vh;
     text-align: center;
     align-content: right;
+    position: relative;
 }
 
 .SignInFormSubmit {
@@ -43,16 +62,21 @@
     height: 8vh;
     border-radius: 10px;
     border-width: 1px;
+    box-sizing:border-box;
+    padding-left: 8vh;
+    margin-bottom: 2.5vh;
 }
 
 .logoLight {
     text-align: left;
     align-items: left;
     height: 20vh;
+    margin-left: -5vh;
 }
 
 .logoLightSignInForm {
     height: 8vh;
+    margin-bottom: 3vh;
 }
 
 .SignInFormContainer {
@@ -63,5 +87,7 @@
 .SignInFormForgotPassword {
     text-align: right;
     color: #50BB27;
+    padding-left: 35vh;
+    margin-bottom: 1.5vh;
 }
 

@@ -505,12 +505,65 @@ function BugAddContent() {
                     </Row>
                     <Row>
                         <Col md = {{span:1, offset: 2}}>
-                            <img src = "https://via.placeholder.com/150" alt = "profile"></img>
+                            <img id="profiles" src = "https://via.placeholder.com/150" alt = "profile" ></img>
                         </Col>
-                        <Col md = {4}>
-                            <input className = "comment" placeholder = "Add a comment"></input>
+                        <Col md = {5}>
+                            <input id = "commentButton" className = "comment" placeholder = "Add a comment                  sendimage"></input>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col md = {{span:6, offset: 2}}>
+                           <Container id= "actualComments">
+                                <Row>
+                                    <Col md = {2}>
+                                        <img id="profiles" src = "https://via.placeholder.com/150" alt = "profile"></img>
+                                    </Col>
+                                    <Col md = {2}>
+                                        <p id = "name">Names</p>
+                                    </Col>
+                                    <Col md = {{offset: 3}}>
+                                        <p id= "time">
+                                        2024-06-21 || 15:23:13 
+                                        </p>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <p id="comment">
+                                        Great find guys, although I think there might be some alternative to fix this issue. Lets try to close this ASAP!
+                                        </p>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md = {{span:6, offset: 2}}>
+                            <Container>
+                                    <Row>
+                                        <Col md = {2}>
+                                            <img id="profiles" src = "https://via.placeholder.com/150" alt = "profile"></img>
+                                        </Col>
+                                        <Col md = {2}>
+                                            <p id = "name">Names</p>
+                                        </Col>
+                                        <Col md = {{ offset: 3}}>
+                                            <p id= "time">
+                                            2024-06-21 || 15:23:13 
+                                            </p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p id= "comment">
+                                            Great find guys, although I think there might be some alternative to fix this issue. Lets try to close this ASAP! Great find guys, although I think there might be some alternative to fix this issue. Lets try to close this ASAP!
+                                            </p>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Col>
+                    </Row>
+                    
 
                 </Row>
 

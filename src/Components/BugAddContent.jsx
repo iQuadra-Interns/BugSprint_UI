@@ -508,7 +508,8 @@ function BugAddContent() {
                             <img id="profiles" src = "https://via.placeholder.com/150" alt = "profile" ></img>
                         </Col>
                         <Col md = {5}>
-                            <input id = "commentButton" className = "comment" placeholder = "Add a comment                  sendimage"></input>
+                            <input id = "commentButton" className = "comment" placeholder = "Add a comment                 "></input>
+                            <i id = "commentButton" className="fas fa-paper-plane" src="plane.png" ></i>
                         </Col>
                     </Row>
                     <Row>

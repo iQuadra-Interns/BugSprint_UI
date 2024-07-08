@@ -107,10 +107,43 @@ background: #FFF;
 #comment{
     width: 732px;
     color: #000;
-    font-family: Roboto;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    letter-spacing: 0.18px;
+font-family: Roboto;
+
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+letter-spacing: 0.18px;
+}
+
+#addRoot{
+    display: inline-flex;
+height: 47px;
+color: white;
+padding: 11px 30px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+flex-shrink: 0;
+border-radius: 10px;
+background: #2F7219;
+box-shadow: 0px 41px 11px 0px rgba(0, 0, 0, 0.00), 0px 26px 10px 0px rgba(0, 0, 0, 0.01), 0px 15px 9px 0px rgba(0, 0, 0, 0.05), 0px 7px 7px 0px rgba(0, 0, 0, 0.09), 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+}
+
+#addSol{
+    display: inline-flex;
+height: 47px;
+padding: 11px 30px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+color: white;
+flex-shrink: 0;
+border-radius: 10px;
+background: #2F7219;
+box-shadow: 0px 41px 11px 0px rgba(0, 0, 0, 0.00), 0px 26px 10px 0px rgba(0, 0, 0, 0.01), 0px 15px 9px 0px rgba(0, 0, 0, 0.05), 0px 7px 7px 0px rgba(0, 0, 0, 0.09), 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+
+}
+#editpng{
+    width: 24px;
+    height: 24px;
 }

@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FormSelect } from 'react-bootstrap';
 
+<script src="https://kit.fontawesome.com/de73538298.js" crossorigin="anonymous"></script>
 
 let editable = true;
 
@@ -357,12 +358,12 @@ function BugAddContent() {
                     <button id = "backArrow"> &larr;</button>
                 </Col>
                 <Col md = {2}>
-                    <p id = "create">Create Bug</p>
+                    <p id = "create"> Create Bug</p>
                     
                     
                 </Col>
                 <Col md={{ span: 2, offset: 6 }}>
-                    <button id="save" onClick = {valudate}type="submit">{buttons}</button>
+                    <button id="save" onClick = {valudate}type="submit"> {buttons}</button>
                     
                     
                 </Col>
@@ -494,6 +495,16 @@ function BugAddContent() {
                     </Col>
                 </Row>
                 <Row>
+                    <Col>
+
+                        <button id = "addRoot">+   Add Root Cause</button>
+                    </Col>
+                    <Col>
+                        
+                        <button id = "addSol">+  Add Solution</button>
+                    </Col>
+                </Row>
+                <Row>
                     <hr/>
                     <Row>
                         <Col md = {{span:4, offset: 2}}>
@@ -564,6 +575,7 @@ function BugAddContent() {
                                 </Container>
                             </Col>
                     </Row>
+                    
                     
 
                 </Row>

@@ -4,6 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FormSelect } from 'react-bootstrap';
+import { FiEdit } from "react-icons/fi";
+
 
 <script src="https://kit.fontawesome.com/de73538298.js" crossorigin="anonymous"></script>
 
@@ -201,7 +203,10 @@ function BugAddContent() {
             }
             if(boo){
                 toggleDisable();
-                
+                const editIcon = document.getElementById("editicon");
+                if(editIcon.style.display === "none"){
+                    editIcon.style.display = "";
+                }
                 setButtons("Edit");
 
             }
@@ -209,6 +214,10 @@ function BugAddContent() {
            
         }
         else{
+            const editIcon = document.getElementById("editicon");
+            if(editIcon.style.display === ""){
+                editIcon.style.display = "none";
+            }
             toggleDisable();
             setButtons("Save");
         }
@@ -363,7 +372,7 @@ function BugAddContent() {
                     
                 </Col>
                 <Col md={{ span: 2, offset: 6 }}>
-                    <button id="save" onClick = {valudate}type="submit"> {buttons}</button>
+                    <button id="save" onClick = {valudate}type="submit">  <FiEdit display = "" id="editicon"/> {buttons}</button>
                     
                     
                 </Col>

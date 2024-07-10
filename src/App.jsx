@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import './App.css'
-// import NavigationBar from './components/NavigationBar';
 import SideBar from './components/Sidebar';
 import Controls from './components/Controls';
 import BugList from './components/Bugslist';

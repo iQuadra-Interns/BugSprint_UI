@@ -4,7 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FormSelect } from 'react-bootstrap';
-import { FiEdit } from "react-icons/fi";
+import  {FiEdit}  from "react-icons/fi";
+import axios from 'axios'
 
 
 <script src="https://kit.fontawesome.com/de73538298.js" crossorigin="anonymous"></script>
@@ -73,6 +74,22 @@ function toggleDisable(){
 
 
 function BugAddContent() {
+    const getQuote = () => {
+        axios.get('https://api.openf1.org/v1/drivers')
+        .then(response => {
+          console.log(response.data[0].full_name)
+          settitleLoadValue(response.data[0].full_name)
+          
+    
+          
+    
+        }).catch(error => {
+          console.log(error)
+    
+        })
+
+    }
+    const [titleLoadValue, settitleLoadValue] = useState("");
     const [buttons, setButtons] = useState("Edit");
     const [titleErrors, settitleErrors] = useState("");
     const [descErrors, setdescErrors] = useState("");
@@ -357,7 +374,7 @@ function BugAddContent() {
 
     
   return (
-    <div>
+    <div onLoad={getQuote}>
         
      
      
@@ -383,7 +400,7 @@ function BugAddContent() {
                     <Col md ={6}>
                         
                         
-                        <input disabled onChange= {changeTitle}id= "bugTitle" type = "text" placeholder = "Bug Title"className = "text"></input>
+                        <input disabled onChange= {changeTitle} placeholder= {titleLoadValue} id= "bugTitle" type = "text" className = "text"></input>
                         
                         <div>
                             <p>{titleErrors}</p>

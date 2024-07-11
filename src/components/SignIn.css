@@ -17,6 +17,7 @@
     position: absolute;
     margin-left: -6vh;
     margin-top: 2.5vh;
+    cursor: pointer;
 }
 
 .SignInTitle {
@@ -35,6 +36,8 @@
 
 .error {
     color: red;
+    margin-top: 5px;
+    font-size: 12px;
 }
 
 .SignInFormCard {
@@ -58,17 +61,26 @@
     height: 8vh;
     text-align: center;
     color: white;
+    cursor: pointer;
+    border: none;
 }
 
 .SignInFormInput {
     width: 50vh;
     height: 8vh;
     border-radius: 10px;
-    border-width: 1px;
-    box-sizing:border-box;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
     padding-left: 8vh;
     margin-bottom: 2.5vh;
     background-color: white;
+    font-size: 16px;
+    color: #333;
+}
+
+.SignInFormInput:focus {
+    outline: none;
+    border-color: #50BB27;
 }
 
 .logoLight {
@@ -93,5 +105,5 @@
     color: #50BB27;
     padding-left: 25vh;
     margin-bottom: 1.5vh;
+    cursor: pointer;
 }
-

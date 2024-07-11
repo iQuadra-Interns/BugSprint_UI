@@ -1,15 +1,12 @@
-import { useState } from 'react'
-import React from "react"
-import {Formik, Form} from 'formik'
-import * as Yup from 'yup'
-import { useNavigate } from 'react-router-dom'
-import { FiUser } from "react-icons/fi";
-import { PiLockOpen } from "react-icons/pi";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
-import './SignIn.css'
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { FiUser } from 'react-icons/fi';
+import { PiLockOpen } from 'react-icons/pi';
+import { AiOutlineEyeInvisible } from 'react-icons/ai';
+import './SignIn.css';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container } from 'react-bootstrap';
 import logoLight from '../images/logo-light.png';
 
 const SignInForm = () => {
@@ -17,54 +14,64 @@ const SignInForm = () => {
     const initialValues = {
         email: '',
         password: '',
-    }
+    };
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().required("Please enter the email"),
-        password: Yup.string().required("Please enter the password"),
+        email: Yup.string().required('Please enter the email'),
+        password: Yup.string().required('Please enter the password'),
     });
 
-    function handleSubmit(values, helders) {
-        console.log(values)
-    }
+    const handleSubmit = (values, { setSubmitting }) => {
+        console.log(values);
+        setSubmitting(false);
+    };
+
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {(props) => {
-                return (
-                    <Container class="SignInFormCard">
-                        <Card>
-                            <Form>
-                                <img src={logoLight} className="logoLightSignInForm" alt = "logo"/>
-                                <p>
-                                    <FiUser class="SignInIconsUser"/>
-                                    <input type="text" name="email" value={props.values.email} onChange={props.handleChange} onBlur={props.handleBlur} placeholder="Email Id" class="SignInFormInput"/>
-                                        {props.errors.email && props.touched.email && (
-                                            <p className="error">{props.errors.email}</p>
-                                        )}
-                                </p>
-                                <p>
-                                    <PiLockOpen class="SignInIconsLock"/>
-                                    <input type="password" name="password" value={props.values.password} onChange={props.handleChange} onBlur={props.handleBlur} placeholder="Password" class="SignInFormInput"/>
-                                        {props.errors.password && props.touched.password && (
-                                        <p className="error">{props.errors.password}</p>)}
-                                    <AiOutlineEyeInvisible class="SignInIconsEye"/>
-                                </p>
-                                <p>
-                                    <label class="SignInFormForgotPassword">Forgot Password?</label>
-                                </p>
-                                <p>
-                                    <button type="submit" class="SignInFormSubmit" onClick={handleSubmit}>Sign In</button>
-                                </p>
-                            </Form>
-                    
-                        </Card>
-                    </Container>
-                )
-            }}
+            {({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
+                <Container className="SignInFormContainer">
+                    <Card className="SignInFormCard">
+                        <Form>
+                            <img src={logoLight} className="logoLightSignInForm" alt="logo" />
+                            <div className="form-group">
+                                <FiUser className="SignInIconsUser" />
+                                <Field
+                                    type="text"
+                                    name="email"
+                                    placeholder="Email Id"
+                                    className="SignInFormInput"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                                <ErrorMessage name="email" component="div" className="error" />
+                            </div>
+                            <div className="form-group">
+                                <PiLockOpen className="SignInIconsLock" />
+                                <Field
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    className="SignInFormInput"
+                                    value={values.password}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                                <ErrorMessage name="password" component="div" className="error" />
+                                <AiOutlineEyeInvisible className="SignInIconsEye" />
+                            </div>
+                            <div className="form-group">
+                                <label className="SignInFormForgotPassword">Forgot Password?</label>
+                            </div>
+                            <div className="form-group">
+                                <button type="submit" className="SignInFormSubmit" onClick={handleSubmit}>Sign In</button>
+                            </div>
+                        </Form>
+                    </Card>
+                </Container>
+            )}
         </Formik>
-    )
-}
+    );
+};
 
 export default SignInForm;
-
-

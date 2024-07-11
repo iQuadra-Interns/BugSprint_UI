@@ -40,7 +40,7 @@
     font-size: 12px;
 }
 
-.SignInFormCard {
+.FormCard {
     border-radius: 34px;
     border-width: 1px;
     border-color: linear-gradient(#32920D, #49B51F);
@@ -95,7 +95,7 @@
     margin-bottom: 3vh;
 }
 
-.SignInFormContainer {
+.FormContainer {
     text-align: right;
     align-content: right;
 }

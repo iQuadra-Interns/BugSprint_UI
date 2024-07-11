@@ -29,8 +29,8 @@ const SignInForm = () => {
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
-                <Container className="SignInFormContainer">
-                    <Card className="SignInFormCard">
+                <Container className="FormContainer">
+                    <Card className="FormCard">
                         <Form>
                             <img src={logoLight} className="logoLightSignInForm" alt="logo" />
                             <div className="form-group">

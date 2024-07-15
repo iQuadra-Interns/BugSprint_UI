@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FiUser } from 'react-icons/fi';
 import { PiLockOpen } from 'react-icons/pi';
-import { AiOutlineEyeInvisible } from 'react-icons/ai';
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import './SignIn.css';
 import Card from 'react-bootstrap/Card';
 import { Container } from 'react-bootstrap';
 import logoLight from '../images/logo-light.png';
 
 const SignInForm = () => {
+    const [showPassword, setShowPassword] = useState(false);
 
     const initialValues = {
         email: '',
@@ -26,9 +27,13 @@ const SignInForm = () => {
         setSubmitting(false);
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState);
+    };
+
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
+            {({ handleChange, handleBlur, values }) => (
                 <Container className="FormContainer">
                     <Card className="FormCard">
                         <Form>
@@ -46,10 +51,10 @@ const SignInForm = () => {
                                 />
                                 <ErrorMessage name="email" component="div" className="error" />
                             </div>
-                            <div className="form-group">
+                            <div className="form-group password-group">
                                 <PiLockOpen className="SignInIconsLock" />
                                 <Field
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     name="password"
                                     placeholder="Password"
                                     className="SignInFormInput"
@@ -58,13 +63,17 @@ const SignInForm = () => {
                                     onBlur={handleBlur}
                                 />
                                 <ErrorMessage name="password" component="div" className="error" />
-                                <AiOutlineEyeInvisible className="SignInIconsEye" />
+                                {showPassword ? (
+                                    <AiOutlineEye className="SignInIconsEye" onClick={togglePasswordVisibility} />
+                                ) : (
+                                    <AiOutlineEyeInvisible className="SignInIconsEye" onClick={togglePasswordVisibility} />
+                                )}
                             </div>
                             <div className="form-group">
                                 <label className="SignInFormForgotPassword">Forgot Password?</label>
                             </div>
                             <div className="form-group">
-                                <button type="submit" className="SignInFormSubmit" onClick={handleSubmit}>Sign In</button>
+                                <button type="submit" className="SignInFormSubmit">Sign In</button>
                             </div>
                         </Form>
                     </Card>

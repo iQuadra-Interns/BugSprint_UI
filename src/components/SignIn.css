@@ -15,29 +15,32 @@
 .SignInIconsEye {
     color: #50BB27;
     position: absolute;
-    margin-left: -6vh;
-    margin-top: 2.5vh;
+    right: 5px;
+    top: 55%;
+    transform: translateX(-600%);
     cursor: pointer;
 }
 
 .SignInTitle {
-    font-size: 45px;
-    font-weight: 600;
+    font-size: 50px;
+    font-weight: 700;
     padding-top: 13vh;
     margin-bottom: 5vh;
     margin-left: -5vh;
 }
 
 .SignInText {
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 400;
     margin-left: -5vh;
 }
 
 .error {
     color: red;
-    margin-top: 5px;
-    font-size: 12px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    font-size: 20px;
+    text-align: center;
 }
 
 .FormCard {
@@ -52,6 +55,7 @@
     align-content: right;
     position: relative;
     margin-top: 8vh;
+    font-size: 20px;
 }
 
 .SignInFormSubmit {
@@ -72,9 +76,10 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
     padding-left: 8vh;
+    padding-right: 2rem;
     margin-bottom: 2.5vh;
     background-color: white;
-    font-size: 16px;
+    font-size: 25px;
     color: #333;
 }
 
@@ -103,7 +108,8 @@
 .SignInFormForgotPassword {
     text-align: right;
     color: #50BB27;
-    padding-left: 25vh;
+    padding-left: 30vh;
+    font-size: 18px;
     margin-bottom: 1.5vh;
     cursor: pointer;
 }

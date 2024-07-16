@@ -8,59 +8,57 @@
 .SignInIconsLock {
     color: #50BB27;
     position: absolute;
-    margin-left: 3vh;
+    margin-left: -22vh;
     margin-top: 2.5vh;
 }
 
 .SignInIconsEye {
     color: #50BB27;
     position: absolute;
-    right: 5px;
-    top: 49%;
-    transform: translateX(-300%);
+    margin-left: 19vh;
+    margin-top: 2.5vh;
     cursor: pointer;
 }
 
 .SignInTitle {
-    font-size: 50px;
+    font-size: 10vh;
     font-weight: 700;
-    padding-top: 13vh;
+    padding-top: 7vh;
     margin-bottom: 5vh;
     margin-left: -5vh;
 }
 
 .SignInText {
-    font-size: 30px;
+    font-size: 5.5vh;
     font-weight: 400;
     margin-left: -5vh;
 }
 
 .error {
     color: red;
-    margin-top: 1px;
-    margin-bottom: 1px;
-    font-size: 20px;
+    margin-top: 0.5vh;
+    margin-bottom: 2.5vh;
+    font-size: 2.5vh;
     text-align: center;
 }
 
 .FormCard {
-    border-radius: 34px;
-    border-width: 1px;
+    border-radius: 5vh;
+    border-width: 1vh;
     border-color: linear-gradient(#32920D, #49B51F);
     background-image: linear-gradient(#F4F4F4, #E0FED3);
-    padding-top: 11vh;
-    padding-bottom: 11vh;
+    padding-top: 10.5vh;
+    padding-bottom: 10.5vh;
     width: 65vh;
     text-align: center;
     align-content: right;
     position: relative;
-    margin-top: 8vh;
-    font-size: 20px;
+    margin-top: 3.5vh;
 }
 
 .SignInFormSubmit {
     background-image: linear-gradient(to right, #1CCA38, #309D06);
-    border-radius: 8.41px;
+    border-radius: 1vh;
     width: 50vh;
     height: 8vh;
     text-align: center;
@@ -72,14 +70,14 @@
 .SignInFormInput {
     width: 50vh;
     height: 8vh;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+    border-radius: 1vh;
+    border: 0.1vh solid #ccc;
     box-sizing: border-box;
     padding-left: 8vh;
     padding-right: 2rem;
     margin-bottom: 2.5vh;
     background-color: white;
-    font-size: 25px;
+    font-size: 3vh;
     color: #333;
 }
 
@@ -109,7 +107,7 @@
     text-align: right;
     color: #50BB27;
     padding-left: 30vh;
-    font-size: 18px;
+    font-size: 2.5vh;
     margin-bottom: 1.5vh;
     cursor: pointer;
 }

@@ -53,6 +53,13 @@ const SignInForm = () => {
                             </div>
                             <div className="form-group">
                                 <PiLockOpen className="SignInIconsLock" />
+                                <div>
+                                    {showPassword ? (
+                                        <AiOutlineEye className="SignInIconsEye" onClick={togglePasswordVisibility} />
+                                    ) : (
+                                        <AiOutlineEyeInvisible className="SignInIconsEye" onClick={togglePasswordVisibility} />
+                                    )}
+                                </div>
                                 <Field
                                     type={showPassword ? "text" : "password"}
                                     name="password"
@@ -63,12 +70,8 @@ const SignInForm = () => {
                                     onBlur={handleBlur}
                                 />
                                 <ErrorMessage name="password" component="div" className="error" />
-                                {showPassword ? (
-                                    <AiOutlineEye className="SignInIconsEye" onClick={togglePasswordVisibility} />
-                                ) : (
-                                    <AiOutlineEyeInvisible className="SignInIconsEye" onClick={togglePasswordVisibility} />
-                                )}
                             </div>
+                            
                             <div className="form-group">
                                 <label className="SignInFormForgotPassword">Forgot Password?</label>
                             </div>

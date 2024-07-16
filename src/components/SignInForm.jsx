@@ -33,52 +33,38 @@ const SignInForm = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {({ handleChange, handleBlur, values }) => (
-                <Container className="FormContainer">
-                    <Card className="FormCard">
-                        <Form>
-                            <img src={logoLight} className="logoLightSignInForm" alt="logo" />
-                            <div className="form-group">
-                                <FiUser className="SignInIconsUser" />
-                                <Field
-                                    type="text"
-                                    name="email"
-                                    placeholder="Email Id"
-                                    className="SignInFormInput"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="email" component="div" className="error" />
-                            </div>
-                            <div className="form-group password-group">
-                                <PiLockOpen className="SignInIconsLock" />
-                                <Field
-                                    type={showPassword ? "text" : "password"}
-                                    name="password"
-                                    placeholder="Password"
-                                    className="SignInFormInput"
-                                    value={values.password}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <ErrorMessage name="password" component="div" className="error" />
-                                {showPassword ? (
-                                    <AiOutlineEye className="SignInIconsEye" onClick={togglePasswordVisibility} />
-                                ) : (
-                                    <AiOutlineEyeInvisible className="SignInIconsEye" onClick={togglePasswordVisibility} />
-                                )}
-                            </div>
-                            <div className="form-group">
-                                <label className="SignInFormForgotPassword">Forgot Password?</label>
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="SignInFormSubmit">Sign In</button>
-                            </div>
-                        </Form>
+            {(props) => {
+                return (
+                    <Card class="SignInFormCard">
+                        <Container>
+                            <Form>
+                                <img src={logoLight} className="logoLightSignInForm" alt = "logo"/>
+                                <p>
+                                    <FiUser class="SignInIconsUser"/>
+                                    <input type="text" name="email" value={props.values.email} onChange={props.handleChange} onBlur={props.handleBlur} placeholder="Email Id" class="SignInFormInput"/>
+                                        {props.errors.email && props.touched.email && (
+                                            <p className="error">{props.errors.email}</p>
+                                        )}
+                                </p>
+                                <p>
+                                    <PiLockOpen class="SignInIconsLock"/>
+                                    <input type="password" name="password" value={props.values.password} onChange={props.handleChange} onBlur={props.handleBlur} placeholder="Password" class="SignInFormInput"/>
+                                        {props.errors.password && props.touched.password && (
+                                        <p className="error">{props.errors.password}</p>)}
+                                    <AiOutlineEyeInvisible class="SignInIconsEye"/>
+                                </p>
+                                <p>
+                                    <label class="SignInFormForgotPassword">Forgot Password?</label>
+                                </p>
+                                <p>
+                                    <button type="submit" class="SignInFormSubmit" onClick={handleSubmit}>Sign In</button>
+                                </p>
+                            </Form>
+                    
+                        </Container>
                     </Card>
-                </Container>
-            )}
+                )
+            }}
         </Formik>
     );
 };

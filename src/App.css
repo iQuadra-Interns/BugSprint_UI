@@ -32,6 +32,7 @@ flex-shrink: 0;
 border-radius: 10px;
 background: #2F7219;
 }
+
 #bugTitle{
     width: 511px;
 height: 47px;
@@ -77,6 +78,9 @@ flex-shrink: 0;
 border-radius: 10px;
 border: 0.5px solid #B8B8B8;
 background: #FFF;
+text-align: justify;
+justify-content: start; /* Aligns the item to the start of the container */
+    align-items: start;
 }
 #actualComments{
     width: 772px;

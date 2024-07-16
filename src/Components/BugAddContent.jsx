@@ -395,7 +395,7 @@ function BugAddContent() {
                 </Col>
             </Row>
         </Container>
-            <Container>
+            <Container class= "container">
                 <Row>
                     <Col md ={6}>
                         

@@ -57,7 +57,7 @@ const SignInForm = () => {
                                     type={showPassword ? "text" : "password"}
                                     name="password"
                                     placeholder="Password"
-                                    className="SignInFormInput"
+                                    className="SignInFormInput"                                        
                                     value={values.password}
                                     onChange={handleChange}
                                     onBlur={handleBlur}

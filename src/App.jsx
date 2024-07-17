@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import './App.css'
 // import NavigationBar from './components/NavigationBar';
 import SideBar from './components/Sidebar';
-
+import MyProfile from './components/MyProfile';
 
 
 function App() {
@@ -16,8 +16,7 @@ function App() {
             <SideBar />
           </Col>
           <Col xs={10}>
-            <p>2 of 2</p>
-            <p>hello</p>
+            <MyProfile/>
           </Col>
         </Row>
         

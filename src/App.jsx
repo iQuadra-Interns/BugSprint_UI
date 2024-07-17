@@ -15,7 +15,10 @@ function App() {
           <Col xs={2} className="p-0">
             <SideBar />
           </Col>
-          <Col xs={10}>2 of 2</Col>
+          <Col xs={10}>
+            <p>2 of 2</p>
+            <p>hello</p>
+          </Col>
         </Row>
         
       </Container>

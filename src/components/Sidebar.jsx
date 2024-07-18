@@ -4,10 +4,12 @@ import BSLogo from "../images/450_BS_Main-Light.png";
 import profile_pic from "../images/profile_pic.png";
 import { Grid, User, Settings, LogOut } from 'lucide-react';
 import '../App.css';
+import './MyProfile.css'
 
 export default function SideBar() {
   return (
-    <Nav className="flex-column bg-light h-100 py-3">
+    //<Nav className="flex-column bg-light h-100 py-3">
+    <Nav className="sideBar">
       <Nav.Item className="mb-4 px-3">
         <img src={BSLogo} alt="Bugsprint Logo" className="img-fluid" />
       </Nav.Item>

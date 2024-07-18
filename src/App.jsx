@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import './App.css'
 // import NavigationBar from './components/NavigationBar';
-import SideBar from './components/Sidebar';
+import SideBar from './components/SideBar';
 
 
 

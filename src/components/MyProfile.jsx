@@ -20,10 +20,10 @@ export default function MyProfile() {
                         <p className="description">Contact:</p>
                     </Col>
                     <Col>
-                        <p className="details">Hari Krishna</p>
-                        <p className="details">Admin</p>
-                        <p className="details">hari.k@iquadra.com</p>
-                        <p className="details">+91 9898989898</p>
+                        <p className="detail">Hari Krishna</p>
+                        <p className="detail">Admin</p>
+                        <p className="detail">hari.k@iquadra.com</p>
+                        <p className="detail">+91 9898989898</p>
                     </Col>
                 </Row>
             </Card>

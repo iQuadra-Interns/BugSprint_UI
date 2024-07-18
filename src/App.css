@@ -22,3 +22,15 @@ body, #root {
     font-weight: bold;
   }
 
+  .mainContainer {
+    height: 100vh;
+    padding: 0;
+    background-color: #f8f9fa;
+  }
+
+  .nav-link.active {
+    background-color: #F0FCE9; /* Change this to your desired background color */
+    color: black;
+    font-weight: normal;
+  }
+

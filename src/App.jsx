@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <Container fluid className="vh-100 p-0">
+      <Container fluid className="mainContainer">
         <Row className="h-100 m-0">
           <Col xs={2} className="p-0">
             <SideBar />
@@ -19,7 +19,6 @@ function App() {
             <MyProfile/>
           </Col>
         </Row>
-        
       </Container>
       
     </>

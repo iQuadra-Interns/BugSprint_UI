@@ -1,11 +1,11 @@
 .profilePicture {
-    width: 30vh;
-    height: 30vh;
+    width: 40vh;
+    height: 40vh;
     border-radius: 50%;
     object-fit: cover;
     margin-top: 3vh;
     margin-bottom: 3vh;
-    margin-left: 17vh;
+    margin-left: 13vh;
 }
 
 .profileCard {
@@ -31,19 +31,25 @@
 
 .description {
     margin-left: 5vh;
-    color: #616161
+    color: #616161;
+    margin-bottom: 1.5vh
+}
+
+.detail {
+    margin-right: 12vh;
+    margin-bottom: 1.5vh
 }
 
 .title {
     color: #2F7219;
     margin-left: 5vh;
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
 }
 
 .sideBar {
     display: flex;
     flex-direction: column;
-    background-color: #f8f9fa;
+    background-color: white;
     height: 100%;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -52,8 +58,7 @@
     border-bottom-right-radius: 5vh;
 }
 
-.backgroundColor {
-    background-color: #f8f9fa; 
+.backgroundColor { 
     height: 100%;
     width: 100%
 }

@@ -1,9 +1,3 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,3 +33,27 @@
 .read-the-docs {
   color: #888;
 }
+
+body, #root {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  } 
+  
+  .sidebar {
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+  }
+  
+  .nav-link {
+    color: #333;
+  }
+  
+  .nav-link:hover, .nav-link:focus {
+    background-color: #e9ecef;
+  }
+  
+  .active {
+    background-color: #e9ecef;
+    font-weight: bold;
+  }

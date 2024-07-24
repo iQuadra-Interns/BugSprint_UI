@@ -8,6 +8,11 @@ import SignInForm from './components/SignInForm.jsx'
 import SignIn from './components/SignIn.jsx'
 import { createRoot } from "react-dom/client";
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col } from 'react-bootstrap';
+import './App.css'
+// import NavigationBar from './components/NavigationBar';
+import SideBar from './components/Sidebar';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

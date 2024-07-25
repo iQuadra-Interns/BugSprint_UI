@@ -8,6 +8,7 @@ import './SignIn.css';
 import Card from 'react-bootstrap/Card';
 import { Container } from 'react-bootstrap';
 import logoLight from '../images/logo-light.png';
+import axios from 'axios';
 
 const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +25,21 @@ const SignInForm = () => {
 
     const handleSubmit = (values, { setSubmitting }) => {
         console.log(values);
+        const sendDetails = async() => {
+            try{
+                let em = values.email
+                let pass = values.password
+
+                const response = await axios.post('http://127.0.0.1:8000/api/sign-in', {
+                    email: em,
+                    password: pass
+                })
+                
+
+            } catch (error) {
+                console.error('Error:', error);
+              }
+        }
         setSubmitting(false);
     };
 

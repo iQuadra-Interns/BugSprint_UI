@@ -34,12 +34,14 @@ const SignInForm = () => {
                     email: em,
                     password: pass
                 })
-                
+
 
             } catch (error) {
                 console.error('Error:', error);
               }
         }
+
+        sendDetails()
         setSubmitting(false);
     };
 

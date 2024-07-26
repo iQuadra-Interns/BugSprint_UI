@@ -27,12 +27,10 @@ const SignInForm = () => {
         console.log(values);
         const sendDetails = async() => {
             try{
-                let em = values.email
-                let pass = values.password
 
                 const response = await axios.post('http://127.0.0.1:8000/api/sign-in', {
-                    email: em,
-                    password: pass
+                    email: values.email,
+                    password: values.password
                 })
 
 

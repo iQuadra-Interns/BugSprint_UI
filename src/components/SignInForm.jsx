@@ -24,6 +24,15 @@ const SignInForm = () => {
 
     const handleSubmit = (values, { setSubmitting }) => {
         console.log(values);
+        //axios({
+        //    method: 'post',
+        //    url: 'http://localhost:5000/api/auth/signin',
+        //    data: {
+        //        email: values.email,
+        //        password: values.password,
+        //    },
+        //})
+        
         setSubmitting(false);
     };
 

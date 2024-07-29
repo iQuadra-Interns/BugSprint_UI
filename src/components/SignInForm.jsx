@@ -9,9 +9,21 @@ import Card from 'react-bootstrap/Card';
 import { Container } from 'react-bootstrap';
 import logoLight from '../images/logo-light.png';
 import axios from 'axios';
+import { Toast, ToastContainer } from 'react-bootstrap';
+
+
 
 const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [show, setShow] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [toastVariant, setToastVariant] = useState('danger');
+
+    const showToast = (message, isSuccess) => {
+        setToastMessage(message);
+        setToastVariant(isSuccess ? 'success' : 'danger');
+        setShow(true);
+    };
 
     const initialValues = {
         email: '',
@@ -28,14 +40,21 @@ const SignInForm = () => {
         const sendDetails = async() => {
             try{
 
-                const response = await axios.post('http://127.0.0.1:8000/api/sign-in', {
+                const response = await axios.post('http://127.0.0.1:9500/signin/api/sign-in', {
                     email: values.email,
                     password: values.password
                 })
 
+                if (response.data.status.sts) {
+                    showToast("Authentication Successful", true);
+                  } else {
+                    showToast("Invalid Email id or Password", false);
+                }
 
             } catch (error) {
                 console.error('Error:', error);
+                showToast("An error occurred. Please try again.", false);
+
               }
         }
 
@@ -48,6 +67,15 @@ const SignInForm = () => {
     };
 
     return (
+        <>
+        <ToastContainer position="top-end" className="p-3" style={{ zIndex: 1 }}>
+        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide bg={toastVariant}>
+            <Toast.Header>
+                <strong className="me-auto">{toastVariant === 'success' ? 'Success' : 'Error'}</strong>
+            </Toast.Header>
+        <Toast.Body>{toastMessage}</Toast.Body>
+        </Toast>
+        </ToastContainer>
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {({ handleChange, handleBlur, values }) => (
                 <Container className="FormContainer">
@@ -99,6 +127,7 @@ const SignInForm = () => {
                 </Container>
             )}
         </Formik>
+        </>
     );
 };
 

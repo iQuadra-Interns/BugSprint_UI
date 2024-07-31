@@ -24,7 +24,7 @@ export default function SideBar() {
       <Nav.Link href="#dashboard" className="d-flex align-items-center px-3 py-2">
         <Grid size={18} className="me-2" /> Dashboard
       </Nav.Link>
-      <Nav.Link href="#profile" className="d-flex align-items-center px-3 py-2">
+      <Nav.Link href="/profile" className="d-flex align-items-center px-3 py-2">
         <User size={18} className="me-2" /> My Profile
       </Nav.Link>
       <Nav.Link href="#settings" className="d-flex align-items-center px-3 py-2">

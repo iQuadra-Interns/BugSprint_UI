@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Nav } from 'react-bootstrap';
 import BSLogo from "../images/450_BS_Main-Light.png";
 import profile_pic from "../images/profile_pic.png";
@@ -23,7 +24,7 @@ export default function SideBar() {
       <Nav.Link href="#dashboard" className="d-flex align-items-center px-3 py-2">
         <Grid size={18} className="me-2" /> Dashboard
       </Nav.Link>
-      <Nav.Link href="#profile" className="d-flex align-items-center px-3 py-2">
+      <Nav.Link href="/MyProfile" className="d-flex align-items-center px-3 py-2">
         <User size={18} className="me-2" /> My Profile
       </Nav.Link>
       <Nav.Link href="#settings" className="d-flex align-items-center px-3 py-2">

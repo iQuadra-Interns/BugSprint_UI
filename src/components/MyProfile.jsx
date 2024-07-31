@@ -1,30 +1,34 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import '../App.css';
-// import NavigationBar from './components/NavigationBar';
-import SideBar from './Sidebar';
-import MyProfileContainer from './MyProfileContainer';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import {Row, Col, Container} from 'react-bootstrap'
+import Card from 'react-bootstrap/Card';
+import profile_pic from "../images/profile_pic.png";
 import './MyProfile.css'
 
+export default function MyProfile() {
+    return (
+        <Container className="profileContainer">
+            <Card className="profileCard">
+                <img src={profile_pic} className="profilePicture" alt="Profile"/>
+                <h3 className="title">My Profile</h3>
+                <Row>
+                    <Col>
+                        <p className="description">Name:</p>
+                        <p className="description">Role:</p>
+                        <p className="description">Email:</p>
+                        <p className="description">Contact:</p>
+                    </Col>
+                    <Col>
+                        <p className="detail">Hari Krishna</p>
+                        <p className="detail">Admin</p>
+                        <p className="detail">hari.k@iquadra.com</p>
+                        <p className="detail">+91 9898989898</p>
+                    </Col>
+                </Row>
+            </Card>
+        </Container>
+    )
 
-function MyProfile() {
-
-  return (
-    <>
-      <Container fluid className="mainContainer">
-        <Row className="h-100 m-0">
-          <Col xs={2} className="p-0">
-            <SideBar/>
-          </Col>
-          <Col xs={10}>
-            <MyProfileContainer/>
-          </Col>
-        </Row>
-      </Container>
-      
-    </>
-  )
 }
 
-export default MyProfile

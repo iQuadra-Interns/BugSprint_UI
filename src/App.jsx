@@ -14,6 +14,10 @@ import './App.css'
 // import NavigationBar from './components/NavigationBar';
 import SideBar from './components/Sidebar';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -30,6 +34,9 @@ function App() {
   return (
     <>
       <RouterProvider router={router}/>
+      <ToastContainer />
+
+      
     </>
   )
 }

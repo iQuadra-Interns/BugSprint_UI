@@ -9,21 +9,33 @@ import Card from 'react-bootstrap/Card';
 import { Container } from 'react-bootstrap';
 import logoLight from '../images/logo-light.png';
 import axios from 'axios';
-import { Toast, ToastContainer } from 'react-bootstrap';
 
+//toast implementation
+import { toast } from 'react-toastify';
 
 
 const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [show, setShow] = useState(false);
-    const [toastMessage, setToastMessage] = useState('');
-    const [toastVariant, setToastVariant] = useState('danger');
 
-    const showToast = (message, isSuccess) => {
-        setToastMessage(message);
-        setToastVariant(isSuccess ? 'success' : 'danger');
-        setShow(true);
-    };
+    const showNotification = (type, message) => {
+        switch (type) {
+          case 'success':
+            toast.success(message);
+            break;
+          case 'error':
+            toast.error(message);
+            break;
+          case 'info':
+            toast.info(message);
+            break;
+          case 'warning':
+            toast.warn(message);
+            break;
+          default:
+            toast(message);
+        }
+      };
+
 
     const initialValues = {
         email: '',
@@ -46,14 +58,17 @@ const SignInForm = () => {
                 })
 
                 if (response.data.status.sts) {
-                    showToast("Authentication Successful", true);
+                    showNotification('success', 'User Authenticated')
+
                   } else {
-                    showToast("Invalid Email id or Password", false);
+                    showNotification('error', 'Invalid Username or Password')
+
                 }
 
             } catch (error) {
                 console.error('Error:', error);
-                showToast("An error occurred. Please try again.", false);
+                showNotification('warning', 'Error encountered')
+
 
               }
         }
@@ -68,14 +83,6 @@ const SignInForm = () => {
 
     return (
         <>
-        <ToastContainer position="top-end" className="p-3" style={{ zIndex: 1 }}>
-        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide bg={toastVariant}>
-            <Toast.Header>
-                <strong className="me-auto">{toastVariant === 'success' ? 'Success' : 'Error'}</strong>
-            </Toast.Header>
-        <Toast.Body>{toastMessage}</Toast.Body>
-        </Toast>
-        </ToastContainer>
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {({ handleChange, handleBlur, values }) => (
                 <Container className="FormContainer">

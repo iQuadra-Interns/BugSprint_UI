@@ -10,7 +10,7 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/profile" element={<MyProfile/>}/>
+      <Route path="/MyProfile" element={<MyProfile/>}/>
     </Route>
   )
 )

@@ -20,16 +20,25 @@ const SignInForm = () => {
     const showNotification = (type, message) => {
         switch (type) {
           case 'success':
-            toast.success(message);
+            toast.success( <div>
+                <strong>SUCCESS</strong>
+                <div>{message}</div>
+            </div>);
             break;
           case 'error':
-            toast.error(message);
+            toast.error( <div>
+                <strong>ERROR</strong>
+                <div>{message}</div>
+            </div>);
             break;
           case 'info':
             toast.info(message);
             break;
           case 'warning':
-            toast.warn(message);
+            toast.warn(<div>
+                <strong>WARNING</strong>
+                <div>{message}</div>
+            </div>);
             break;
           default:
             toast(message);

@@ -12,7 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import './App.css'
 import MyProfile from './components/MyProfile';
-import { createRoot } from "react-dom/client";
 import SideBar from './components/Sidebar';
 
 const router = createBrowserRouter(

@@ -1,6 +1,7 @@
 import SideBar from './Sidebar';
 import Controls from './Controls';
 import BugList from './Bugslist';
+import { Container, Row, Col } from 'react-bootstrap';
 
 function BugsListScreen() {
 

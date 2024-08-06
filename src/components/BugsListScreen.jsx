@@ -1,6 +1,6 @@
-import SideBar from './components/Sidebar';
-import Controls from './components/Controls';
-import BugList from './components/Bugslist';
+import SideBar from './Sidebar';
+import Controls from './Controls';
+import BugList from './Bugslist';
 
 function BugsListScreen() {
 

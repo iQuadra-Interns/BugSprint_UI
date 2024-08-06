@@ -58,6 +58,11 @@ body, #root {
     font-weight: bold;
   }
 
+.flex {
+
+  display: flex;
+
+}
   .mainContainer {
     height: 100vh;
     padding: 0;

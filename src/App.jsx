@@ -11,8 +11,8 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import './App.css'
+import BugsListScreen from './components/BugsListScreen.jsx'
 import MyProfile from './components/MyProfile';
-import SideBar from './components/Sidebar';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +20,7 @@ const router = createBrowserRouter(
       <Route index element={<SignIn/>}/>
       <Route path="/" element={<SignIn/>}/>
       <Route path="/MyProfile" element={<MyProfile/>}/>
+      <Route path="/MyDashboard" element={<BugsListScreen/>}/>
     </Route>
   )
 )

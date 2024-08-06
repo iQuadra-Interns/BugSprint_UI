@@ -21,7 +21,7 @@ export default function SideBar() {
           <small className="text-muted">Admin</small>
         </div>
       </Nav.Item>
-      <Nav.Link href="#dashboard" className="d-flex align-items-center px-3 py-2">
+      <Nav.Link href="/MyDashboard" className="d-flex align-items-center px-3 py-2">
         <Grid size={18} className="me-2" /> Dashboard
       </Nav.Link>
       <Nav.Link href="/MyProfile" className="d-flex align-items-center px-3 py-2">

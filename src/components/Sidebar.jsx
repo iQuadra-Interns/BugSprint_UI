@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Nav } from 'react-bootstrap';
 import BSLogo from "../images/450_BS_Main-Light.png";
 import profile_pic from "../images/profile_pic.png";
 import { Grid, User, Settings, LogOut } from 'lucide-react';
 import '../App.css';
+import './MyProfile.css'
 
 export default function SideBar() {
   return (
-    <Nav className="flex-column bg-light h-100 py-3">
+    //<Nav className="flex-column bg-light h-100 py-3">
+    <Nav className="sideBar">
       <Nav.Item className="mb-4 px-3">
         <img src={BSLogo} alt="Bugsprint Logo" className="img-fluid" />
       </Nav.Item>
@@ -21,7 +24,7 @@ export default function SideBar() {
       <Nav.Link href="#dashboard" className="d-flex align-items-center px-3 py-2">
         <Grid size={18} className="me-2" /> Dashboard
       </Nav.Link>
-      <Nav.Link href="#profile" className="d-flex align-items-center px-3 py-2">
+      <Nav.Link href="/MyProfile" className="d-flex align-items-center px-3 py-2">
         <User size={18} className="me-2" /> My Profile
       </Nav.Link>
       <Nav.Link href="#settings" className="d-flex align-items-center px-3 py-2">

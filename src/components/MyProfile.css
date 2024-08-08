@@ -5,7 +5,7 @@
     object-fit: cover;
     margin-top: 3vh;
     margin-bottom: 3vh;
-    margin-left: 13vh;
+    margin-left: 8vh;
 }
 
 .profileCard {
@@ -30,19 +30,19 @@
 }
 
 .description {
-    margin-left: 5vh;
+    margin-left: 2vh;
     color: #616161;
     margin-bottom: 1.5vh
 }
 
 .detail {
-    margin-right: 12vh;
+    margin-right: 0vh;
     margin-bottom: 1.5vh
 }
 
 .title {
     color: #2F7219;
-    margin-left: 5vh;
+    margin-left: 2vh;
     margin-bottom: 3vh;
 }
 
@@ -60,5 +60,5 @@
 
 .backgroundColor { 
     height: 100%;
-    width: 100%
+    width: 100%;
 }

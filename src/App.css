@@ -63,11 +63,12 @@ body, #root {
   display: flex;
 
 }
-  .mainContainer {
-    height: 100vh;
-    padding: 0;
-    background-color: #f8f9fa;
-  }
+
+.mainContainer {
+  height: 100%;
+  width: 100%;
+  background-color: #f8f9fa;
+}
 
   .nav-link.active {
     background-color: #F0FCE9; /* Change this to your desired background color */

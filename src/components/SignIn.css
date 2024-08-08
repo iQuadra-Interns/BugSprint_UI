@@ -25,13 +25,13 @@
     font-weight: 700;
     padding-top: 7vh;
     margin-bottom: 5vh;
-    margin-left: 3.5vh;
+    margin-left: -10vh;
 }
 
 .SignInText {
     font-size: 5.5vh;
     font-weight: 400;
-    margin-left: 3.5vh;
+    margin-left: -10vh;
 }
 
 .error {
@@ -54,7 +54,7 @@
     align-content: right;
     position: relative;
     margin-top: 15vh;
-    margin-left: 5vh;
+    margin-left: -5vh;
 }
 
 .SignInFormSubmit {
@@ -91,7 +91,7 @@
     text-align: left;
     align-items: left;
     height: 20vh;
-    margin-left: -2.5vh;
+    margin-left: -16vh;
     margin-top: 13vh;
 }
 

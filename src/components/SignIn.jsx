@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import SignInForm from './SignInForm';
@@ -8,6 +9,10 @@ import Button from 'react-bootstrap/Button';
 import logoLight from '../images/logo-light.png';
 
 const SignIn = () => {
+
+    useEffect(() => {
+        document.title = "Sign In";
+      }, []);
 
     return (
         <>

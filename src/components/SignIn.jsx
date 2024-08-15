@@ -10,10 +10,6 @@ import logoLight from '../images/logo-light.png';
 
 const SignIn = () => {
 
-    useEffect(() => {
-        document.title = "Sign In";
-      }, []);
-
     return (
         <>
             <Container>

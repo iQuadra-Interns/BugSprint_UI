@@ -10,10 +10,6 @@ import './MyProfile.css'
 
 function MyProfile() {
 
-    useEffect(() => {
-      document.title = "My Profile";
-    }, []);
-
     return (
       <>
         <Container fluid className="mainContainer">

@@ -6,10 +6,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 function BugsListScreen() {
 
-  useEffect(() => {
-    document.title = "My Dashboard";
-  }, []);
-
     return (
       <>
         <Container fluid className="mainContainer">

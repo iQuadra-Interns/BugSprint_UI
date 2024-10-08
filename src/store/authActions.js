@@ -1,10 +1,15 @@
-// src/store/actions/authActions.js
+// src/store/authActions.js
 
-// Action Types
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const loginSuccess = (user) => ({
+    type: 'LOGIN_SUCCESS',
+    payload: user,
+});
 
-// Action Creators
-export const loginSuccess = (userData) => ({
-    type: LOGIN_SUCCESS,
-    payload: userData,
+export const logout = () => ({
+    type: 'LOGOUT',
+});
+
+export const loginFailure = (error) => ({
+    type: 'LOGIN_FAILURE',
+    payload: error,
 });

@@ -10,7 +10,8 @@ import Card from 'react-bootstrap/Card';
 import { Container } from 'react-bootstrap';
 import logoLight from '../images/logo-light.png';
 import { useDispatch } from 'react-redux'; // Import useDispatch
-import { loginSuccess } from '../store/actions/authActions'; // Import loginSuccess action from Redux
+import { loginSuccess } from '../store/authActions'; // Adjust path accordingly
+
 import { useNavigate } from 'react-router-dom'; // To navigate after login
 
 const SignInForm = () => {

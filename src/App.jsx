@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -13,7 +14,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import './App.css'
 import BugsListScreen from './components/BugsListScreen.jsx'
-import MyProfile from './components/MyProfile';
+import MyProfile from './components/MyProfile.jsx';
+
+function ProtectedRoute({ children }) {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // Access authentication state from Redux
+  return isAuthenticated ? children : <Navigate to="/" />; // If not authenticated, redirect to SignIn page
+}
 
 const router = createBrowserRouter(
   createRoutesFromElements(

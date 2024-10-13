@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';  
 import { FiUser } from 'react-icons/fi';
 import { PiLockOpen } from 'react-icons/pi';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
@@ -8,9 +9,17 @@ import './SignIn.css';
 import Card from 'react-bootstrap/Card';
 import { Container } from 'react-bootstrap';
 import logoLight from '../images/logo-light.png';
+import { useDispatch } from 'react-redux'; // Import useDispatch
+import { loginSuccess } from '../store/authActions'; // Adjust path accordingly
+
+import { useNavigate } from 'react-router-dom'; // To navigate after login
 
 const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch(); // Initialize dispatch
+    const navigate = useNavigate(); // Initialize navigate
 
     const initialValues = {
         email: '',
@@ -18,17 +27,45 @@ const SignInForm = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().required('Please enter the email'),
+        email: Yup.string().email('Invalid email format').required('Please enter the email'),
         password: Yup.string().required('Please enter the password'),
     });
 
-    const handleSubmit = (values, { setSubmitting }) => {
-        console.log(values);
-        setSubmitting(false);
+    const handleSubmit = async (values, { setSubmitting }) => {
+        setLoading(true);
+        setErrorMessage('');  
+        try {
+            // Sending POST request
+            const response = await axios.post('https://c2r3hnk5frqsa6l7zbl43je7cu0lqjyy.lambda-url.us-east-1.on.aws/api/sign-in', {
+                email: values.email,
+                password: values.password,
+            });
+
+            if (response.status === 200) {
+                // Dispatch login action to Redux store
+                dispatch(loginSuccess(response.data));
+
+                // Redirect to the profile page after successful sign-in
+                navigate('/MyProfile');
+            } else {
+                setErrorMessage('Sign-in failed. Please try again.');
+            }
+        } catch (error) {
+            if (error.response) {
+                setErrorMessage(`Sign-in failed: ${error.response.data.message || 'Please check your credentials.'}`);
+                console.error('Sign-in error:', error.response.data);
+            } else {
+                setErrorMessage('Error occurred during sign-in. Please check your connection.');
+                console.error('Sign-in error:', error);
+            }
+        } finally {
+            setLoading(false);
+            setSubmitting(false);
+        }
     };
 
     const togglePasswordVisibility = () => {
-        setShowPassword(prevState => !prevState);
+        setShowPassword((prevState) => !prevState);
     };
 
     return (
@@ -61,23 +98,26 @@ const SignInForm = () => {
                                     )}
                                 </div>
                                 <Field
-                                    type={showPassword ? "text" : "password"}
+                                    type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     placeholder="Password"
-                                    className="SignInFormInput"                                        
+                                    className="SignInFormInput"
                                     value={values.password}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
                                 <ErrorMessage name="password" component="div" className="error" />
                             </div>
-                            
+
                             <div className="form-group">
                                 <label className="SignInFormForgotPassword">Forgot Password?</label>
                             </div>
                             <div className="form-group">
-                                <button type="submit" className="SignInFormSubmit">Sign In</button>
+                                <button type="submit" className="SignInFormSubmit" disabled={loading}>
+                                    {loading ? 'Signing in...' : 'Sign In'}
+                                </button>
                             </div>
+                            {errorMessage && <div className="error">{errorMessage}</div>}
                         </Form>
                     </Card>
                 </Container>

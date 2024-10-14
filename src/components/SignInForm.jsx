@@ -9,17 +9,16 @@ import './SignIn.css';
 import Card from 'react-bootstrap/Card';
 import { Container } from 'react-bootstrap';
 import logoLight from '../images/logo-light.png';
-import { useDispatch } from 'react-redux'; // Import useDispatch
-import { loginSuccess } from '../store/authActions'; // Adjust path accordingly
-
-import { useNavigate } from 'react-router-dom'; // To navigate after login
+import { useDispatch } from 'react-redux'; 
+import { loginSuccess } from '../store/authActions'; 
+import { useNavigate } from 'react-router-dom';
 
 const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch(); // Initialize dispatch
-    const navigate = useNavigate(); // Initialize navigate
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const initialValues = {
         email: '',
@@ -53,10 +52,8 @@ const SignInForm = () => {
         } catch (error) {
             if (error.response) {
                 setErrorMessage(`Sign-in failed: ${error.response.data.message || 'Please check your credentials.'}`);
-                console.error('Sign-in error:', error.response.data);
             } else {
                 setErrorMessage('Error occurred during sign-in. Please check your connection.');
-                console.error('Sign-in error:', error);
             }
         } finally {
             setLoading(false);

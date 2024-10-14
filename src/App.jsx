@@ -14,7 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import './App.css'
 import BugsListScreen from './components/BugsListScreen.jsx'
-import MyProfile from './components/MyProfile.jsx';
+import MyProfile from './components/MyProfile';
 
 function ProtectedRoute({ children }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // Access authentication state from Redux

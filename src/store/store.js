@@ -1,9 +1,8 @@
-// src/store/store.js
 import { createStore, combineReducers } from 'redux';
-import authReducer from './authReducer'; // Update this line
+import authReducer from './authReducer'; 
 
 const rootReducer = combineReducers({
-    auth: authReducer, // Authentication state
+    auth: authReducer, 
 });
 
 export const store = createStore(rootReducer);

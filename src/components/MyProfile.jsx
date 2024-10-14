@@ -7,21 +7,21 @@ import MyProfileContainer from './MyProfileContainer';
 import './MyProfile.css';
 
 function MyProfile() {
-    const user = useSelector((state) => state.auth.user); // Get user from Redux store
-
+    // Get user data from Redux store
+    const user = useSelector((state) => state.auth.user);
+    console.log(user);
     return (
-        <>
-            <Container fluid className="mainContainer">
-                <Row className="h-100">
-                    <Col xs={2} className="p-0">
-                        <SideBar />
-                    </Col>
-                    <Col xs={10}>
-                        <MyProfileContainer user={user} /> {/* Pass user to MyProfileContainer */}
-                    </Col>
-                </Row>
-            </Container>
-        </>
+        <Container fluid className="mainContainer">
+            <Row className="h-100">
+                <Col xs={2} className="p-0">
+                    <SideBar />
+                </Col>
+                <Col xs={10}>
+                    {/* Pass the user data as a prop */}
+                    <MyProfileContainer user={user} />
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

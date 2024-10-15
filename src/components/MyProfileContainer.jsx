@@ -28,13 +28,16 @@ const MyProfileContainer = () => {
                     <Col>
                         <p className="description">Name:</p>
                         <p className="description">Role:</p>
+                        
+                        <p className="description">Email:</p>
                         <p className="description">Contact:</p>
+
                     </Col>
                     <Col>
                         {/* Dynamically display user data */}
                         <p className="detail">{user.developer_details.first_name + " " + user.developer_details.last_name}</p>
                         <p className="detail">{user.usr.user_category}</p>
-                        <p className="detail">{user.email}</p>
+                        <p className="detail">{user.developer_details.email}</p>
                         <p className="detail">{user.developer_details.isd + " " + user.developer_details.mobile_number}</p>
                     </Col>
                 </Row>

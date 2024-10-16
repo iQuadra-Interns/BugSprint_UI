@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Form, InputGroup, Button, Row, Col, Dropdown, Modal } from 'react-bootstrap';
 import { Search, Filter } from 'lucide-react';
 import SortButton from './SortButton';
-import BugAddContent from './BugAddContent';  // Import BugAddContent
+//import BugAddContent from './BugAddContent';  // Import BugAddContent
+import CreateBug from './CreateBug/CreateBug';
 
 function Controls() {
   const [showSortDropdown, setShowSortDropdown] = useState(false);
@@ -81,7 +82,7 @@ function Controls() {
           <Modal.Title>Create Bug</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <BugAddContent onClose={toggleBugModal} /> {/* Pass toggleBugModal as onClose prop */}
+          <CreateBug onClose={toggleBugModal} /> {/* Pass toggleBugModal as onClose prop */}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={toggleBugModal}>

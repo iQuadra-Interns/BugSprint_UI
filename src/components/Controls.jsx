@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { Form, InputGroup, Button, Row, Col, Dropdown, Modal } from 'react-bootstrap';
 import { Search, Filter } from 'lucide-react';
 import SortButton from './SortButton';
+import BugAddContent from './BugAddContent';  // Import BugAddContent
 
 function Controls() {
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showBugModal, setShowBugModal] = useState(false); // State to show BugAddContent modal
 
   const toggleSortDropdown = () => setShowSortDropdown(!showSortDropdown);
   const toggleFilterModal = () => setShowFilterModal(!showFilterModal);
+  const toggleBugModal = () => setShowBugModal(!showBugModal); // Toggle BugAddContent modal
 
   const filterOptions = [
     'Reported by', 'Product Name', 'Environment', 'Testing Medium',
@@ -36,12 +39,13 @@ function Controls() {
             Filter
           </Button>
           <SortButton/>
-          <Button variant="success">
+          <Button variant="success" onClick={toggleBugModal}>
             + Create Bug
           </Button>
         </Col>
       </Row>
 
+      {/* Filter Modal */}
       <Modal show={showFilterModal} onHide={toggleFilterModal} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Filters</Modal.Title>
@@ -67,6 +71,21 @@ function Controls() {
         <Modal.Footer>
           <Button variant="success" onClick={toggleFilterModal}>
             Apply
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Bug Add Content Modal */}
+      <Modal show={showBugModal} onHide={toggleBugModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Create Bug</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <BugAddContent onClose={toggleBugModal} /> {/* Pass toggleBugModal as onClose prop */}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={toggleBugModal}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

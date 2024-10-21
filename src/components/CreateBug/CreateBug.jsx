@@ -5,28 +5,12 @@ import "./CreateBug.css";
 let editable = true;
 
 function toggleDisable(){
-    const bugTitle = document.getElementById("bugTitle");
-    const bugDesc = document.getElementById("desc");
-    const bugUser = document.getElementById("user");
-    const scenario = document.getElementById("scenario");
-    const product = document.getElementById("product");
-    const enviornment = document.getElementById("enviornment");
-    const testing = document.getElementById("testing");
-    const rootcause = document.getElementById("rootcause");
-    const priority = document.getElementById("priority");
-    const assignee = document.getElementById("assignee");
-
+    const fields = ["bugTitle", "desc", "user", "scenario", "product", "enviornment", "testing", "rootcause", "priority", "assignee"];
+    fields.forEach(id => {
+        const element = document.getElementById(id);
+        element.disabled = !element.disabled;
+    });
     editable = !editable;
-    bugTitle.disabled = !bugTitle.disabled;
-    bugDesc.disabled = !bugDesc.disabled;
-    bugUser.disabled = !bugUser.disabled;
-    scenario.disabled = !scenario.disabled;
-    product.disabled = !product.disabled;
-    enviornment.disabled = !enviornment.disabled;
-    testing.disabled = !testing.disabled;
-    rootcause.disabled = !rootcause.disabled;
-    priority.disabled = !priority.disabled;
-    assignee.disabled = !assignee.disabled;
 }
 
 function CreateBug() {
@@ -45,109 +29,49 @@ function CreateBug() {
     const [errorMessage, setErrorMessage] = useState("");
 
     function validate(){
-        let boo = true;
+        let isValid = true;
         
-        const bugTitle = document.getElementById("bugTitle");
-        let titleValue = bugTitle.value;
-        if(titleValue === ""){
-            settitleErrors("Required");
-            boo = false;
-        }
+        const checkRequired = (id, setError) => {
+            const element = document.getElementById(id);
+            if (element.value === "" || element.value === "base") {
+                setError("Required");
+                isValid = false;
+            } else {
+                setError("");
+            }
+        };
 
-        const bugDesc = document.getElementById("desc");
-        let description = bugDesc.value;
-        if(description === ""){
-            setdescErrors("Required");
-            boo = false;
-        }
+        checkRequired("bugTitle", settitleErrors);
+        checkRequired("desc", setdescErrors);
+        checkRequired("user", setuserErrors);
+        checkRequired("scenario", setscenarioErrors);
+        checkRequired("product", setproductErrors);
+        checkRequired("enviornment", setenviornmentErrors);
+        checkRequired("testing", settestingErrors);
+        checkRequired("rootcause", setrootErrors);
+        checkRequired("priority", setpriorityErrors);
+        checkRequired("assignee", setassigneeErrors);
 
-        const bugUser = document.getElementById("user");
-        let user = bugUser.value;
-        if(user === ""){
-            setuserErrors("Required");
-            boo = false;
-        }
-
-        const scenarioElement = document.getElementById("scenario");
-        let scenarioValue = scenarioElement.value;
-        if(scenarioValue === "base" || scenarioValue === ""){
-            setscenarioErrors("Required");
-            boo = false;
-        }
-
-        const productElement = document.getElementById("product");
-        let productValue = productElement.value;
-        if(productValue === "base" || productValue === ""){
-            setproductErrors("Required");
-            boo = false;
-        }
-
-        const enviornmentElement = document.getElementById("enviornment");
-        let enviornmentValue = enviornmentElement.value;
-        if(enviornmentValue === "base" || enviornmentValue === ""){
-            setenviornmentErrors("Required");
-            boo = false;
-        }
-
-        const testingElement = document.getElementById("testing");
-        let testingValue = testingElement.value;
-        if(testingValue === "base" || testingValue === ""){
-            settestingErrors("Required");
-            boo = false;
-        }
-
-        const rootcauseElement = document.getElementById("rootcause");
-        let rootcauseValue = rootcauseElement.value;
-        if(rootcauseValue === "base" || rootcauseValue === ""){
-            setrootErrors("Required");
-            boo = false;
-        }
-
-        const priorityElement = document.getElementById("priority");
-        let priorityValue = priorityElement.value;
-        if(priorityValue === "base" || priorityValue === ""){
-            setpriorityErrors("Required");
-            boo = false;
-        }
-
-        const assigneeElement = document.getElementById("assignee");
-        let assigneeValue = assigneeElement.value;
-        if(assigneeValue === "base" || assigneeValue === ""){
-            setassigneeErrors("Required");
-            boo = false;
-        }
-
-        if(boo){
+        if(isValid){
             toggleDisable();
-            handleSubmit(); // Call the submit function here
+            handleSubmit();
         }
     }
 
     async function handleSubmit() {
-        const bugTitle = document.getElementById("bugTitle").value;
-        const bugDesc = document.getElementById("desc").value;
-        const bugUser = document.getElementById("user").value;
-        const scenario = document.getElementById("scenario").value;
-        const product = document.getElementById("product").value;
-        const enviornment = document.getElementById("enviornment").value;
-        const testing = document.getElementById("testing").value;
-        const rootcause = document.getElementById("rootcause").value;
-        const priority = document.getElementById("priority").value;
-        const assignee = document.getElementById("assignee").value;
-
         const payload = {
-            product_id: product,
-            environment_id: enviornment,
-            scenario_id: scenario,
-            testing_medium: testing,
-            description: bugDesc,
-            user_data: bugUser,
-            priority_id: priority,
+            product_id: document.getElementById("product").value,
+            environment_id: document.getElementById("enviornment").value,
+            scenario_id: document.getElementById("scenario").value,
+            testing_medium: document.getElementById("testing").value,
+            description: document.getElementById("desc").value,
+            user_data: document.getElementById("user").value,
+            priority_id: document.getElementById("priority").value,
             reported_by: 1, // Assuming the current user ID is 1
-            assignee_id: assignee,
-            root_cause_location: rootcause,
-            root_cause: "Some root cause", // Add the root cause
-            resolution: "In Progress", // Add the resolution
+            assignee_id: document.getElementById("assignee").value,
+            root_cause_location: document.getElementById("rootcause").value,
+            root_cause: "Some root cause", // Replace with actual value
+            resolution: "In Progress", // Replace with actual value
             status: 0
         };
 
@@ -162,14 +86,8 @@ function CreateBug() {
 
             if (response.ok) {
                 const result = await response.json();
-                console.log(result);
-                if (result.status.status === false) {
-                    setSuccessMessage(result.status.message || "Bug successfully added!");
-                    setErrorMessage("");  // Clear the error message on success
-                } else {
-                    setErrorMessage(result.status.message || "Operation failed");
-                    setSuccessMessage("");
-                }
+                setSuccessMessage(result.status.message || "Bug successfully added!");
+                setErrorMessage("");
             } else {
                 setErrorMessage("Error adding bug, please try again.");
                 setSuccessMessage("");
@@ -204,9 +122,7 @@ function CreateBug() {
                 <Row>
                     <Col md={6}>
                         <input onChange={() => settitleErrors("")} id="bugTitle" type="text" placeholder="Bug Title" className="text"></input>
-                        <div>
-                            <p>{titleErrors}</p>
-                        </div>
+                        <div><p className="error">{titleErrors}</p></div>
                     </Col>
                 </Row>
                 <Row>
@@ -217,9 +133,7 @@ function CreateBug() {
                             <option value="Fixed">Fixed</option>
                             <option value="Reopen">Reopen</option>
                         </FormSelect>
-                        <div>
-                            <p>{scenarioErrors}</p>
-                        </div>
+                        <div><p className="error">{scenarioErrors}</p></div>
                     </Col>
                     <Col>
                         <FormSelect onChange={() => setproductErrors("")} className="drop" id="product" aria-label="Default select example">
@@ -228,9 +142,7 @@ function CreateBug() {
                             <option value="Fixed">Fixed</option>
                             <option value="Reopen">Reopen</option>
                         </FormSelect>
-                        <div>
-                            <p>{productErrors}</p>
-                        </div>
+                        <div><p className="error">{productErrors}</p></div>
                     </Col>
                     <Col>
                         <FormSelect onChange={() => setenviornmentErrors("")} className="drop" id="enviornment" aria-label="Default select example">
@@ -239,9 +151,7 @@ function CreateBug() {
                             <option value="Fixed">Fixed</option>
                             <option value="Reopen">Reopen</option>
                         </FormSelect>
-                        <div>
-                            <p>{enviornmentErrors}</p>
-                        </div>
+                        <div><p className="error">{enviornmentErrors}</p></div>
                     </Col>
                     <Col>
                         <FormSelect onChange={() => settestingErrors("")} className="drop" id="testing" aria-label="Default select example">
@@ -250,9 +160,7 @@ function CreateBug() {
                             <option value="Fixed">Fixed</option>
                             <option value="Reopen">Reopen</option>
                         </FormSelect>
-                        <div>
-                            <p>{testingErrors}</p>
-                        </div>
+                        <div><p className="error">{testingErrors}</p></div>
                     </Col>
                     <Col>
                         <FormSelect onChange={() => setrootErrors("")} className="drop" id="rootcause" aria-label="Default select example">
@@ -261,9 +169,7 @@ function CreateBug() {
                             <option value="Fixed">Fixed</option>
                             <option value="Reopen">Reopen</option>
                         </FormSelect>
-                        <div>
-                            <p>{rootcauseErrors}</p>
-                        </div>
+                        <div><p className="error">{rootcauseErrors}</p></div>
                     </Col>
                 </Row>
                 <Row>
@@ -274,9 +180,7 @@ function CreateBug() {
                             <option value="Fixed">Fixed</option>
                             <option value="Reopen">Reopen</option>
                         </FormSelect>
-                        <div>
-                            <p>{priorityErrors}</p>
-                        </div>
+                        <div><p className="error">{priorityErrors}</p></div>
                     </Col>
                     <Col>
                         <FormSelect onChange={() => setassigneeErrors("")} className="drop" id="assignee" aria-label="Default select example">
@@ -285,23 +189,17 @@ function CreateBug() {
                             <option value="Fixed">Fixed</option>
                             <option value="Reopen">Reopen</option>
                         </FormSelect>
-                        <div>
-                            <p>{assigneeErrors}</p>
-                        </div>
+                        <div><p className="error">{assigneeErrors}</p></div>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <input onChange={() => setdescErrors("")} className="text" id="desc" placeholder="Description"></input>
-                        <div>
-                            <p>{descErrors}</p>
-                        </div>
+                        <div><p className="error">{descErrors}</p></div>
                     </Col>
                     <Col>
                         <input onChange={() => setuserErrors("")} className="text" id="user" placeholder="User Data (Optional)"></input>
-                        <div>
-                            <p>{userErrors}</p>
-                        </div>
+                        <div><p className="error">{userErrors}</p></div>
                     </Col>
                 </Row>
             </Container>

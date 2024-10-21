@@ -40,6 +40,8 @@ const SignInForm = () => {
                 password: values.password,
             });
 
+            console.log(response);
+
             if (response.status === 200) {
                 // Dispatch login action to Redux store
                 dispatch(loginSuccess(response.data));

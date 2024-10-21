@@ -16,6 +16,7 @@ const BugList = () => {
     { id: 'IQBS-001', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'High', assignee: 'AJ' },
   ];
 
+
   return (
     <Table hover>
       <thead>
@@ -28,8 +29,7 @@ const BugList = () => {
       </thead>
       <tbody>
         {bugs.map((bugInd) => (
-          // Adding unique key by combining id and status
-          <Bug key={`${bugInd.id}-${bugInd.status}`} indbug={bugInd} />
+            <Bug indbug={bugInd} />
         ))}
       </tbody>
     </Table>

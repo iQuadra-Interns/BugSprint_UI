@@ -1,14 +1,15 @@
-// Initial state
-const initialState = {
-    isAuthenticated: !!localStorage.getItem('user'), // Check if user data exists in localStorage
-    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null, // Parse user data from localStorage
-    error: null,
-};
-
 // Action types
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGOUT = 'LOGOUT';
 const LOGIN_FAILURE = 'LOGIN_FAILURE';
+
+// Retrieve user data from localStorage, if available
+const storedUser = localStorage.getItem('user');
+const initialState = {
+    isAuthenticated: !!storedUser, // Initialize based on whether storedUser is present
+    user: storedUser ? JSON.parse(storedUser) : null, // Parse the stored user data, if any
+    error: null,
+};
 
 // Reducer function
 const authReducer = (state = initialState, action) => {

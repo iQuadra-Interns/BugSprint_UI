@@ -40,18 +40,26 @@ const SignInForm = () => {
                 password: values.password,
             });
 
-            if (response.status === 200) {
+            console.log("Response Status:", response.status);
+            console.log("Response Data:", response.data);
+
+            // Verify both status and response data to ensure sign-in success
+            if (response.status === 200 && response.data && response.data.status.status === true) {
                 // Dispatch login action to Redux store
                 dispatch(loginSuccess(response.data));
-
                 // Redirect to the profile page after successful sign-in
                 navigate('/MyProfile');
             } else {
-                setErrorMessage('Sign-in failed. Please try again.');
+                // Log unexpected response for debugging
+                console.log("Unexpected response:", response);
+                setErrorMessage(response.data.status.message || 'Sign-in failed. Please try again.');
             }
         } catch (error) {
+            // Log full error response for debugging
+            console.error("Sign-in error:", error);
             if (error.response) {
-                setErrorMessage(`Sign-in failed: ${error.response.data.message || 'Please check your credentials.'}`);
+                // Show the detailed error message if available
+                setErrorMessage(`Sign-in failed: ${error.response.data.message || 'Invalid credentials.'}`);
             } else {
                 setErrorMessage('Error occurred during sign-in. Please check your connection.');
             }

@@ -1,210 +1,245 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Button, Alert, FormSelect } from 'react-bootstrap';
-import "./CreateBug.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import Toast styles
+import './CreateBug.css';
 
-let editable = true;
+const CreateBug = () => {
+  const [bugData, setBugData] = useState({
+    product_id: 0,
+    title: '',
+    environment_id: 0,
+    scenario_id: 0,
+    testing_medium: 0,
+    description: '',
+    user_data: '',
+    priority_id: 0,
+    reported_by: 0,
+    assignee_id: 0,
+    root_cause_location: 0,
+    root_cause: '',
+    resolution: '',
+    status: 0
+  });
 
-function toggleDisable(){
-    const fields = ["bugTitle", "desc", "user", "scenario", "product", "enviornment", "testing", "rootcause", "priority", "assignee"];
-    fields.forEach(id => {
-        const element = document.getElementById(id);
-        element.disabled = !element.disabled;
-    });
-    editable = !editable;
-}
+  const [dropdownData, setDropdownData] = useState({
+    bugStatus: [],
+    environments: [],
+    products: [],
+    rootCauseLocations: [],
+    scenarios: [],
+    testingMediums: [],
+    priorities: []
+  });
 
-function CreateBug() {
-    const [titleErrors, settitleErrors] = useState("");
-    const [descErrors, setdescErrors] = useState("");
-    const [userErrors, setuserErrors] = useState("");
-    const [scenarioErrors, setscenarioErrors] = useState("");
-    const [productErrors, setproductErrors] = useState("");
-    const [enviornmentErrors, setenviornmentErrors] = useState("");
-    const [testingErrors, settestingErrors] = useState("");
-    const [rootcauseErrors, setrootErrors] = useState("");
-    const [priorityErrors, setpriorityErrors] = useState("");
-    const [assigneeErrors, setassigneeErrors] = useState("");
-    
-    const [successMessage, setSuccessMessage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+  const [filteredScenarios, setFilteredScenarios] = useState([]);
 
-    function validate(){
-        let isValid = true;
-        
-        const checkRequired = (id, setError) => {
-            const element = document.getElementById(id);
-            if (element.value === "" || element.value === "base") {
-                setError("Required");
-                isValid = false;
-            } else {
-                setError("");
-            }
-        };
+  // Fetch dropdown data from common constants URL
+  useEffect(() => {
+    axios.post(
+      'https://xjhkkap5tmpwr3yjiw7nvadwra0jyiav.lambda-url.us-east-1.on.aws/fetch-table-data',
+      { "table_name": "string" },
+      { headers: { 'Content-Type': 'application/json' } }
+    )
+      .then(response => {
+        setDropdownData({
+          bugStatus: response.data.data.bug_status,
+          environments: response.data.data.environments,
+          products: response.data.data.products,
+          rootCauseLocations: response.data.data.root_cause_location,
+          scenarios: response.data.data.scenarios,
+          testingMediums: response.data.data.testing_medium,
+          priorities: response.data.data.priority
+        });
+      })
+      .catch(error => {
+        toast.error('Error fetching dropdown data');
+        console.error('Error fetching dropdown data:', error);
+        setDropdownData({
+          bugStatus: [],
+          environments: [],
+          products: [],
+          rootCauseLocations: [],
+          scenarios: [],
+          testingMediums: [],
+          priorities: []
+        });
+      });
+  }, []);
 
-        checkRequired("bugTitle", settitleErrors);
-        checkRequired("desc", setdescErrors);
-        checkRequired("user", setuserErrors);
-        checkRequired("scenario", setscenarioErrors);
-        checkRequired("product", setproductErrors);
-        checkRequired("enviornment", setenviornmentErrors);
-        checkRequired("testing", settestingErrors);
-        checkRequired("rootcause", setrootErrors);
-        checkRequired("priority", setpriorityErrors);
-        checkRequired("assignee", setassigneeErrors);
+  // Filter scenarios based on selected product
+  const handleProductChange = (e) => {
+    const selectedProductId = e.target.value;
+    setBugData({ ...bugData, product_id: selectedProductId, scenario_id: '' });
 
-        if(isValid){
-            toggleDisable();
-            handleSubmit();
-        }
+    if (dropdownData.scenarios && Array.isArray(dropdownData.scenarios)) {
+      const filtered = dropdownData.scenarios.filter(
+        (scenario) => scenario.product_id.toString() === selectedProductId
+      );
+      setFilteredScenarios(filtered);
+    }
+  };
+
+  // Handle other input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBugData({ ...bugData, [name]: value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validation for required fields
+    if (!bugData.product_id || !bugData.description || !bugData.title || !bugData.priority_id) {
+      toast.error("Please fill out all required fields.");
+      return;
     }
 
-    async function handleSubmit() {
-        const payload = {
-            product_id: document.getElementById("product").value,
-            environment_id: document.getElementById("enviornment").value,
-            scenario_id: document.getElementById("scenario").value,
-            testing_medium: document.getElementById("testing").value,
-            description: document.getElementById("desc").value,
-            user_data: document.getElementById("user").value,
-            priority_id: document.getElementById("priority").value,
-            reported_by: 1, // Assuming the current user ID is 1
-            assignee_id: document.getElementById("assignee").value,
-            root_cause_location: document.getElementById("rootcause").value,
-            root_cause: "Some root cause", // Replace with actual value
-            resolution: "In Progress", // Replace with actual value
-            status: 0
-        };
+    // Convert data to correct types and add default values for optional fields
+    const formattedBugData = {
+      ...bugData,
+      product_id: parseInt(bugData.product_id, 10),
+      environment_id: parseInt(bugData.environment_id, 10),
+      scenario_id: parseInt(bugData.scenario_id, 10),
+      testing_medium: parseInt(bugData.testing_medium, 10),
+      priority_id: parseInt(bugData.priority_id, 10),
+      assignee_id: parseInt(bugData.assignee_id, 10),
+      root_cause_location: parseInt(bugData.root_cause_location, 10),
+      status: parseInt(bugData.status, 10),
+      resolution: bugData.resolution || "Not Provided", // Default value for optional fields
+      root_cause: bugData.root_cause || "Not Provided", // Default value for optional fields
+      reported_by: bugData.reported_by || 1, // Set to the current user ID (if applicable)
+    };
 
-        try {
-            const response = await fetch('https://esayaabfpizs3huhtuo6hevhia0parjp.lambda-url.us-east-1.on.aws/api/add-bug', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
+    // Submit data to the API
+    axios.post(
+      'https://esayaabfpizs3huhtuo6hevhia0parjp.lambda-url.us-east-1.on.aws/api/add-bug',
+      formattedBugData,
+      { headers: { 'Content-Type': 'application/json' } }
+    )
+      .then(response => {
+        toast.success('Bug saved successfully!');
+        console.log('Bug added successfully:', response.data);
+      })
+      .catch(error => {
+        toast.error('Failed to save the bug. Please try again.');
+        console.error('Error adding bug:', error.response?.data || error);
+      });
+  };
 
-            if (response.ok) {
-                const result = await response.json();
-                setSuccessMessage(result.status.message || "Bug successfully added!");
-                setErrorMessage("");
-            } else {
-                setErrorMessage("Error adding bug, please try again.");
-                setSuccessMessage("");
-            }
-        } catch (error) {
-            setErrorMessage("Error: " + error.message);
-            setSuccessMessage("");
-        }
-    }
-
-    return (
-        <div>
-            <Container>
-                <Row>
-                    <Col md={2}>
-                        <button id="backArrow"> &larr;</button>
-                    </Col>
-                    <Col md={2}>
-                        <p id="create">Create Bug</p>
-                    </Col>
-                    <Col md={{ span: 2, offset: 6 }}>
-                        <button id="save" onClick={validate} type="submit">Save</button>
-                    </Col>
-                </Row>
-            </Container>
-
-            {/* Display success or error message */}
-            {successMessage && <Alert variant="success">{successMessage}</Alert>}
-            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-
-            <Container>
-                <Row>
-                    <Col md={6}>
-                        <input onChange={() => settitleErrors("")} id="bugTitle" type="text" placeholder="Bug Title" className="text"></input>
-                        <div><p className="error">{titleErrors}</p></div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <FormSelect onChange={() => setscenarioErrors("")} className="drop" id="scenario" aria-label="Default select example">
-                            <option value="base">Scenario</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Reopen">Reopen</option>
-                        </FormSelect>
-                        <div><p className="error">{scenarioErrors}</p></div>
-                    </Col>
-                    <Col>
-                        <FormSelect onChange={() => setproductErrors("")} className="drop" id="product" aria-label="Default select example">
-                            <option value="base">Product Name</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Reopen">Reopen</option>
-                        </FormSelect>
-                        <div><p className="error">{productErrors}</p></div>
-                    </Col>
-                    <Col>
-                        <FormSelect onChange={() => setenviornmentErrors("")} className="drop" id="enviornment" aria-label="Default select example">
-                            <option value="base">Environment</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Reopen">Reopen</option>
-                        </FormSelect>
-                        <div><p className="error">{enviornmentErrors}</p></div>
-                    </Col>
-                    <Col>
-                        <FormSelect onChange={() => settestingErrors("")} className="drop" id="testing" aria-label="Default select example">
-                            <option value="base">Testing Medium</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Reopen">Reopen</option>
-                        </FormSelect>
-                        <div><p className="error">{testingErrors}</p></div>
-                    </Col>
-                    <Col>
-                        <FormSelect onChange={() => setrootErrors("")} className="drop" id="rootcause" aria-label="Default select example">
-                            <option value="base">Root Cause Location</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Reopen">Reopen</option>
-                        </FormSelect>
-                        <div><p className="error">{rootcauseErrors}</p></div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <FormSelect onChange={() => setpriorityErrors("")} className="drop" id="priority" aria-label="Default select example">
-                            <option value="base">Priority</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Reopen">Reopen</option>
-                        </FormSelect>
-                        <div><p className="error">{priorityErrors}</p></div>
-                    </Col>
-                    <Col>
-                        <FormSelect onChange={() => setassigneeErrors("")} className="drop" id="assignee" aria-label="Default select example">
-                            <option value="base">Assignee</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Reopen">Reopen</option>
-                        </FormSelect>
-                        <div><p className="error">{assigneeErrors}</p></div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <input onChange={() => setdescErrors("")} className="text" id="desc" placeholder="Description"></input>
-                        <div><p className="error">{descErrors}</p></div>
-                    </Col>
-                    <Col>
-                        <input onChange={() => setuserErrors("")} className="text" id="user" placeholder="User Data (Optional)"></input>
-                        <div><p className="error">{userErrors}</p></div>
-                    </Col>
-                </Row>
-            </Container>
+  return (
+    <div className="create-bug-container">
+      <ToastContainer position="top-center" autoClose={3000} />
+      <h2 className="title">Create Bug</h2>
+      <form onSubmit={handleSubmit} className="create-bug-form">
+        <div className="form-group">
+          <input 
+            type="text" 
+            placeholder="Bug Title" 
+            name="title" 
+            value={bugData.title} 
+            onChange={handleChange} 
+            required
+          />
         </div>
-    );
-}
+
+        <div className="form-row">
+          <select name="product_id" value={bugData.product_id} onChange={handleProductChange} required>
+            <option value="">Product Name</option>
+            {dropdownData.products && dropdownData.products.map(product => (
+              <option key={product.product_id} value={product.product_id}>
+                {product.product_name}
+              </option>
+            ))}
+          </select>
+
+          <select name="scenario_id" value={bugData.scenario_id} onChange={handleChange} disabled={!filteredScenarios.length}>
+            <option value="">Scenario</option>
+            {filteredScenarios.map(scenario => (
+              <option key={scenario.scenario_id} value={scenario.scenario_id}>
+                {scenario.scenario_name}
+              </option>
+            ))}
+          </select>
+
+          <select name="environment_id" value={bugData.environment_id} onChange={handleChange}>
+            <option value="">Environment</option>
+            {dropdownData.environments.map(environment => (
+              <option key={environment.environment_id} value={environment.environment_id}>
+                {environment.environment_name}
+              </option>
+            ))}
+          </select>
+
+          <select name="testing_medium" value={bugData.testing_medium} onChange={handleChange}>
+            <option value="">Testing Medium</option>
+            {dropdownData.testingMediums.map(medium => (
+              <option key={medium.medium_id} value={medium.medium_id}>
+                {medium.medium_name}
+              </option>
+            ))}
+          </select>
+
+          <select name="root_cause_location" value={bugData.root_cause_location} onChange={handleChange}>
+            <option value="">Root Cause Location</option>
+            {dropdownData.rootCauseLocations.map(location => (
+              <option key={location.location_id} value={location.location_id}>
+                {location.location_name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-row">
+          <select name="priority_id" value={bugData.priority_id} onChange={handleChange} required>
+            <option value="">Priority</option>
+            {dropdownData.priorities.map(priority => (
+              <option key={priority.priority_id} value={priority.priority_id}>
+                {priority.priority_name}
+              </option>
+            ))}
+          </select>
+
+          <select name="status" value={bugData.status} onChange={handleChange} required>
+            <option value="">Status</option>
+            {dropdownData.bugStatus.map(status => (
+              <option key={status.status_id} value={status.status_id}>
+                {status.status_name}
+              </option>
+            ))}
+          </select>
+
+          <input 
+            type="text" 
+            placeholder="Assignee" 
+            name="assignee_id" 
+            value={bugData.assignee_id} 
+            onChange={handleChange} 
+            required 
+          />
+        </div>
+
+        <div className="form-row">
+          <textarea 
+            placeholder="Bug Description" 
+            name="description" 
+            value={bugData.description} 
+            onChange={handleChange} 
+            required
+          />
+          <textarea 
+            placeholder="User Data (optional)" 
+            name="user_data" 
+            value={bugData.user_data} 
+            onChange={handleChange}
+          />
+        </div>
+
+        <button type="submit" className="save-button">Save</button>
+      </form>
+    </div>
+  );
+};
 
 export default CreateBug;

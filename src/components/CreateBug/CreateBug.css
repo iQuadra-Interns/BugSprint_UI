@@ -1,134 +1,66 @@
-/* General Page Layout */
-body {
-    background-color: #f0f4f7;
-    font-family: 'Arial', sans-serif;
+.create-bug-container {
+  padding: 20px;
+  max-width: 1200px; /* Increased horizontal size */
+  width: 90%; /* Make it responsive */
+  margin: 0 auto;
+  background-color: #f8f8f8;
+  border-radius: 8px; /* Smooth rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  height: auto; /* Prevent unnecessary vertical stretching */
 }
 
-/* Container styling */
-.container {
-    margin-top: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
+.title {
+  color: green;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center; /* Keep it centered */
 }
 
-/* Header */
-#create {
-    font-size: 24px;
-    font-weight: bold;
-    color: #34a853;
-    margin-left: 10px;
+.create-bug-form .form-group {
+  display: flex;
+  flex-wrap: wrap; /* Wrap fields when needed */
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-/* Save Button */
-#save {
-    background-color: #34a853;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.form-row {
+  display: flex;
+  flex: 1;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Ensure responsive adjustments */
 }
 
-#save:hover {
-    background-color: #2b8c45;
+.form-row select,
+.form-row input,
+.form-group input {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
 }
 
-/* Back Button */
-#backArrow {
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
-    color: #34a853;
-    cursor: pointer;
-    margin-left: 10px;
-    transition: color 0.3s;
+textarea {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  min-height: 100px;
 }
 
-#backArrow:hover {
-    color: #2b8c45;
+.save-button {
+  background-color: green;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-/* Input Fields */
-.text {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-}
-
-.text:focus {
-    outline: none;
-    border-color: #34a853;
-}
-
-/* Dropdown (FormSelect) Styling */
-.drop {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-}
-
-.drop:focus {
-    outline: none;
-    border-color: #34a853;
-}
-
-/* Error Message Styling */
-p {
-    color: red;
-    font-size: 12px;
-    margin: 5px 0;
-}
-
-/* Success and Error Alert Styling */
-.alert {
-    margin-top: 20px;
-}
-
-.alert-success {
-    background-color: #e6f4ea;
-    color: #34a853;
-    border: none;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #b71c1c;
-    border: none;
-}
-
-/* Sidebar Styling */
-.sidebar {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Sidebar Menu */
-.sidebar a {
-    text-decoration: none;
-    color: black;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.sidebar a:hover {
-    color: #34a853;
-}
-
-/* Sidebar Active Item */
-.sidebar .active {
-    background-color: #e6f4ea;
-    color: #34a853;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 5px;
+.save-button:hover {
+  background-color: darkgreen; /* Hover effect */
 }

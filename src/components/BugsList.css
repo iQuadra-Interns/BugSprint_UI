@@ -1,0 +1,122 @@
+/* General Row Styling */
+.bug-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f5f5f5; /* Light gray for row separation */
+  transition: background-color 0.2s ease;
+}
+
+.bug-row:hover {
+  background-color: #fafafa; /* Light background on hover */
+}
+
+/* Bug Title Styling */
+.bug-title {
+  font-weight: 600;
+  flex: 2;
+  color: #1a73e8; /* Blue color for bug title links */
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.bug-title:hover {
+  text-decoration: underline;
+}
+
+/* Scenario Column Styling */
+.bug-scenario {
+  flex: 3;
+  color: #5f6368; /* Gray for scenario description */
+  font-size: 15px;
+}
+
+/* Status Styling */
+.bug-status {
+  flex: 1;
+  text-align: center;
+  border-radius: 20px; /* Rounded corners for pill-shaped badges */
+  padding: 5px 12px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+/* Assignee Styling */
+.bug-assignee {
+  flex: 1;
+  color: #333333;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Status Color Coding */
+.bug-status.open {
+  background-color: #ff4d4f; /* Red for "Open" */
+}
+
+.bug-status.wip {
+  background-color: #ffa940; /* Orange for "WIP" */
+}
+
+.bug-status.fixed {
+  background-color: #52c41a; /* Light green for "Fixed" */
+}
+
+.bug-status.closed {
+  background-color: #52c41a; /* Same green for "Closed" */
+}
+
+.bug-status.deferred {
+  background-color: #faad14; /* Yellow for "Deferred" */
+}
+
+.bug-status.rejected {
+  background-color: #8c8c8c; /* Gray for "Rejected" */
+}
+
+.bug-status.medium {
+  background-color: #ff85c0; /* Pink for "Medium" */
+}
+
+.bug-status.low {
+  background-color: #a3b5ff; /* Light blue for "Low" */
+}
+
+.bug-status.high {
+  background-color: #ff7875; /* Red for "High" */
+}
+
+/* Table Header Styling */
+table thead th {
+  font-size: 16px;
+  font-weight: 600;
+  color: #202124; /* Darker gray for headers */
+  padding: 10px 15px;
+  background-color: #f8f9fa; /* Light gray background for header */
+  border-bottom: 2px solid #e0e0e0;
+  text-align: left;
+}
+
+/* Assignee Initials Badge */
+.bug-assignee .initials-badge {
+  background-color: #d3adf7; /* Purple for user initials badge */
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+/* Table Hover Effect */
+table tbody tr:hover {
+  background-color: #f1f3f4; /* Slightly darker hover effect */
+}

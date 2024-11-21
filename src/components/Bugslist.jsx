@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import Bug from './Bug';
 import axios from 'axios';
-import './BugsList.css';
+//import './BugsList.css';
 
 const BugList = () => {
   const [loading, setLoading] = useState(true);

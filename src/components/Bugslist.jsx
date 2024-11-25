@@ -11,11 +11,10 @@ const BugList = () => {
     { id: 'IQUA-777', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'Closed', assignee: 'profile_pic' },
     { id: 'ADT-900', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'Deferred', assignee: 'profile_pic' },
     { id: 'IQBS-001', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'Rejected', assignee: 'KM' },
-    { id: 'IQBS-001', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'Medium', assignee: 'profile_pic' },
-    { id: 'IQBS-001', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'Low', assignee: 'HB' },
-    { id: 'IQBS-001', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'High', assignee: 'AJ' },
+    { id: 'IQBS-002', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'Medium', assignee: 'profile_pic' },
+    { id: 'IQBS-003', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'Low', assignee: 'HB' },
+    { id: 'IQBS-004', description: 'Performance metrics issue', scenario: 'My Interviews page', status: 'High', assignee: 'AJ' },
   ];
-
 
   return (
     <Table hover>
@@ -29,7 +28,7 @@ const BugList = () => {
       </thead>
       <tbody>
         {bugs.map((bugInd) => (
-            <Bug indbug={bugInd} />
+          <Bug key={bugInd.id} indbug={bugInd} />
         ))}
       </tbody>
     </Table>

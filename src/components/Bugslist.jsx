@@ -33,6 +33,7 @@ const BugList = () => {
     return <div>{error}</div>;
   }
 
+
   return (
     <Table hover>
       <thead>
@@ -46,6 +47,7 @@ const BugList = () => {
       <tbody>
         {Array.isArray(bugs) && bugs.map((bug) => (
           <Bug key={bug.id} indbug={bug} />
+
         ))}
       </tbody>
     </Table>

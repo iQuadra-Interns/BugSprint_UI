@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { Form, InputGroup, Button, Row, Col, Dropdown, Modal } from 'react-bootstrap';
 import { Search, Filter } from 'lucide-react';
 import SortButton from './SortButton';
+import CreateBug from './CreateBug/CreateBug'; // Import the CreateBug component
 
 function Controls() {
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showCreateBugModal, setShowCreateBugModal] = useState(false); // New state for Create Bug modal
 
   const toggleSortDropdown = () => setShowSortDropdown(!showSortDropdown);
   const toggleFilterModal = () => setShowFilterModal(!showFilterModal);
+  const toggleCreateBugModal = () => setShowCreateBugModal(!showCreateBugModal); // Toggle for Create Bug modal
 
   const filterOptions = [
     'Reported by', 'Product Name', 'Environment', 'Testing Medium',
@@ -35,13 +38,14 @@ function Controls() {
             <Filter size={18} className="me-2" />
             Filter
           </Button>
-          <SortButton/>
-          <Button variant="success">
+          <SortButton />
+          <Button variant="success" onClick={toggleCreateBugModal}> {/* Opens Create Bug modal */}
             + Create Bug
           </Button>
         </Col>
       </Row>
 
+      {/* Filter Modal */}
       <Modal show={showFilterModal} onHide={toggleFilterModal} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Filters</Modal.Title>
@@ -67,6 +71,21 @@ function Controls() {
         <Modal.Footer>
           <Button variant="success" onClick={toggleFilterModal}>
             Apply
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Create Bug Modal */}
+      <Modal show={showCreateBugModal} onHide={toggleCreateBugModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Create Bug</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CreateBug /> {/* Render CreateBug component in modal */}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={toggleCreateBugModal}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

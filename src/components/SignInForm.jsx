@@ -34,25 +34,19 @@ const SignInForm = () => {
         setLoading(true);
         setErrorMessage('');  
         try {
-            // Sending POST request
             const response = await axios.post('https://c2r3hnk5frqsa6l7zbl43je7cu0lqjyy.lambda-url.us-east-1.on.aws/api/sign-in', {
                 email: values.email,
                 password: values.password,
             });
 
-
-            console.log(response);
             if (response.status === 200 && response.data && response.data.status.status === true) {
-                // Dispatch login action to Redux store
                 dispatch(loginSuccess(response.data));
-                // Redirect to the profile page after successful sign-in
                 navigate('/MyProfile');
             } else {
                 setErrorMessage(response.data.status.message || 'Sign-in failed. Please try again.');
             }
         } catch (error) {
             if (error.response) {
-                // Show the detailed error message if available
                 setErrorMessage(`Sign-in failed: ${error.response.data.message || 'Invalid credentials.'}`);
             } else {
                 setErrorMessage('Error occurred during sign-in. Please check your connection.');
@@ -74,7 +68,8 @@ const SignInForm = () => {
                     <Card className="FormCard">
                         <Form>
                             <img src={logoLight} className="logoLightSignInForm" alt="logo" />
-                            <div className="form-group">
+
+                            <div className="InputContainer">
                                 <FiUser className="SignInIconsUser" />
                                 <Field
                                     type="text"
@@ -85,17 +80,11 @@ const SignInForm = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
-                                <ErrorMessage name="email" component="div" className="error" />
                             </div>
-                            <div className="form-group">
+                            <ErrorMessage name="email" component="div" className="error" />
+
+                            <div className="InputContainer">
                                 <PiLockOpen className="SignInIconsLock" />
-                                <div>
-                                    {showPassword ? (
-                                        <AiOutlineEye className="SignInIconsEye" onClick={togglePasswordVisibility} />
-                                    ) : (
-                                        <AiOutlineEyeInvisible className="SignInIconsEye" onClick={togglePasswordVisibility} />
-                                    )}
-                                </div>
                                 <Field
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
@@ -105,8 +94,13 @@ const SignInForm = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
-                                <ErrorMessage name="password" component="div" className="error" />
+                                {showPassword ? (
+                                    <AiOutlineEye className="SignInIconsEye" onClick={togglePasswordVisibility} />
+                                ) : (
+                                    <AiOutlineEyeInvisible className="SignInIconsEye" onClick={togglePasswordVisibility} />
+                                )}
                             </div>
+                            <ErrorMessage name="password" component="div" className="error" />
 
                             <div className="form-group">
                                 <label className="SignInFormForgotPassword">Forgot Password?</label>

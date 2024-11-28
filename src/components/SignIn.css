@@ -1,23 +1,45 @@
 .SignInIconsUser {
     color: #50BB27;
     position: absolute;
-    margin-left: 3vh;
-    margin-top: 2.5vh;
+    left: 3.5vh; /* Adjusted for alignment */
+    top: 40%;
+    transform: translateY(-50%);
 }
 
 .SignInIconsLock {
     color: #50BB27;
     position: absolute;
-    margin-left: -22vh;
-    margin-top: 2.5vh;
+    left: 3.5vh; /* Adjusted for alignment */
+    top: 40%;
+    transform: translateY(-50%);
 }
 
 .SignInIconsEye {
     color: #50BB27;
     position: absolute;
-    margin-left: 19vh;
-    margin-top: 2.5vh;
+    right: 4vh; /* Positioned on the right of the input field */
+    top: 40%;
+    transform: translateY(-50%);
     cursor: pointer;
+}
+
+.SignInFormInput {
+    width: 50vh;
+    height: 8vh;
+    border-radius: 1vh;
+    border: 0.1vh solid #ccc;
+    box-sizing: border-box;
+    padding-left: 5vh; /* Space for the left icons */
+    padding-right: 5vh; /* Space for the right icons */
+    margin-bottom: 2.5vh;
+    background-color: white;
+    font-size: 3vh;
+    color: #333;
+}
+
+.InputContainer {
+    position: relative;
+    margin-bottom: 2.5vh;
 }
 
 .SignInTitle {
@@ -66,20 +88,6 @@
     color: white;
     cursor: pointer;
     border: none;
-}
-
-.SignInFormInput {
-    width: 50vh;
-    height: 8vh;
-    border-radius: 1vh;
-    border: 0.1vh solid #ccc;
-    box-sizing: border-box;
-    padding-left: 8vh;
-    padding-right: 2rem;
-    margin-bottom: 2.5vh;
-    background-color: white;
-    font-size: 3vh;
-    color: #333;
 }
 
 .SignInFormInput:focus {

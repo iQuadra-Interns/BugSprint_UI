@@ -13,7 +13,7 @@ function MyProfile() {
     return (
         <Container fluid className="mainContainer">
             <Row className="h-100">
-                <Col xs={2} className="p-0">
+                <Col xs={2} className="p-0 ">
                     <SideBar />
                 </Col>
                 <Col xs={10}>

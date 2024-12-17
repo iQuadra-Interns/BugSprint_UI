@@ -14,9 +14,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 }; */
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>  {/* Wrap App with Redux Provider */}
       <App />
     </Provider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 );

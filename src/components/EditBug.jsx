@@ -359,24 +359,6 @@ function EditBug() {
               <Row className="mb-5">
                 <Col md={2}>
                   {!isEditMode && (
-                    <SmallBox child={baseData.scenario}></SmallBox>
-                  )}
-                  {isEditMode && (
-                    <DropDown
-                      options={dropdownOptions.scenarioOptions}
-                      onChange={(selectedOption) =>
-                        handleDropdownChange("scenario", selectedOption)
-                      }
-                      value={dropdownOptions.scenarioOptions.find(
-                        (option) => option.value === baseData.scenario
-                      )}
-                      def={baseData.scenario}
-                    />
-                  )}
-                </Col>
-
-                <Col md={2} className="colgap">
-                  {!isEditMode && (
                     <SmallBox child={baseData.product}></SmallBox>
                   )}
                   {isEditMode && (
@@ -389,6 +371,24 @@ function EditBug() {
                         (option) => option.value === baseData.product
                       )}
                       def={baseData.product}
+                    />
+                  )}
+                </Col>
+
+                <Col md={2} className="colgap">
+                  {!isEditMode && (
+                    <SmallBox child={baseData.scenario}></SmallBox>
+                  )}
+                  {isEditMode && (
+                    <DropDown
+                      options={dropdownOptions.scenarioOptions}
+                      onChange={(selectedOption) =>
+                        handleDropdownChange("scenario", selectedOption)
+                      }
+                      value={dropdownOptions.scenarioOptions.find(
+                        (option) => option.value === baseData.scenario
+                      )}
+                      def={baseData.scenario}
                     />
                   )}
                 </Col>

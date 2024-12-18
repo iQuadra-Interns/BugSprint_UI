@@ -1,19 +1,22 @@
-import { useSelector } from "react-redux";
-import "./App.css";
-import "./components/SignIn.jsx";
-import "./components/SignInForm.jsx";
-import SignIn from "./components/SignIn.jsx";
-import {
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-} from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import BugsListScreen from "./components/BugsListScreen.jsx";
-import MyProfile from "./components/MyProfile";
+import { useState } from 'react'
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import './components/SignIn.jsx'
+import './components/SignInForm.jsx'
+import SignInForm from './components/SignInForm.jsx'
+import SignIn from './components/SignIn.jsx'
+import { createRoot } from "react-dom/client";
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col } from 'react-bootstrap';
+import './App.css'
+import BugsListScreen from './components/BugsListScreen.jsx'
+import CreateBug from './components/CreateBug/CreateBug.jsx';
 import EditBug from "./components/EditBug.jsx";
+import MyProfile from './components/MyProfile';
 
 function ProtectedRoute({ children }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -23,11 +26,13 @@ function ProtectedRoute({ children }) {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route index element={<SignIn />} />
-      <Route path="/" element={<SignIn />} />
-      <Route path="/MyProfile" element={<MyProfile />} />
-      <Route path="/MyDashboard" element={<BugsListScreen />} />
+      <Route index element={<SignIn/>}/>
+      <Route path="/" element={<SignIn/>}/>
+      <Route path="/MyProfile" element={<MyProfile/>}/>
+      <Route path="/MyDashboard" element={<BugsListScreen/>}/>
+      <Route path="/CreateBug" element={<CreateBug/>}/> 
       <Route path="/view-bug" element={<EditBug />} />
+
     </Route>
   )
 );

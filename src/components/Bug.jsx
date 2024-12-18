@@ -1,60 +1,78 @@
 import React from 'react';
-import { Badge} from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
 
-export default function Bug({indbug}) {
+export default function Bug({ indbug }) {
+  // Maps for status and priority colors
+  const getStatusColor = (status) => {
+    const statusColors = {
+      Open: '#ff4d4f',    // Red
+      WIP: '#ffa940',     // Orange
+      Fixed: '#52c41a',   // Green
+      Closed: '#0e4d05',  // Dark Green
+      Deferred: '#eded42',// Yellow
+      Rejected: '#4a4a46' // Dark Gray
+    };
+    return statusColors[status] || '##CECECE'; // Default gray #6c757d
+  };
 
-    const getStatusBadge = (status) => {
-        const statusColors = {
-          Open: 'danger',
-          Wip: 'warning',
-          Fixed: 'success',
-          Closed: 'success',
-          Deferred: 'info',
-          Rejected: 'secondary',
-          Medium: 'warning',
-          Low: 'info',
-          High: 'danger'
-        };
-        return <Badge bg={statusColors[status]}>{status}</Badge>;
-      };
+  const getPriorityColor = (priority) => {
+    const priorityColors = {
+      Feature: '#9370DB',  // Lavender
+      Low: '#28a745',      // Green
+      High: '#dc3545',     // Red
+      Critical: '#000000'  // Black
+    };
+    return priorityColors[priority] || '#6c757d'; // Default gray
+  };
 
-    const getStatusColor = (status) => {
-        const statusColors = {
-          Open: '#dc3545',
-          Wip: '#ffc107',
-          Fixed: '#28a745',
-          Closed: '#28a745',
-          Deferred: '#17a2b8',
-          Rejected: '#6c757d',
-          Medium: '#ffc107',
-          Low: '#17a2b8',
-          High: '#dc3545'
-        };
-        return statusColors[status] || '#6c757d'; // Default color if status is not found
-      };
+  const getStatusBadge = (status) => {
+    console.log("Status fetched:", status); 
+    const statusColors = {
+      Open: 'danger',    // Red
+      WIP: 'warning',    // Orange
+      Fixed: 'success',  // Green
+      Closed: 'success', // Dark Green
+      Deferred: 'info',  // Yellow
+      Rejected: 'secondary' //Dark Gray
+    };
+    return <Badge bg={statusColors[status]}>{status}</Badge>;
+  };
 
-    return (
-        <tr key={indbug.id}>
-            <td style={{ display: 'flex', alignItems: 'center' }}>
-              <div 
-                style={{
-                width: '4px',
-                height: '50px',
-                backgroundColor: getStatusColor(indbug.status),
-                marginRight: '10px'
-              }}
-              />
-              <div>
-                <div>{indbug.id}</div>
-                <div>{indbug.description}</div>
-              </div>
-            </td>
-            <td>{indbug.scenario}</td>
-            <td>{getStatusBadge(indbug.status)}</td>
-            <td>
-              <Badge bg="secondary" pill>{indbug.assignee}</Badge>
-            </td>
-          </tr>
-    )
+  return (
+    <tr key={indbug.id}>
+      {/* Bug description column */}
+      <td style={{ display: 'flex', alignItems: 'center' }}>
+        {/* Vertical section for priority */}
+        <div
+          style={{
+            width: '4px',
+            height: '50px',
+            backgroundColor: getPriorityColor(indbug.priority), // Priority color
+            marginRight: '10px'
+          }}
+        />
+        {/* Bug details */}
+        <div>
+          <div>{indbug.id}</div>
+          <div>{indbug.description}</div>
+        </div>
+      </td>
 
+      {/* Scenario column */}
+      <td>{indbug.scenario}</td>
+
+      {/* Status column with colored badge */}
+      
+      <td>
+        {getStatusBadge(indbug.status)}
+      </td>
+
+      {/* Assignee column */}
+      <td>
+        <Badge bg="secondary" pill style={{ fontSize: '1.25rem', padding: '0.5rem 1rem' }}>
+          {indbug.assignee}
+        </Badge>
+      </td>
+    </tr>
+  );
 }

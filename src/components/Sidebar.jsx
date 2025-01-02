@@ -17,7 +17,7 @@ export default function SideBar() {
 
   const handleLogout = () => {
     dispatch(logout()); // Dispatch the logout action
-    navigate('/sign-in'); // Redirect to sign-in page after logout
+    navigate('/'); // Redirect to sign-in page after logout
   };
 
   return (

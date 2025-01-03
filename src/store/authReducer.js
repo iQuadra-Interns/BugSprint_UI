@@ -1,63 +1,59 @@
-// Action types
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGOUT = 'LOGOUT';
-const LOGIN_FAILURE = 'LOGIN_FAILURE';
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGOUT = "LOGOUT";
+const LOGIN_FAILURE = "LOGIN_FAILURE";
+const UPDATE_PROFILE = "UPDATE_PROFILE"; // New action type for updating profile
 
-// Retrieve user data from localStorage, if available
-const storedUser = localStorage.getItem('user');
+// Retrieving the stored user from localStorage
+const storedUser = localStorage.getItem("user");
+
 const initialState = {
-    isAuthenticated: !!storedUser, // Initialize based on whether storedUser is present
-    user: storedUser ? JSON.parse(storedUser) : null, // Parse the stored user data, if any
-    error: null,
+  isAuthenticated: !!storedUser, // Checks if the user exists in localStorage
+  user: storedUser ? JSON.parse(storedUser) : null, // Parses the user data from localStorage
+  error: null,
 };
 
-// Reducer function
 const authReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case LOGIN_SUCCESS:
-            // Save user data to localStorage on successful login
-            localStorage.setItem('user', JSON.stringify(action.payload));
-            return {
-                ...state,
-                isAuthenticated: true,
-                user: action.payload,
-                error: null, // Clear any errors
-            };
-        
-        case LOGOUT:
-            // Remove user data from localStorage on logout
-            localStorage.removeItem('user');
-            return {
-                ...state,
-                isAuthenticated: false,
-                user: null, // Clear the user data
-            };
+  switch (action.type) {
+    case LOGIN_SUCCESS:
+      // When login is successful, store the user in localStorage
+      localStorage.setItem("user", JSON.stringify(action.payload));
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+        error: null,
+      };
 
-        case LOGIN_FAILURE:
-            return {
-                ...state,
-                error: action.payload, // Capture the error message from the action
-            };
-        
-        default:
-            return state;
-    }
+    case LOGOUT:
+      // When logging out, remove the user from localStorage
+      localStorage.removeItem("user");
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+      };
+
+    case LOGIN_FAILURE:
+      // On login failure, set the error message
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    case UPDATE_PROFILE: // Handling profile updates
+      // Update the user information in the store
+      const updatedUser = { ...state.user, developer_details: { ...state.user.developer_details, ...action.payload } };
+      
+      // Store the updated user information in localStorage
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      return {
+        ...state,
+        user: updatedUser, // Set the updated user in the Redux store
+      };
+
+    default:
+      return state;
+  }
 };
-
-// Action creators
-
-export const loginSuccess = (userData) => ({
-    type: LOGIN_SUCCESS,
-    payload: userData, // Pass user data to the reducer
-});
-
-export const logout = () => ({
-    type: LOGOUT,
-});
-
-export const loginFailure = (errorMessage) => ({
-    type: LOGIN_FAILURE,
-    payload: errorMessage, // Pass error message to the reducer
-});
 
 export default authReducer;

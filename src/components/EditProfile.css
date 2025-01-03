@@ -1,0 +1,64 @@
+.edit-profile-container {
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-profile-title {
+    text-align: center;
+    color: #4caf50;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .edit-profile-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .edit-profile-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .edit-profile-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .cancel-button {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .save-button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .message {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #4caf50;
+  }
+  

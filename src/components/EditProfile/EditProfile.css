@@ -1,0 +1,121 @@
+/* Main container for Edit Profile */
+.edit-profile-container {
+    padding: 40px 50px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    margin: 40px auto;
+    border: none;
+  }
+  
+  /* Title for Edit Profile */
+  .edit-title {
+    font-size: 2rem;
+    color: #495057;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+  
+  /* Styling for the form fields */
+  .edit-profile-form label {
+    display: block;
+    font-size: 16px;
+    color: #495057;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  /* Input fields */
+  .edit-profile-form input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    color: #495057;
+    box-sizing: border-box;
+    font-weight: 500;
+  }
+  
+  /* Focus state for inputs */
+  .edit-profile-form input:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+  }
+  
+  /* Buttons container */
+  .edit-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Button styles */
+  .save-button, .cancel-button {
+    width: 48%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* Save button */
+  .save-button {
+    background-color: #28a745;
+    color: white;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+  }
+  
+  .save-button:hover {
+    background-color: #218838;
+    box-shadow: 0 6px 12px rgba(40, 167, 69, 0.5);
+  }
+  
+  /* Cancel button */
+  .cancel-button {
+    background-color: #6c757d;
+    color: white;
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+  }
+  
+  .cancel-button:hover {
+    background-color: #5a6268;
+    box-shadow: 0 6px 12px rgba(108, 117, 125, 0.5);
+  }
+  
+  /* Error text style */
+  .error-text {
+    color: #ff3333;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  /* Responsive adjustments for mobile screens */
+  @media (max-width: 768px) {
+    .edit-profile-container {
+      padding: 30px;
+    }
+  
+    .edit-title {
+      font-size: 1.6rem;
+    }
+  
+    .edit-profile-form input {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+  
+    .save-button, .cancel-button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  

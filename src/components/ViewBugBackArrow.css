@@ -1,0 +1,189 @@
+.mainContainer {
+  background-color: #f8f9fa; /* Light background color */
+  padding: 20px;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent overall page scrolling */
+  display: flex; /* Flex layout for vertical stacking */
+  flex-direction: column;
+}
+
+.backarrow {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.bug-details {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #309d06;
+}
+
+.bug-title-input {
+  font-size: 1 rem;
+  padding: 10px;
+}
+
+.box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  padding-bottom: 10px;
+  background: #fff;
+}
+
+.box h5 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.img-1 {
+  height: 20px;
+  width: 20px;
+  /* background-color: white; */
+  margin-right: 5px;
+}
+.pad {
+  padding-left: 50px;
+  padding-right: 60px;
+  height: calc(100vh - 40px); /* Adjust height considering padding */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.custom-edit-btn {
+  background-color: #2f7219;
+  color: #fff; /* White text */
+  border: none; /* No border */
+  width: 140px;
+  height: 40px;
+}
+.alt {
+  height: 200px;
+}
+.box-textarea {
+  width: 100%; /* Full width inside the box */
+  border: none; /* Remove default border */
+  resize: none; /* Prevent resizing */
+  font-size: 1rem; /* Consistent font size */
+  padding: 10px; /* Comfortable spacing */
+  background-color: #fff; /* Light background to match the container */
+  border-radius: 5px; /* Smooth corners */
+  outline: none; /* Remove focus outline */
+  height: 100px; /* Set fixed height */
+  overflow-y: auto; /* Enable scrolling for text overflow */
+  border: 1px solid #fff; /* Add border for clarity */
+}
+
+/* .view-box{
+  height: 50px;
+  width: 100px;
+  border: 1px solid #;
+} */
+
+.small-box {
+  height: 40px;
+  width: 190px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: auto;
+  text-align: center;
+
+  display: flex; /* Center content */
+  align-items: center;
+  justify-content: center;
+}
+
+.fixed-box {
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #fff; /* White background */
+  width: 100%; /* Flexible width based on parent */
+  max-height: 150px; /* Fixed height */
+  min-height: 150px; /* Ensures consistent height */
+  padding: 10px; /* Spacing inside the box */
+  overflow-y: auto; /* Enable vertical scrolling for overflowing content */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  word-wrap: break-word; /* Prevent text overflow */
+  display: flex; /* Flexbox for alignment */
+  flex-direction: column; /* Align content vertically */
+}
+
+.fixed-box-content {
+  flex-grow: 1; /* Allows the content to expand and fill the box */
+  font-size: 1rem; /* Consistent font size */
+  color: #333; /* Text color */
+  white-space: pre-wrap; /* Preserve line breaks in content */
+  padding: 10px;
+}
+
+.colgap {
+  margin-left: 15px;
+}
+
+.fixed-box h5 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.t {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: -12px;
+  color: #616161;
+  background-color: #f8f9fa;
+  font-size: 13px;
+}
+
+.re {
+  position: relative;
+}
+
+.save-cancel-bt {
+  display: flex;
+}
+
+.save-bt {
+  background-color: #2f7219;
+  width: 100px;
+}
+
+.cancel-bt {
+  background-color: rgb(188, 29, 29);
+}
+
+/* .box-content{
+
+} */
+
+.title-box {
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #fff; /* White background */
+  width: 470px; /* Flexible width based on parent */
+  max-height: 50px; /* Fixed height */
+  min-height: 50px; /* Consistent height */
+  padding: 10px; /* Inner spacing */
+  overflow-y: auto; /* Enable vertical scrolling for overflowing content */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+  white-space: pre-wrap; /* Preserve line breaks in the content */
+  display: flex; /* Flexbox layout */
+  flex-direction: row; /* Stack content vertically */
+  box-sizing: border-box; /* Ensure padding and border are included in width/height */
+}
+
+.title-box-content {
+  flex-grow: 1; /* Allows content to expand while respecting the parent box's constraints */
+  font-size: 1rem; /* Consistent font size */
+  color: #333; /* Dark text color for better readability */
+  padding: 8px; /* Extra inner padding for content */
+}
+
+.loading {
+  margin-top: 300px;
+}
+
+.space {
+  padding-left: 10px;
+}

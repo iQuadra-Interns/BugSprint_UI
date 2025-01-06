@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Nav } from 'react-bootstrap';
 import BSLogo from "../images/450_BS_Main-Light.png";
 import profile_pic from "../images/profile_pic.png";
@@ -20,6 +19,17 @@ export default function SideBar() {
     navigate('/'); // Redirect to sign-in page after logout
   };
 
+  // Dynamically extract the correct role details
+  const roleDetails =
+    user?.developer_details ||
+    user?.tester_details ||
+    user?.admin_details ||
+    {};
+
+  const firstName = roleDetails?.first_name || "Guest";
+  const lastName = roleDetails?.last_name || "";
+  const userCategory = user?.usr?.user_category || "Unknown";
+
   return (
     <Nav className="sideBar">
       <Nav.Item className="mb-4 px-3">
@@ -29,9 +39,9 @@ export default function SideBar() {
         <img src={profile_pic} width={40} height={40} className="rounded-circle me-2" alt="Profile" />
         <div>
           <div className="fw-bold">
-            {user?.developer_details.first_name + " " + user?.developer_details.last_name}
+            {`${firstName} ${lastName}`}
           </div>
-          <small className="text-muted">{user?.usr.user_category}</small> {/* Assuming this contains the role */}
+          <small className="text-muted">{userCategory}</small>
         </div>
       </Nav.Item>
       <Nav.Link href="/MyDashboard" className="d-flex align-items-center px-3 py-2">

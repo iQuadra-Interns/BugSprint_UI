@@ -242,7 +242,7 @@ function EditBug() {
   };
   console.log(popup);
   return (
-    <Container fluid className="mainContainer">
+    <Container fluid className="mainContainerrr">
       {popup?.notification === true && (
         <CreateNotificationContainer obj={popup} setPopUp={setPopUp} />
       )}

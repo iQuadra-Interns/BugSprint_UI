@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import Bug from './Bug';
 import axios from 'axios';
 //import './BugsList.css';
@@ -35,21 +35,29 @@ const BugList = () => {
 
 
   return (
-    <Table hover>
+    <Table hover >
+      
       <thead>
+        
         <tr>
+          
           <th>Bug</th>
           <th>Scenario</th>
           <th>Status</th>
           <th>Assignee</th>
+          <th></th>
+          
         </tr>
+        
       </thead>
+      
       <tbody>
         {Array.isArray(bugs) && bugs.map((bug) => (
           <Bug key={bug.id} indbug={bug} />
 
         ))}
       </tbody>
+      
     </Table>
   );
 };

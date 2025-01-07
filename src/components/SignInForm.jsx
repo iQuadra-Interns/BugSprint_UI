@@ -41,7 +41,8 @@ const SignInForm = () => {
 
             if (response.status === 200 && response.data && response.data.status.status === true) {
                 dispatch(loginSuccess(response.data));
-                navigate('/MyProfile');
+                // Redirect to the profile page after successful sign-in
+                navigate('/MyDashBoard');
             } else {
                 setErrorMessage(response.data.status.message || 'Sign-in failed. Please try again.');
             }

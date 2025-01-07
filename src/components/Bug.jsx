@@ -73,6 +73,9 @@ export default function Bug({ indbug }) {
           {indbug.assignee}
         </Badge>
       </td>
+      <td>
+        :
+        </td>
     </tr>
   );
 }

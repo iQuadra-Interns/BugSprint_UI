@@ -10,6 +10,7 @@ import BugsListScreen from './components/BugsListScreen.jsx'
 import CreateBug from './components/CreateBug/CreateBug.jsx';
 import EditBug from "./components/EditBug.jsx";
 import MyProfile from './components/MyProfile';
+import Error404Page from './components/Error404Page';
 
 function ProtectedRoute({ children }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="/MyDashboard" element={<BugsListScreen/>}/>
       <Route path="/CreateBug" element={<CreateBug/>}/> 
       <Route path="/view-bug" element={<EditBug />} />
+      <Route path="*" element={<Error404Page />} />
 
     </Route>
   )

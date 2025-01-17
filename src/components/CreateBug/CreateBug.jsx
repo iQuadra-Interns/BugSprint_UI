@@ -35,6 +35,12 @@ const CreateBug = () => {
 
   const [filteredScenarios, setFilteredScenarios] = useState([]);
   const [loading, setLoading] = useState(false); // State for Loading Screen
+  
+  const assigneeByOptions = [
+    { value: 1, label: "Satish" },
+    { value: 2, label: "Ramya Vaddempudi" },
+    { value: 3, label: "Virat" },
+  ];
 
   // Fetch dropdown data from common constants URL
   useEffect(() => {
@@ -213,14 +219,19 @@ const CreateBug = () => {
             ))}
           </select>
 
-          <input
-            type="text"
-            placeholder="Assignee"
+          <select
             name="assignee_id"
             value={bugData.assignee_id}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Assignee</option>
+            {assigneeByOptions.map((assignee) => (
+              <option key={assignee.value} value={assignee.value}>
+                {assignee.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-row">

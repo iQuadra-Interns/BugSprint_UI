@@ -53,7 +53,7 @@ const BugList = () => {
       
       <tbody>
         {Array.isArray(bugs) && bugs.map((bug) => (
-          <Bug key={bug.id} indbug={bug} />
+          <Bug key={bug.bug_id} indbug={bug} />
 
         ))}
       </tbody>

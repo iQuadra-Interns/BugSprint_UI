@@ -1,7 +1,14 @@
 import React from 'react';
 import { Badge } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function Bug({ indbug }) {
+  const navigate = useNavigate(); // Correct usage of useNavigate
+
+  // Function to handle the click event on <tr>
+  const handleRowClick = (id) => {
+    navigate("/view-bug",{state:{id}}); // Navigate to the desired route
+  };
   // Maps for status and priority colors
   const getStatusColor = (status) => {
     const statusColors = {
@@ -39,7 +46,7 @@ export default function Bug({ indbug }) {
   };
 
   return (
-    <tr key={indbug.id}>
+    <tr onClick={()=>handleRowClick(indbug.bug_id)} key={indbug.bug_id} >
       {/* Bug description column */}
       <td style={{ display: 'flex', alignItems: 'center' }}>
         {/* Vertical section for priority */}

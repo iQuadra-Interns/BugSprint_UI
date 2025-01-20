@@ -42,7 +42,7 @@ const authReducer = (state = initialState, action) => {
             const updatedUser = { ...state.user, developer_details: { ...state.user.developer_details, ...action.payload } };
             
             // Store the updated user information in localStorage
-            localStorage.setItem("user", JSON.stringify(updatedUser));
+            sessionStorage.setItem("user", JSON.stringify(updatedUser));
             return {
               ...state,
               user: updatedUser, // Set the updated user in the Redux store

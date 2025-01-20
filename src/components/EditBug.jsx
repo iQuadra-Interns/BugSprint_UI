@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import SideBar from "./Sidebar";
 import DropDown from "./DropDown";
 import Box from "./Box";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import BackArrow from "../assets/Arrow.png";
 import edit from "../assets/Edit.png";
 import "./ViewBugBackArrow.css";
@@ -17,6 +17,9 @@ import { GETAPI, POSTAPI } from "./Api";
 
 function EditBug() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const data = location.state;
+  console.log(data);
   const [baseData, SetBaseData] = useState({
     bugTitle: "S",
     status: "Open",
@@ -106,7 +109,7 @@ function EditBug() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(urls.view_bug + "/find-bug/1");
+      const response = await axios.get(urls.view_bug + `/find-bug/${data.id}`);
 
       if (response.data.status.status === true) {
         setLoading(false);

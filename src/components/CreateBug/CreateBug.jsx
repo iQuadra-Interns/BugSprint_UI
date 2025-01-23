@@ -39,7 +39,7 @@ const CreateBug = () => {
 
   // Fetch dropdown data from common constants URL
   useEffect(() => {
-    setLoading(true);
+    setLoading(true); // Show loader while fetching dropdown data
     axios
       .post(
         "https://xjhkkap5tmpwr3yjiw7nvadwra0jyiav.lambda-url.us-east-1.on.aws/fetch-table-data",
@@ -57,15 +57,17 @@ const CreateBug = () => {
           testingMediums: response.data.data.testing_medium,
           priorities: response.data.data.priority,
         }));
-        setLoading(false);
       })
       .catch((error) => {
         toast.error("Error fetching dropdown data");
         console.error("Error fetching dropdown data:", error);
-        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false); // Hide loader after dropdown data fetch
       });
 
     // Fetch assignees
+    setLoading(true); // Show loader while fetching assignees
     axios
       .get("https://xjhkkap5tmpwr3yjiw7nvadwra0jyiav.lambda-url.us-east-1.on.aws/get-user-details")
       .then((response) => {
@@ -77,6 +79,9 @@ const CreateBug = () => {
       .catch((error) => {
         toast.error("Error fetching assignees");
         console.error("Error fetching assignees:", error);
+      })
+      .finally(() => {
+        setLoading(false); // Hide loader after assignee fetch
       });
   }, []);
 

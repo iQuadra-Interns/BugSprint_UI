@@ -14,21 +14,22 @@ import urls from "../Baseurls";
 import TitleBox from "./TitleBox";
 import CreateNotificationContainer from "./Notifications";
 import { GETAPI, POSTAPI } from "./Api";
-
+import { useSelector } from "react-redux";
 function EditBug() {
   const navigate = useNavigate();
   const location = useLocation();
   const data = location.state;
-  console.log(data);
+  const reported = useSelector((state) => state.auth.user.usr.user_cat_id);
+  console.log("final", reported);
   const [baseData, SetBaseData] = useState({
-    bugTitle: "S",
-    status: "Open",
+    bugTitle: "BugTitle",
+    status: "Status",
     scenario: "Scenario",
     product: "Product",
     environment: "Environment",
     testingMedium: "Medium",
     priority: "Priority",
-    reportedBy: "Reported By",
+    assignee: "assignee",
     rootCauseLocation: "Location",
     rootCause: "Root Cause",
     solution: "Solution",
@@ -44,7 +45,7 @@ function EditBug() {
     environmentOptions: [],
     testingMediumOptions: [],
     priorityOptions: [],
-    reportedByOptions: [],
+    assigneeOptions: [],
     rootCauseLocationOptions: [],
   });
 
@@ -53,11 +54,48 @@ function EditBug() {
   const [popup, setPopUp] = useState({});
 
   const fetchDropdownData = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const res = await axios.post(urls.common_constants, {});
-      console.log(res.data.status.status);
+      const response = await GETAPI(
+        urls.view_bug + `/find-bug?bug_id=${data.id}`
+      );
+
+      if (response.data.status.status === true) {
+        SetBaseData({
+          bugTitle: response.data.bug_details.title,
+          status: response.data.bug_details.status,
+          description: response.data.bug_details.description,
+          userData: response.data.bug_details.user_data,
+          rootCause: response.data.bug_details.root_cause,
+          product: response.data.bug_details.product,
+          priority: response.data.bug_details.priority,
+          environment: response.data.bug_details.environment,
+          rootCauseLocation: response.data.bug_details.root_cause_location,
+          testingMedium: response.data.bug_details.testing_medium,
+          scenario: response.data.bug_details.scenario,
+          solution: response.data.bug_details.resolution,
+          reportedBy: response.data.bug_details.reported_by,
+          assignee: response.data.bug_details.assignee,
+          createdAt: response.data.bug_details.created_at,
+        });
+      } else {
+        const notificationData = {
+          notification: true,
+          type: "warning",
+          data: "Failed",
+          message: "Request Failed",
+        };
+  
+        setPopUp(notificationData);
+      }
+      const res = await axios.post(
+        urls.common_constants + "fetch-table-data",
+        {}
+      );
+      const res2 = await GETAPI(urls.common_constants + "get-user-details");
+
       if (res.data.status.status === true) {
+        setLoading(false);
         setDropdownOptions({
           statusOptions: res.data.data.bug_status.map((item) => ({
             value: item.status_id,
@@ -83,11 +121,10 @@ function EditBug() {
             value: item.priority_id,
             label: item.priority_name,
           })),
-          reportedByOptions: [
-            { value: 1, label: "Satish" },
-            { value: 2, label: "Ramya Vaddempudi" },
-            { value: 3, label: "Virat" },
-          ],
+          assigneeOptions: res2?.data?.users.map((item) => ({
+            value: item.user_id,
+            label: item?.user_name,
+          })),
           rootCauseLocationOptions: res.data.data.root_cause_location.map(
             (item) => ({
               value: item.location_id,
@@ -96,52 +133,32 @@ function EditBug() {
           ),
         });
       } else {
-        console.log("once verify the request and response");
+        const notificationData = {
+          notification: true,
+          type: "warning",
+          data: "Failed",
+          message: "Request Failed",
+        };
+  
+        setPopUp(notificationData);
       }
     } catch (error) {
-      console.error("Error fetching dropdown data:", error);
-      setLoading(false);
+      const notificationData = {
+        notification: true,
+        type: "danger",
+        data: "Failed",
+        message: "Contact Support",
+      };
+
+      setPopUp(notificationData);
     } finally {
       setLoading(false);
     }
   };
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(urls.view_bug + `/find-bug/${data.id}`);
 
-      if (response.data.status.status === true) {
-        setLoading(false);
-        SetBaseData({
-          bugTitle: response.data.bug_details.title,
-          status: response.data.bug_details.status,
-          description: response.data.bug_details.description,
-          userData: response.data.bug_details.user_data,
-          rootCause: response.data.bug_details.root_cause,
-          product: response.data.bug_details.product,
-          priority: response.data.bug_details.priority,
-          environment: response.data.bug_details.environment,
-          rootCauseLocation: response.data.bug_details.root_cause_location,
-          testingMedium: response.data.bug_details.testing_medium,
-          scenario: response.data.bug_details.scenario,
-          solution: response.data.bug_details.resolution,
-          reportedBy: response.data.bug_details.reported_by,
-          createdAt: response.data.bug_details.created_at,
-        });
-      } else {
-        console.log("once verify the request and response");
-      }
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchData();
     fetchDropdownData();
   }, []);
 
@@ -162,7 +179,6 @@ function EditBug() {
   };
   const handleSave = async () => {
     const allNotNull = Object.values(baseData).every((value) => value !== "");
-    console.log(allNotNull);
     if (allNotNull === false) {
       const notificationData = {
         notification: true,
@@ -175,8 +191,6 @@ function EditBug() {
       return;
     }
     setLoading(true);
-    console.log("hhhhhhh", dropdownOptions?.productOptions);
-    console.log("hhj", baseData?.product);
 
     const payload = {
       product_id: dropdownOptions?.productOptions?.find(
@@ -197,10 +211,11 @@ function EditBug() {
       priority_id: dropdownOptions?.priorityOptions?.find(
         (option) => option?.label === baseData?.priority
       )?.value,
-      reported_by: dropdownOptions?.reportedByOptions?.find(
-        (option) => option?.label === baseData?.reportedBy
-      )?.value,
-      assignee_id: 2, // Adjust this field as per your logic
+
+      assignee_id: dropdownOptions?.assigneeOptions?.find(
+        (option) => option?.label === baseData?.assigneeOptions
+      )?.value, // Adjust this field as per your logic
+      reported_by: reported,
       root_cause_location: dropdownOptions?.rootCauseLocationOptions?.find(
         (option) => option?.label === baseData?.rootCauseLocation
       )?.value,
@@ -210,23 +225,23 @@ function EditBug() {
         (option) => option?.label === baseData?.status
       )?.value,
     };
-    console.log("Payload Data:", payload);
 
-    const response = await POSTAPI("1", payload, urls.edit_bug);
+    const response = await axios.post(
+      `${urls.edit_bug}?bug_id=${data.id}`,
+      payload
+    );
     console.log("response", response);
     if (response?.data?.status?.status === true) {
-      console.log("success");
-      // setLoading(false);
+      fetchDropdownData();
       const notificationData = {
         notification: true,
         type: "success",
         data: "Success",
-        message: "Success full updated",
+        message: "Successfully updated",
       };
 
       setPopUp(notificationData);
       setIsEditMode(false);
-      fetchData();
     } else {
       const notificationData = {
         notification: true,
@@ -241,9 +256,7 @@ function EditBug() {
   };
   const handleCancel = () => {
     setIsEditMode(false);
-    fetchData(); // Re-fetch bug details to restore original values
   };
-  console.log(popup);
   return (
     <Container fluid className="mainContainerrr">
       {popup?.notification === true && (
@@ -471,21 +484,20 @@ function EditBug() {
                     />
                   )}
                 </Col>
-
                 <Col md={2} className="colgap">
                   {!isEditMode && (
-                    <SmallBox child={baseData.reportedBy}></SmallBox>
+                    <SmallBox child={baseData.assignee}></SmallBox>
                   )}
                   {isEditMode && (
                     <DropDown
-                      options={dropdownOptions.reportedByOptions}
+                      options={dropdownOptions.assigneeOptions}
                       onChange={(selectedOption) =>
-                        handleDropdownChange("reportedBy", selectedOption)
+                        handleDropdownChange("assigneeOptions", selectedOption)
                       }
-                      value={dropdownOptions.reportedByOptions.find(
-                        (option) => option.value === baseData.reportedBy
+                      value={dropdownOptions.assigneeOptions.find(
+                        (option) => option.value === baseData.assignee
                       )}
-                      def={baseData.reportedBy}
+                      def={baseData.assignee}
                     />
                   )}
                 </Col>
@@ -587,12 +599,6 @@ function EditBug() {
                     </Box>
                   )}
                 </Col>
-              </Row>
-
-              {/* Comments Section */}
-              <Row className="mt-4">
-                <h5>Comments</h5>
-                <Form.Control type="text" placeholder="Add a Comment..." />
               </Row>
             </>
           </Col>

@@ -31,6 +31,7 @@ const CreateBug = () => {
     scenarios: [],
     testingMediums: [],
     priorities: [],
+    assignees: [],
   });
 
   const [filteredScenarios, setFilteredScenarios] = useState([]);
@@ -38,7 +39,7 @@ const CreateBug = () => {
 
   // Fetch dropdown data from common constants URL
   useEffect(() => {
-    setLoading(true);
+    setLoading(true); // Show loader while fetching dropdown data
     axios
       .post(
         "https://xjhkkap5tmpwr3yjiw7nvadwra0jyiav.lambda-url.us-east-1.on.aws/fetch-table-data",
@@ -46,7 +47,8 @@ const CreateBug = () => {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((response) => {
-        setDropdownData({
+        setDropdownData((prev) => ({
+          ...prev,
           bugStatus: response.data.data.bug_status,
           environments: response.data.data.environments,
           products: response.data.data.products,
@@ -54,13 +56,32 @@ const CreateBug = () => {
           scenarios: response.data.data.scenarios,
           testingMediums: response.data.data.testing_medium,
           priorities: response.data.data.priority,
-        });
-        setLoading(false);
+        }));
       })
       .catch((error) => {
         toast.error("Error fetching dropdown data");
         console.error("Error fetching dropdown data:", error);
-        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false); // Hide loader after dropdown data fetch
+      });
+
+    // Fetch assignees
+    setLoading(true); // Show loader while fetching assignees
+    axios
+      .get("https://xjhkkap5tmpwr3yjiw7nvadwra0jyiav.lambda-url.us-east-1.on.aws/get-user-details")
+      .then((response) => {
+        setDropdownData((prev) => ({
+          ...prev,
+          assignees: response.data.users,
+        }));
+      })
+      .catch((error) => {
+        toast.error("Error fetching assignees");
+        console.error("Error fetching assignees:", error);
+      })
+      .finally(() => {
+        setLoading(false); // Hide loader after assignee fetch
       });
   }, []);
 
@@ -88,7 +109,7 @@ const CreateBug = () => {
     e.preventDefault();
 
     // Validation for required fields
-    if (!bugData.product_id || !bugData.description || !bugData.title || !bugData.priority_id) {
+    if (!bugData.product_id || !bugData.description || !bugData.title || !bugData.priority_id || !bugData.assignee_id) {
       toast.error("Please fill out all required fields.");
       return;
     }
@@ -213,14 +234,14 @@ const CreateBug = () => {
             ))}
           </select>
 
-          <input
-            type="text"
-            placeholder="Assignee"
-            name="assignee_id"
-            value={bugData.assignee_id}
-            onChange={handleChange}
-            required
-          />
+          <select name="assignee_id" value={bugData.assignee_id} onChange={handleChange} required>
+            <option value="">Assignee</option>
+            {dropdownData.assignees.map((assignee) => (
+              <option key={assignee.user_id} value={assignee.user_id}>
+                {assignee.user_name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-row">

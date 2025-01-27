@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import Bug from './Bug';
 import axios from 'axios';
 //import './BugsList.css';
@@ -13,7 +13,6 @@ const BugList = () => {
     const fetchBugs = async () => {
       try {
         const response = await axios.post('https://v3dfk4mm6zkwbehcs5c6cvauae0yzksa.lambda-url.us-east-1.on.aws/bugs_list');
-        console.log(response.data);
         setBugs(response.data.bugs);  // Adjusted for the new response structure
         setLoading(false);
       } catch (err) {
@@ -35,21 +34,29 @@ const BugList = () => {
 
 
   return (
-    <Table hover>
+    <Table hover >
+      
       <thead>
+        
         <tr>
+          
           <th>Bug</th>
           <th>Scenario</th>
           <th>Status</th>
           <th>Assignee</th>
+          <th></th>
+          
         </tr>
+        
       </thead>
+      
       <tbody>
         {Array.isArray(bugs) && bugs.map((bug) => (
-          <Bug key={bug.id} indbug={bug} />
+          <Bug key={bug.bug_id} indbug={bug} />
 
         ))}
       </tbody>
+      
     </Table>
   );
 };

@@ -25,7 +25,7 @@ const router = createBrowserRouter(
       <Route path="/MyProfile" element={<MyProfile/>}/>
       <Route path="/MyDashboard" element={<BugsListScreen/>}/>
       <Route path="/CreateBug" element={<CreateBug/>}/> 
-      <Route path="/view-bug" element={<EditBug />} />
+      <Route path="/bug/:id" element={<EditBug />} />
       <Route path="*" element={<Error404Page />} />
 
     </Route>
@@ -33,6 +33,7 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  
   return (
     <>
       <RouterProvider router={router} />

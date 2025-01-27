@@ -161,7 +161,6 @@ function BugAddContent() {
 
             if (response.ok) {
                 const result = await response.json();
-                console.log(result);
                 if (result.status.status === false) {
                     setSuccessMessage(result.status.message || "Bug successfully added!");
                     setErrorMessage("");  // Clear the error message on success

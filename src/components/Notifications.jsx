@@ -18,7 +18,7 @@ function CreateNotificationContainer({ obj, setPopUp }) {
     if (obj.notification) {
       timer = setTimeout(() => {
         handleClose();
-      }, 2000); // 3000ms = 3 seconds
+      }, 4000); // 3000ms = 3 seconds
     }
     return () => {
       clearTimeout(timer); // Clean up the timeout when the component unmounts or obj changes

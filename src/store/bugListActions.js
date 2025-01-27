@@ -1,9 +1,8 @@
 import axios from 'axios';
+import { FETCH_BUGS_FAILURE, FETCH_BUGS_REQUEST, FETCH_BUGS_SUCCESS } from './actionTypes';
 
 // action type definitions
-export const FETCH_BUGS_REQUEST = 'FETCH_BUGS_REQUEST';
-export const FETCH_BUGS_SUCCESS = 'FETCH_BUGS_SUCCESS';
-export const FETCH_BUGS_FAILURE = 'FETCH_BUGS_FAILURE';
+
 
 // create actions
 export const fetchBugsRequest = () => ({ type: FETCH_BUGS_REQUEST });

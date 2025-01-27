@@ -17,7 +17,7 @@ function BugsListScreen() {
           <div className="controls-container">
             <Controls />
           </div>
-          <div className="buglist-container">
+          <div className="buglist-container" style={{height:"80vh",overflowY:"auto"}}>
             <BugList />
           </div>
         </Col>

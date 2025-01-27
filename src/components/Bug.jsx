@@ -10,7 +10,7 @@ export default function Bug({ indbug }) {
 
   // Function to handle the click event on <tr>
   const handleRowClick = (id) => {
-    navigate(`/Bug/${unq}`,{state:{id}}); // Navigate to the desired route
+    navigate(`/bug/${unq}`,{state:{id}}); // Navigate to the desired route
   };
   // Maps for status and priority colors
   const getStatusColor = (status) => {

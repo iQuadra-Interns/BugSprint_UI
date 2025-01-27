@@ -13,7 +13,6 @@ const BugList = () => {
     const fetchBugs = async () => {
       try {
         const response = await axios.post('https://v3dfk4mm6zkwbehcs5c6cvauae0yzksa.lambda-url.us-east-1.on.aws/bugs_list');
-        console.log(response.data);
         setBugs(response.data.bugs);  // Adjusted for the new response structure
         setLoading(false);
       } catch (err) {

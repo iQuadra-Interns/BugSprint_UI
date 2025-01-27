@@ -5,9 +5,12 @@ import { useNavigate } from 'react-router-dom';
 export default function Bug({ indbug }) {
   const navigate = useNavigate(); // Correct usage of useNavigate
 
+  const unq = indbug.bug_code
+  console.log("unq : ",unq)
+
   // Function to handle the click event on <tr>
   const handleRowClick = (id) => {
-    navigate("/view-bug",{state:{id}}); // Navigate to the desired route
+    navigate(`/Bug/${unq}`,{state:{id}}); // Navigate to the desired route
   };
   // Maps for status and priority colors
   const getStatusColor = (status) => {
@@ -33,7 +36,6 @@ export default function Bug({ indbug }) {
   };
 
   const getStatusBadge = (status) => {
-    console.log("Status fetched:", status); 
     const statusColors = {
       Open: 'danger',    // Red
       WIP: 'warning',    // Orange

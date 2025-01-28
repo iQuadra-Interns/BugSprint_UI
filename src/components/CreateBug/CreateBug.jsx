@@ -7,20 +7,20 @@ import "./CreateBug.css";
 
 const CreateBug = () => {
   const [bugData, setBugData] = useState({
-    product_id: 0,
+    product_id: "",
     title: "",
-    environment_id: 0,
-    scenario_id: 0,
-    testing_medium: 0,
+    environment_id: "",
+    scenario_id: "",
+    testing_medium: "",
     description: "",
-    user_data: "",
-    priority_id: 0,
-    reported_by: 0,
-    assignee_id: 0,
-    root_cause_location: 0,
+    user_data: "", // Optional field
+    priority_id: "",
+    reported_by: 1, // Example: set default to 1, can be updated dynamically
+    assignee_id: "",
+    root_cause_location: "",
     root_cause: "",
     resolution: "",
-    status: 0,
+    status: "",
   });
 
   const [dropdownData, setDropdownData] = useState({
@@ -62,9 +62,7 @@ const CreateBug = () => {
         toast.error("Error fetching dropdown data");
         console.error("Error fetching dropdown data:", error);
       })
-      .finally(() => {
-        setLoading(false); // Hide loader after dropdown data fetch
-      });
+      .finally(() => setLoading(false)); // Hide loader after dropdown data fetch
 
     // Fetch assignees
     setLoading(true); // Show loader while fetching assignees
@@ -80,9 +78,7 @@ const CreateBug = () => {
         toast.error("Error fetching assignees");
         console.error("Error fetching assignees:", error);
       })
-      .finally(() => {
-        setLoading(false); // Hide loader after assignee fetch
-      });
+      .finally(() => setLoading(false)); // Hide loader after assignee fetch
   }, []);
 
   // Filter scenarios based on selected product
@@ -108,15 +104,29 @@ const CreateBug = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation for required fields
-    if (!bugData.product_id || !bugData.description || !bugData.title || !bugData.priority_id || !bugData.assignee_id) {
-      toast.error("Please fill out all required fields.");
-      return;
+    // Validation: Check for all required fields
+    const requiredFields = [
+      "product_id",
+      "title",
+      "environment_id",
+      "scenario_id",
+      "testing_medium",
+      "description",
+      "priority_id",
+      "assignee_id",
+      "root_cause_location",
+      "status",
+    ];
+    for (const field of requiredFields) {
+      if (!bugData[field]) {
+        toast.error(`Please fill out the required field: ${field.replace("_", " ")}`);
+        return;
+      }
     }
 
     setLoading(true); // Show loading screen during submission
 
-    // Convert data to correct types and add default values for optional fields
+    // Prepare bug data for submission
     const formattedBugData = {
       ...bugData,
       product_id: parseInt(bugData.product_id, 10),
@@ -129,7 +139,6 @@ const CreateBug = () => {
       status: parseInt(bugData.status, 10),
       resolution: bugData.resolution || "Not Provided", // Default value for optional fields
       root_cause: bugData.root_cause || "Not Provided", // Default value for optional fields
-      reported_by: bugData.reported_by || 1, // Set to the current user ID (if applicable)
     };
 
     // Submit data to the API
@@ -140,15 +149,35 @@ const CreateBug = () => {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((response) => {
-        toast.success("Bug saved successfully!");
-        console.log("Bug added successfully:", response.data);
-        setLoading(false);
+        // Check nested status field
+        if (response.data.status.status) {
+          toast.success("Bug added successfully!");
+          console.log("Bug added successfully:", response.data);
+          setBugData({
+            product_id: "",
+            title: "",
+            environment_id: "",
+            scenario_id: "",
+            testing_medium: "",
+            description: "",
+            user_data: "",
+            priority_id: "",
+            reported_by: 1,
+            assignee_id: "",
+            root_cause_location: "",
+            root_cause: "",
+            resolution: "",
+            status: "",
+          });
+        } else {
+          toast.error("Failed to save the bug. Please try again.");
+        }
       })
       .catch((error) => {
         toast.error("Failed to save the bug. Please try again.");
         console.error("Error adding bug:", error.response?.data || error);
-        setLoading(false);
-      });
+      })
+      .finally(() => setLoading(false)); // Hide loading screen
   };
 
   return (
@@ -167,7 +196,6 @@ const CreateBug = () => {
             required
           />
         </div>
-
         <div className="form-row">
           <select name="product_id" value={bugData.product_id} onChange={handleProductChange} required>
             <option value="">Product Name</option>
@@ -178,7 +206,7 @@ const CreateBug = () => {
             ))}
           </select>
 
-          <select name="scenario_id" value={bugData.scenario_id} onChange={handleChange} disabled={!filteredScenarios.length}>
+          <select name="scenario_id" value={bugData.scenario_id} onChange={handleChange} required>
             <option value="">Scenario</option>
             {filteredScenarios.map((scenario) => (
               <option key={scenario.scenario_id} value={scenario.scenario_id}>
@@ -187,7 +215,7 @@ const CreateBug = () => {
             ))}
           </select>
 
-          <select name="environment_id" value={bugData.environment_id} onChange={handleChange}>
+          <select name="environment_id" value={bugData.environment_id} onChange={handleChange} required>
             <option value="">Environment</option>
             {dropdownData.environments.map((environment) => (
               <option key={environment.environment_id} value={environment.environment_id}>
@@ -196,7 +224,7 @@ const CreateBug = () => {
             ))}
           </select>
 
-          <select name="testing_medium" value={bugData.testing_medium} onChange={handleChange}>
+          <select name="testing_medium" value={bugData.testing_medium} onChange={handleChange} required>
             <option value="">Testing Medium</option>
             {dropdownData.testingMediums.map((medium) => (
               <option key={medium.medium_id} value={medium.medium_id}>
@@ -205,7 +233,7 @@ const CreateBug = () => {
             ))}
           </select>
 
-          <select name="root_cause_location" value={bugData.root_cause_location} onChange={handleChange}>
+          <select name="root_cause_location" value={bugData.root_cause_location} onChange={handleChange} required>
             <option value="">Root Cause Location</option>
             {dropdownData.rootCauseLocations.map((location) => (
               <option key={location.location_id} value={location.location_id}>
@@ -259,7 +287,6 @@ const CreateBug = () => {
             onChange={handleChange}
           />
         </div>
-
         <button type="submit" className="save-button">Save</button>
       </form>
     </div>

@@ -1,20 +1,18 @@
 import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT, UPDATE_PROFILE } from "./actionTypes";
 
-// Retrieve user data from sessionStorage
-const storedUser = sessionStorage.getItem('user');
+// Retrieve user data from localStorage
+const storedUser = localStorage.getItem('user');
 const initialState = {
-    isAuthenticated: !!storedUser, // Initialize based on sessionStorage
+    isAuthenticated: !!storedUser, // Initialize based on localStorage
     user: storedUser ? JSON.parse(storedUser) : null, // Parse user data if available
     error: null, // Error messages
 };
 
 const authReducer = (state = initialState, action) => {
-
-
     switch (action.type) {
         case LOGIN_SUCCESS:
-            // Save user data to sessionStorage on successful login
-            sessionStorage.setItem('user', JSON.stringify(action.payload));
+            // Save user data to localStorage on successful login
+            localStorage.setItem('user', JSON.stringify(action.payload));
             return {
                 ...state,
                 isAuthenticated: true,
@@ -23,8 +21,9 @@ const authReducer = (state = initialState, action) => {
             };
 
         case LOGOUT:
-            // Remove user data from sessionStorage on logout
-            sessionStorage.removeItem('user');
+            // Remove user data from localStorage on logout
+            localStorage.removeItem('user');
+            localStorage.setItem("logout", Date.now()); // Broadcast logout event
             return {
                 ...state,
                 isAuthenticated: false,
@@ -42,17 +41,15 @@ const authReducer = (state = initialState, action) => {
             const updatedUser = { ...state.user, developer_details: { ...state.user.developer_details, ...action.payload } };
             
             // Store the updated user information in localStorage
-            sessionStorage.setItem("user", JSON.stringify(updatedUser));
+            localStorage.setItem("user", JSON.stringify(updatedUser));
             return {
-              ...state,
-              user: updatedUser, // Set the updated user in the Redux store
+                ...state,
+                user: updatedUser, // Set the updated user in the Redux store
             };
-      
+
         default:
             return state;
-        }
-
-        
+    }
 };
 
 export default authReducer;

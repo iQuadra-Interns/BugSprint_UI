@@ -18,8 +18,9 @@ import { useSelector } from "react-redux";
 function EditBug() {
   const navigate = useNavigate();
   // const {id} = useParams()
-  const location = useLocation();
-  const data = location.state;
+  const bugId = sessionStorage.getItem("bugId"); // Retrieve bugId
+  // sessionStorage.removeItem("bugId"); // Remove it after retrieving
+
   const reported = useSelector((state) => state.auth.user.usr.user_cat_id);
   const [baseData, SetBaseData] = useState({
     bugTitle: "BugTitle",
@@ -57,7 +58,7 @@ function EditBug() {
     setLoading(true);
     try {
       const response = await GETAPI(
-        urls.view_bug + `/find-bug?bug_id=${data.id}`
+        `${urls.view_bug}/find-bug?bug_id=${bugId}`
       );
 
       if (response.data.status.status === true) {
@@ -85,7 +86,7 @@ function EditBug() {
           data: "Failed",
           message: "Request Failed",
         };
-  
+
         setPopUp(notificationData);
       }
       const res = await axios.post(
@@ -133,14 +134,13 @@ function EditBug() {
           ),
         });
       } else {
-        
         const notificationData = {
           notification: true,
           type: "warning",
           data: "Failed",
           message: "Request Failed",
         };
-  
+
         setPopUp(notificationData);
       }
     } catch (error) {
@@ -157,11 +157,11 @@ function EditBug() {
     }
   };
 
-
-
   useEffect(() => {
-    fetchDropdownData();
-  }, []);
+    if (bugId) {
+      fetchDropdownData();
+    }
+  }, [bugId]);
 
   const handleDropdownChange = (key, selectedOption) => {
     if (selectedOption) {
@@ -228,7 +228,7 @@ function EditBug() {
     };
 
     const response = await axios.post(
-      `${urls.edit_bug}?bug_id=${data.id}`,
+      `${urls.edit_bug}?bug_id=${bugId}`,
       payload
     );
     if (response?.data?.status?.status === true) {

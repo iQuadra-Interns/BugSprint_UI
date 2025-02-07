@@ -6,12 +6,14 @@ export default function Bug({ indbug }) {
   const navigate = useNavigate(); // Correct usage of useNavigate
 
   const unq = indbug.bug_code
-  console.log("unq : ",unq)
 
   // Function to handle the click event on <tr>
   const handleRowClick = (id) => {
-    navigate(`/bug/${unq}`,{state:{id}}); // Navigate to the desired route
+    sessionStorage.setItem("bugId", id); // Store bugId in sessionStorage
+    window.open(`/bug/${unq}`, "_blank"); // Open in a new tab
   };
+  
+  
   // Maps for status and priority colors
   const getStatusColor = (status) => {
     const statusColors = {

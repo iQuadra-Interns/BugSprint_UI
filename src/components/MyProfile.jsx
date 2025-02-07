@@ -9,7 +9,6 @@ import './MyProfile.css';
 function MyProfile() {
     // Get user data from Redux store
     const user = useSelector((state) => state.auth.user);
-    console.log(user);
     return (
         <Container fluid className="mainContainer">
             <Row className="h-100">

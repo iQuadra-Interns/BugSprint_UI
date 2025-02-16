@@ -21,7 +21,7 @@ function EditBug() {
   const bugId = sessionStorage.getItem("bugId"); // Retrieve bugId
   // sessionStorage.removeItem("bugId"); // Remove it after retrieving
 
-  const reported = useSelector((state) => state.auth.user.usr.user_cat_id);
+  const reported = useSelector((state) => state.auth.user.usr.user_id);
   const [baseData, SetBaseData] = useState({
     bugTitle: "BugTitle",
     status: "Status",

@@ -1,16 +1,13 @@
-import { useSelector } from 'react-redux';
-import './App.css'
-import './components/SignIn.jsx'
-import './components/SignInForm.jsx'
-import SignIn from './components/SignIn.jsx'
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
-import BugsListScreen from './components/BugsListScreen.jsx'
-import CreateBug from './components/CreateBug/CreateBug.jsx';
+import { useSelector } from "react-redux";
+import { Navigate, Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import SignIn from "./components/SignIn.jsx";
+import BugsListScreen from "./components/BugsListScreen.jsx";
+import CreateBug from "./components/CreateBug/CreateBug.jsx";
 import EditBug from "./components/EditBug.jsx";
-import MyProfile from './components/MyProfile';
-import Error404Page from './components/Error404Page';
+import MyProfile from "./components/MyProfile";
+import Error404Page from "./components/Error404Page";
 
 function ProtectedRoute({ children }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -20,25 +17,19 @@ function ProtectedRoute({ children }) {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route index element={<SignIn/>}/>
-      <Route path="/" element={<SignIn/>}/>
-      <Route path="/MyProfile" element={<MyProfile/>}/>
-      <Route path="/MyDashboard" element={<BugsListScreen/>}/>
-      <Route path="/CreateBug" element={<CreateBug/>}/> 
-      <Route path="/bug/:id" element={<EditBug />} />
+      <Route index element={<SignIn />} />
+      <Route path="/" element={<SignIn />} />
+      <Route path="/MyProfile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />
+      <Route path="/MyDashboard" element={<ProtectedRoute><BugsListScreen /></ProtectedRoute>} />
+      <Route path="/CreateBug" element={<ProtectedRoute><CreateBug /></ProtectedRoute>} />
+      <Route path="/bug/:id" element={<ProtectedRoute><EditBug /></ProtectedRoute>} />
       <Route path="*" element={<Error404Page />} />
-
     </Route>
   )
 );
 
 function App() {
-  
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

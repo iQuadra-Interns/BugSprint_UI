@@ -1,15 +1,21 @@
-import { useEffect } from 'react';
-import { ToastContainer } from 'react-toastify';
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import SignIn from './components/SignIn.jsx';
-import BugsListScreen from './components/BugsListScreen.jsx';
-import CreateBug from './components/CreateBug/CreateBug.jsx';
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { Navigate, Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import SignIn from "./components/SignIn.jsx";
+import BugsListScreen from "./components/BugsListScreen.jsx";
+import CreateBug from "./components/CreateBug/CreateBug.jsx";
 import EditBug from "./components/EditBug.jsx";
-import MyProfile from './components/MyProfile';
-import Error404Page from './components/Error404Page';
-import PrivateRoute from './components/PrivateRoute.jsx';
+import MyProfile from "./components/MyProfile";
+import Error404Page from "./components/Error404Page";
+import PrivateRoute from "./components/PrivateRoute.jsx";
+
+function ProtectedRoute({ children }) {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  return isAuthenticated ? children : <Navigate to="/" />;
+}
 
 const router = createBrowserRouter(
   createRoutesFromElements(

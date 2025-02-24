@@ -1,10 +1,13 @@
 // store.js
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./authReducer";
+import bugListReducer from "./bugListReducer"; // Import bugList reducer
 
-import { createStore, combineReducers } from 'redux';
-import authReducer from './authReducer'; 
-
-const rootReducer = combineReducers({
-    auth: authReducer,  // Auth reducer to handle user authentication and data
+const store = configureStore({
+  reducer: {
+    auth: authReducer, // Auth reducer for user authentication
+    bugList: bugListReducer, // Bug list reducer
+  },
 });
 
-export const store = createStore(rootReducer);
+export default store;

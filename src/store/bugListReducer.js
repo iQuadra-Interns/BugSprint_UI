@@ -1,4 +1,4 @@
-import { FETCH_BUGS_REQUEST, FETCH_BUGS_SUCCESS, FETCH_BUGS_FAILURE } from './bugListActions';
+import { FETCH_BUGS_REQUEST, FETCH_BUGS_SUCCESS, FETCH_BUGS_FAILURE } from './actionTypes';
 
 const initialState = {
     loading: false,

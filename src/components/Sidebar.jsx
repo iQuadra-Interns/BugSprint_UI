@@ -50,7 +50,7 @@ export default function SideBar() {
       <Nav.Link href="/MyProfile" className="d-flex align-items-center px-3 py-2">
         <User size={18} className="me-2" /> My Profile
       </Nav.Link>
-      <Nav.Link href="#settings" className="d-flex align-items-center px-3 py-2">
+      <Nav.Link href="/Settings" className="d-flex align-items-center px-3 py-2">
         <Settings size={18} className="me-2" /> Settings
       </Nav.Link>
       <Nav.Link onClick={handleLogout} className="d-flex align-items-center px-3 py-2">

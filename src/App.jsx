@@ -9,6 +9,7 @@ import BugsListScreen from "./components/BugsListScreen.jsx";
 import CreateBug from "./components/CreateBug/CreateBug.jsx";
 import EditBug from "./components/EditBug.jsx";
 import MyProfile from "./components/MyProfile";
+import Settings from "./components/Settings.jsx";
 import Error404Page from "./components/Error404Page";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="/MyDashboard" element={<PrivateRoute><BugsListScreen /></PrivateRoute>} />
       <Route path="/CreateBug" element={<PrivateRoute><CreateBug /></PrivateRoute>} />
       <Route path="/bug/:id" element={<PrivateRoute><EditBug /></PrivateRoute>} />
+      <Route path="/Settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
 
       <Route path="*" element={<Error404Page />} />
     </Route>

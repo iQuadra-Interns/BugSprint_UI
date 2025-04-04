@@ -1,93 +1,101 @@
-.SignInIconsUser {
-    color: #50BB27;
-    position: absolute;
-    left: 3.5vh; /* Adjusted for alignment */
-    top: 40%;
-    transform: translateY(-50%);
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-.SignInIconsLock {
-    color: #50BB27;
-    position: absolute;
-    left: 3.5vh; /* Adjusted for alignment */
-    top: 40%;
-    transform: translateY(-50%);
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
-.SignInIconsEye {
-    color: #50BB27;
-    position: absolute;
-    right: 4vh; /* Positioned on the right of the input field */
-    top: 40%;
-    transform: translateY(-50%);
-    cursor: pointer;
+.Row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
 }
 
-.SignInFormInput {
-    width: 50vh;
-    height: 8vh;
-    border-radius: 1vh;
-    border: 0.1vh solid #ccc;
-    box-sizing: border-box;
-    padding-left: 5vh; /* Space for the left icons */
-    padding-right: 5vh; /* Space for the right icons */
-    margin-bottom: 2.5vh;
-    background-color: white;
-    font-size: 3vh;
+.Col {
+    flex: 1;
+    max-width: 100%;
+    padding: 10px;
+}
+
+.logoLight {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+.SignInTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.SignInText {
+    font-size: 1.2rem;
+    text-align: center;
     color: #333;
+    margin-bottom: 20px;
+}
+
+.FormContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.FormCard {
+    background-color: #E0FED3;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logoLightSignInForm {
+    max-width: 100px;
+    height: auto;
+    margin: 0 auto 20px;
+    display: block;
 }
 
 .InputContainer {
     position: relative;
-    margin-bottom: 2.5vh;
+    margin-bottom: 15px;
 }
 
-.SignInTitle {
-    font-size: 10vh;
-    font-weight: 700;
-    padding-top: 7vh;
-    margin-bottom: 5vh;
-    margin-left: -10vh;
+.SignInIconsUser,
+.SignInIconsLock,
+.SignInIconsEye {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #50BB27;
 }
 
-.SignInText {
-    font-size: 5.5vh;
-    font-weight: 400;
-    margin-left: -10vh;
+.SignInIconsUser,
+.SignInIconsLock {
+    left: 10px;
 }
 
-.error {
-    color: red;
-    margin-top: 0.5vh;
-    margin-bottom: 2.5vh;
-    font-size: 2.5vh;
-    text-align: center;
-}
-
-.FormCard {
-    border-radius: 5vh;
-    border-width: 1vh;
-    border-color: linear-gradient(#32920D, #49B51F);
-    background-image: linear-gradient(#F4F4F4, #E0FED3);
-    padding-top: 10.5vh;
-    padding-bottom: 10.5vh;
-    width: 65vh;
-    text-align: center;
-    align-content: right;
-    position: relative;
-    margin-top: 15vh;
-    margin-left: -5vh;
-}
-
-.SignInFormSubmit {
-    background-image: linear-gradient(to right, #1CCA38, #309D06);
-    border-radius: 1vh;
-    width: 50vh;
-    height: 8vh;
-    text-align: center;
-    color: white;
+.SignInIconsEye {
+    right: 10px;
     cursor: pointer;
-    border: none;
+}
+
+.SignInFormInput {
+    width: 100%;
+    padding: 10px 40px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
 }
 
 .SignInFormInput:focus {
@@ -95,29 +103,31 @@
     border-color: #50BB27;
 }
 
-.logoLight {
-    text-align: left;
-    align-items: left;
-    height: 20vh;
-    margin-left: -16vh;
-    margin-top: 13vh;
+.SignInFormSubmit {
+    width: 100%;
+    padding: 10px;
+    background-color: #1CCA38;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
-.logoLightSignInForm {
-    height: 10vh;
-    margin-bottom: 3vh;
+.SignInFormSubmit:hover {
+    background-color: #309D06;
 }
 
-.FormContainer {
-    text-align: right;
-    align-content: right;
+.error {
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .SignInFormForgotPassword {
     text-align: right;
     color: #50BB27;
-    padding-left: 30vh;
-    font-size: 2.5vh;
-    margin-bottom: 1.5vh;
+    font-size: 0.9rem;
     cursor: pointer;
 }

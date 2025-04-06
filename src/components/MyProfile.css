@@ -3,6 +3,8 @@
     height: 40vh;
     border-radius: 50%;
     object-fit: cover;
+    display: flex;
+    align-items: center;
     margin-top: 3vh;
     margin-bottom: 3vh;
     margin-left: 8vh;

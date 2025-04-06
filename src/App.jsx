@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { Navigate, Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import SignIn from "./components/SignIn.jsx";
@@ -12,11 +11,6 @@ import MyProfile from "./components/MyProfile";
 import Settings from "./components/Settings.jsx";
 import Error404Page from "./components/Error404Page";
 import PrivateRoute from "./components/PrivateRoute.jsx";
-
-function ProtectedRoute({ children }) {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  return isAuthenticated ? children : <Navigate to="/" />;
-}
 
 const router = createBrowserRouter(
   createRoutesFromElements(

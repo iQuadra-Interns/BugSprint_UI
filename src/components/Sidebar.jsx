@@ -1,13 +1,12 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav } from 'react-bootstrap';
 import BSLogo from "../images/450_BS_Main-Light.png";
-import profile_pic from "../images/profile_pic.png";
 import { Grid, User, Settings, LogOut } from 'lucide-react';
 import { logout } from '../store/authActions';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import './MyProfile.css';
+import ProfileImage from './ProfileImage';
 
 export default function SideBar() {
   const dispatch = useDispatch();
@@ -36,7 +35,7 @@ export default function SideBar() {
         <img src={BSLogo} alt="Bugsprint Logo" className="img-fluid" />
       </Nav.Item>
       <Nav.Item className="d-flex align-items-center mb-4 px-3">
-        <img src={profile_pic} width={40} height={40} className="rounded-circle me-2" alt="Profile" />
+     <ProfileImage size={40} customStyle={{marginRight: "0.5em", fontWeight: "bold"}}/>
         <div>
           <div className="fw-bold">
             {`${firstName} ${lastName}`}

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import profile_pic from "../images/profile_pic.png";
+import ProfileImage from "./ProfileImage";
 import "./MyProfile.css";
 import EditProfile from "./EditProfile/EditProfile";
 
@@ -33,7 +33,11 @@ const MyProfileContainer = () => {
   return (
     <Container className="profileContainer">
       <Card className="profileCard">
-        <img src={profile_pic} className="profilePicture" alt="Profile" />
+        <ProfileImage
+          size={230}
+          customStyle={{ marginBottom: "20px", marginTop: "0.5em" }}
+          className="d-flex justify-content-center me-2"
+        />
         <h3 className="title">My Profile</h3>
         <Row>
           <Col>

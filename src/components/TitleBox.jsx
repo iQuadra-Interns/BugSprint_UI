@@ -1,11 +1,10 @@
-import React from "react";
 import "./ViewBugBackArrow.css";
 
-function TitleBox({ titl }) {
+function TitleBox({ title }) {
   return (
     <div className="title-box">
       
-      <div className="title-box-content">{titl}</div>
+      <div className="title-box-content">{title}</div>
     </div>
   );
 }

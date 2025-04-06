@@ -6,6 +6,7 @@ const initialState = {
     isAuthenticated: !!storedUser, // Initialize based on localStorage
     user: storedUser ? JSON.parse(storedUser) : null, // Parse user data if available
     error: null, // Error messages
+    profile_pic: localStorage.getItem('profile_pic') || null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -24,6 +25,7 @@ const authReducer = (state = initialState, action) => {
             // Remove user data from localStorage on logout
             localStorage.removeItem('user');
             localStorage.setItem("logout", Date.now()); // Broadcast logout event
+            localStorage.removeItem('profile_pic');
             return {
                 ...state,
                 isAuthenticated: false,
@@ -46,7 +48,10 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 user: updatedUser, // Set the updated user in the Redux store
             };
-
+        
+        case "SET_PROFILE_IMAGE":
+            localStorage.setItem('profile_pic', action.payload); // persist to localStorage
+            return { ...state, profile_pic: action.payload };
         default:
             return state;
     }

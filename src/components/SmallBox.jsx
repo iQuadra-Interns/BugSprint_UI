@@ -1,4 +1,3 @@
-import React from "react";
 import "./ViewBugBackArrow.css";
 
 function SmallBox({ child }) {

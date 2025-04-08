@@ -1,23 +1,29 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.Container {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    height: 100%;
+    justify-content: center;
 }
 
-.Row {
+.row {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     margin: 20px 0;
+    align-items: anchor-center;
 }
 
-.Col {
+.col {
     flex: 1;
     max-width: 100%;
     padding: 10px;

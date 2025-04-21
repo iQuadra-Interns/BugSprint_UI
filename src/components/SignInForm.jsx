@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../store/authActions'; 
 import { useNavigate } from 'react-router-dom';
 
-const SignInForm = () => {
+ const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -120,4 +120,4 @@ const SignInForm = () => {
     );
 };
 
-export default SignInForm;
+export default SignInForm

@@ -34,8 +34,9 @@
   color: #888;
 }
 
-body, #root {
-    height: 100vh;
+html,body, #root {
+    min-height: 100vh;
+    width: 100% !important;
     margin: 0;
     padding: 0;
   } 
@@ -43,6 +44,11 @@ body, #root {
   .sidebar {
     background-color: #f8f9fa;
     border-right: 1px solid #dee2e6;
+  }
+  .sideBar{
+    height:100vh !important;
+    position:sticy;
+    left:0;
   }
   
   .nav-link {
@@ -65,9 +71,14 @@ body, #root {
 }
 
 .mainContainer {
-  height: 100%;
+  min-height: 100vh;
+  /* height: 100%; */
   width: 100%;
   background-color: #f8f9fa;
+}
+.container-fluid{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
   .nav-link.active {

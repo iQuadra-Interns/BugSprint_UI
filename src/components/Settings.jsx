@@ -11,7 +11,7 @@ function Settings() {
     const user = useSelector((state) => state.auth.user);
     return (
         <Container fluid className="mainContainer">
-            <Row className="h-100">
+            <Row>
                 <Col xs={2} className="p-0 ">
                     <SideBar />
                 </Col>

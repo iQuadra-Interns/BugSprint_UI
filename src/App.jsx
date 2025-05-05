@@ -10,8 +10,10 @@ import CreateBug from "./components/CreateBug/CreateBug.jsx";
 import EditBug from "./components/EditBug.jsx";
 import MyProfile from "./components/MyProfile";
 import Settings from "./components/Settings.jsx";
+import TestCases from "./components/TestCases/TestCases";  // Import TestCases
 import Error404Page from "./components/Error404Page";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import TestCasesList from "./components/TestCasesList/TestCasesList.jsx";
 
 function ProtectedRoute({ children }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -30,11 +32,15 @@ const router = createBrowserRouter(
       <Route path="/CreateBug" element={<PrivateRoute><CreateBug /></PrivateRoute>} />
       <Route path="/bug/:id" element={<PrivateRoute><EditBug /></PrivateRoute>} />
       <Route path="/Settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
+      <Route path="/TestCases" element={<PrivateRoute><TestCases /></PrivateRoute>} />  {/* Added TestCases Route */}
+      <Route path="/TestCasesList" element={<PrivateRoute><TestCasesList /></PrivateRoute>} />
+
 
       <Route path="*" element={<Error404Page />} />
     </Route>
   )
 );
+
 
 function App() {
   useEffect(() => {

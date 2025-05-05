@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Nav } from 'react-bootstrap';
 import BSLogo from "../images/450_BS_Main-Light.png";
 import profile_pic from "../images/profile_pic.png";
-import { Grid, User, Settings, LogOut } from 'lucide-react';
+import { Grid, User, FileText, Settings, LogOut } from 'lucide-react'; // Import FileText icon
 import { logout } from '../store/authActions';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
@@ -15,11 +15,11 @@ export default function SideBar() {
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = () => {
-    dispatch(logout()); // Dispatch the logout action
-    navigate('/'); // Redirect to sign-in page after logout
+    dispatch(logout());
+    navigate('/'); 
   };
 
-  // Dynamically extract the correct role details
+  // Extract user details dynamically
   const roleDetails =
     user?.developer_details ||
     user?.tester_details ||
@@ -46,6 +46,10 @@ export default function SideBar() {
       </Nav.Item>
       <Nav.Link href="/MyDashboard" className="d-flex align-items-center px-3 py-2">
         <Grid size={18} className="me-2" /> Dashboard
+      </Nav.Link>
+      {/* New Test Cases Link */}
+      <Nav.Link href="/TestCases" className="d-flex align-items-center px-3 py-2">
+        <FileText size={18} className="me-2" /> Test Cases
       </Nav.Link>
       <Nav.Link href="/MyProfile" className="d-flex align-items-center px-3 py-2">
         <User size={18} className="me-2" /> My Profile

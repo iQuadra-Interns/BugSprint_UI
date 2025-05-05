@@ -1,0 +1,8 @@
+/* TestCases.css */
+.testcases-container {
+  height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}

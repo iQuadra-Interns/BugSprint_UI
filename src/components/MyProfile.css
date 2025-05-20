@@ -1,0 +1,64 @@
+.profilePicture {
+    width: 40vh;
+    height: 40vh;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    margin-left: 8vh;
+}
+
+.profileCard {
+    width: 65vh;
+    height: 85vh;
+    margin-left: 50vh;
+    border-radius: 2.5vh;
+    border-color: white;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    text-align: left;
+    align-content: left;
+    position: relative;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+}
+
+.profileContainer {
+    text-align: left;
+    align-content: left;
+    margin-top: 8vh;
+    background-color: #f8f9fa;
+}
+
+.description {
+    margin-left: 2vh;
+    color: #616161;
+    margin-bottom: 1.5vh
+}
+
+.detail {
+    margin-right: 0vh;
+    margin-bottom: 1.5vh
+}
+
+.title {
+    color: #2F7219;
+    margin-left: 2vh;
+    margin-bottom: 3vh;
+}
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 0 4px 10px 0 #AAEEC2;
+    border-top-right-radius: 5vh;
+    border-bottom-right-radius: 5vh;
+}
+
+.backgroundColor { 
+    height: 100%;
+    width: 100%;
+}

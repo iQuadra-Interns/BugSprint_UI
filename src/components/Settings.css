@@ -1,0 +1,25 @@
+.settingsContainer {
+    text-align: left;
+    align-content: left;
+    margin: 0vh;
+    background-color: #f8f9fa;
+}
+
+.settingsTitle {
+    color: #3b8721;
+}
+
+.reset-password-title {
+    color: #4caf50;
+}
+
+.spacer {
+    margin-bottom: 1vh;
+}
+
+.save-button {
+    margin-top: 1vh;
+    background-color: #2F7219;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+}

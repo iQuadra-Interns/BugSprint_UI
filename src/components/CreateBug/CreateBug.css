@@ -1,0 +1,66 @@
+.create-bug-container {
+  padding: 20px;
+  max-width: 1200px; /* Increased horizontal size */
+  width: 90%; /* Make it responsive */
+  margin: 0 auto;
+  background-color: #f8f8f8;
+  border-radius: 8px; /* Smooth rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  height: auto; /* Prevent unnecessary vertical stretching */
+}
+
+.title {
+  color: green;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center; /* Keep it centered */
+}
+
+.create-bug-form .form-group {
+  display: flex;
+  flex-wrap: wrap; /* Wrap fields when needed */
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex: 1;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Ensure responsive adjustments */
+}
+
+.form-row select,
+.form-row input,
+.form-group input {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+textarea {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  min-height: 100px;
+}
+
+.save-button {
+  background-color: green;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: darkgreen; /* Hover effect */
+}

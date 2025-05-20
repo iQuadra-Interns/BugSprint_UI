@@ -1,0 +1,80 @@
+.add-testcase-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.add-testcase-popup {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.add-testcase-popup h3 {
+  margin-top: 0;
+  color: green;
+  text-align: center;
+}
+
+.add-testcase-popup form label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.add-testcase-popup form input,
+.add-testcase-popup form textarea,
+.add-testcase-popup form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.save-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.success-message {
+  color: green;
+  margin-top: 10px;
+  font-weight: 500;
+}

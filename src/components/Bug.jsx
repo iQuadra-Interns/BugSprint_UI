@@ -5,15 +5,14 @@ import { useNavigate } from 'react-router-dom';
 export default function Bug({ indbug }) {
   const navigate = useNavigate(); // Correct usage of useNavigate
 
-  const unq = indbug.bug_code
+  const unq = indbug.bug_code;
 
   // Function to handle the click event on <tr>
   const handleRowClick = (id) => {
     sessionStorage.setItem("bugId", id); // Store bugId in sessionStorage
     window.open(`/bug/${unq}`, "_blank"); // Open in a new tab
   };
-  
-  
+
   // Maps for status and priority colors
   const getStatusColor = (status) => {
     const statusColors = {
@@ -24,7 +23,7 @@ export default function Bug({ indbug }) {
       Deferred: '#eded42',// Yellow
       Rejected: '#4a4a46' // Dark Gray
     };
-    return statusColors[status] || '##CECECE'; // Default gray #6c757d
+    return statusColors[status] || '#CECECE'; // Default gray
   };
 
   const getPriorityColor = (priority) => {
@@ -44,13 +43,24 @@ export default function Bug({ indbug }) {
       Fixed: 'success',  // Green
       Closed: 'success', // Dark Green
       Deferred: 'info',  // Yellow
-      Rejected: 'secondary' //Dark Gray
+      Rejected: 'secondary' // Dark Gray
     };
     return <Badge bg={statusColors[status]}>{status}</Badge>;
   };
 
+  // Construct the profile picture path 
+  const profilePicturePath = `/images/${indbug.assignee.toLowerCase().replace(' ', '-')}.jpg`;
+
+  // Function to check if the image exists 
+  const imageExists = (url) => {
+    return true;
+  };
+
+  // Fallback for tooltip content
+  const tooltipContent = indbug.assignee || 'Unknown Assignee';
+
   return (
-    <tr onClick={()=>handleRowClick(indbug.bug_id)} key={indbug.bug_id} >
+    <tr onClick={() => handleRowClick(indbug.bug_id)} key={indbug.bug_id}>
       {/* Bug description column */}
       <td style={{ display: 'flex', alignItems: 'center' }}>
         {/* Vertical section for priority */}
@@ -73,18 +83,45 @@ export default function Bug({ indbug }) {
       <td>{indbug.scenario}</td>
 
       {/* Status column with colored badge */}
-      
       <td>
         {getStatusBadge(indbug.status)}
       </td>
 
       {/* Assignee column */}
       <td>
-        <Badge bg="secondary" pill style={{ fontSize: '1.25rem', padding: '0.5rem 1rem' }}>
-          {indbug.assignee}
-        </Badge>
+        <div className="avatar-circle">
+          {imageExists(profilePicturePath) ? (
+            <img
+              src={profilePicturePath}
+              alt={indbug.assignee}
+              style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+          ) : null}
+          <span
+            style={{
+              display: imageExists(profilePicturePath) ? 'none' : 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%'
+            }}
+          >
+            {indbug.assignee
+              ? indbug.assignee
+                  .split(' ')
+                  .map((name) => name[0])
+                  .join('')
+                  .slice(0, 2)
+                  .toUpperCase()
+              : '??'}
+          </span>
+          <span className="tooltip">{tooltipContent}</span>
+        </div>
       </td>
-      
     </tr>
   );
 }

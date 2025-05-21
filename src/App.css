@@ -34,61 +34,131 @@
   color: #888;
 }
 
-html,body, #root {
-    min-height: 100vh;
-    width: 100% !important;
-    margin: 0;
-    padding: 0;
-  } 
-  
-  .sidebar {
-    background-color: #f8f9fa;
-    border-right: 1px solid #dee2e6;
-  }
-  .sideBar{
-    height:100vh !important;
-    position:sticy;
-    left:0;
-  }
-  
-  .nav-link {
-    color: #333;
-  }
-  
-  .nav-link:hover, .nav-link:focus {
-    background-color: #e9ecef;
-  }
-  
-  .active {
-    background-color: #e9ecef;
-    font-weight: bold;
-  }
-
-.flex {
-
-  display: flex;
-
-}
+html, body, #root {
+  min-height: 100vh;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+} 
 
 .mainContainer {
   min-height: 100vh;
-  /* height: 100%; */
   width: 100%;
   background-color: #f8f9fa;
 }
-.container-fluid{
+
+.container-fluid {
   padding-left: 0px !important;
   padding-right: 0px !important;
 }
 
-  .nav-link.active {
-    background-color: #F0FCE9; /* Change this to your desired background color */
-    color: black;
-    font-weight: normal;
+/* Sidebar styles */
+.sideBar {
+  height: 100vh !important;
+  position: sticky; /* Fixed the typo */
+  top: 0;
+  left: 0;
+  width: 250px; /* Fixed width for desktop */
+  background-color: white; /* Matches MyProfile.css */
+  box-shadow: 0 4px 10px 0 #AAEEC2; /* Matches MyProfile.css */
+  border-top-right-radius: 5vh;
+  border-bottom-right-radius: 5vh;
+  transition: transform 0.3s ease-in-out; /* For mobile toggle animation */
+  z-index: 1000;
+}
+
+.nav-link {
+  color: #333;
+}
+
+.nav-link:hover, .nav-link:focus {
+  background-color: #e9ecef;
+}
+
+.nav-link.active {
+  background-color: #F0FCE9;
+  color: black;
+  font-weight: normal;
+}
+
+.img-fluid {
+  margin-left: -1.3rem;
+}
+
+/* Hamburger menu button */
+.sidebar-toggle {
+  display: none; /* Hidden by default on desktop */
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: none;
+  border: none;
+  color: #333;
+  z-index: 1100;
+  cursor: pointer;
+}
+
+/* Desktop (≥ 992px) */
+@media (min-width: 992px) {
+  .sideBar {
+    transform: translateX(0); /* Always visible */
   }
 
-  .img-fluid {
-    margin-left: -1.3rem;
+  .sidebar-toggle {
+    display: none; /* Hidden on desktop */
+  }
+}
+
+/* Tablet (768px–991px) */
+@media (max-width: 991px) {
+  .sideBar {
+    width: 200px; /* Narrower sidebar */
+    border-top-right-radius: 4vh;
+    border-bottom-right-radius: 4vh;
   }
 
-  
+  .nav-link {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .nav-item .rounded-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-item .fw-bold {
+    font-size: 14px;
+  }
+
+  .nav-item .text-muted {
+    font-size: 12px;
+  }
+}
+
+/* Mobile (≤ 767px) */
+@media (max-width: 767px) {
+  .sideBar {
+    width: 250px;
+    transform: translateX(-100%); /* Hidden by default */
+    position: fixed; /* Overlay on mobile */
+  }
+
+  .sideBar.open {
+    transform: translateX(0); /* Slide in when toggled */
+  }
+
+  .sidebar-toggle {
+    display: block; /* Show hamburger menu */
+  }
+
+  .nav-link {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .nav-item .rounded-circle {
+    width: 40px;
+    height: 40px;
+  }
+}

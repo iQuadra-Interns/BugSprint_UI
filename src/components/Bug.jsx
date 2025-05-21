@@ -3,94 +3,108 @@ import { Badge } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 export default function Bug({ indbug }) {
-  const navigate = useNavigate(); // Correct usage of useNavigate
+  const navigate = useNavigate();
 
   const unq = indbug.bug_code;
 
-  // Function to handle the click event on <tr>
   const handleRowClick = (id) => {
-    sessionStorage.setItem("bugId", id); // Store bugId in sessionStorage
-    window.open(`/bug/${unq}`, "_blank"); // Open in a new tab
+    sessionStorage.setItem("bugId", id);
+    window.open(`/bug/${unq}`, "_blank");
   };
 
-  // Maps for status and priority colors
   const getStatusColor = (status) => {
     const statusColors = {
-      Open: '#ff4d4f',    // Red
-      WIP: '#ffa940',     // Orange
-      Fixed: '#52c41a',   // Green
-      Closed: '#0e4d05',  // Dark Green
-      Deferred: '#eded42',// Yellow
-      Rejected: '#4a4a46' // Dark Gray
+      Open: '#ff4d4f',
+      WIP: '#ffa940',
+      Fixed: '#52c41a',
+      Closed: '#0e4d05',
+      Deferred: '#eded42',
+      Rejected: '#4a4a46'
     };
-    return statusColors[status] || '#CECECE'; // Default gray
+    return statusColors[status] || '#CECECE';
   };
 
   const getPriorityColor = (priority) => {
     const priorityColors = {
-      Feature: '#9370DB',  // Lavender
-      Low: '#28a745',      // Green
-      High: '#dc3545',     // Red
-      Critical: '#000000'  // Black
+      Feature: '#9370DB',
+      Low: '#28a745',
+      High: '#dc3545',
+      Critical: '#000000'
     };
-    return priorityColors[priority] || '#6c757d'; // Default gray
+    return priorityColors[priority] || '#6c757d';
   };
 
   const getStatusBadge = (status) => {
     const statusColors = {
-      Open: 'danger',    // Red
-      WIP: 'warning',    // Orange
-      Fixed: 'success',  // Green
-      Closed: 'success', // Dark Green
-      Deferred: 'info',  // Yellow
-      Rejected: 'secondary' // Dark Gray
+      Open: 'danger',
+      WIP: 'warning',
+      Fixed: 'success',
+      Closed: 'success',
+      Deferred: 'info',
+      Rejected: 'secondary'
     };
     return <Badge bg={statusColors[status]}>{status}</Badge>;
   };
 
-  // Construct the profile picture path 
   const profilePicturePath = `/images/${indbug.assignee.toLowerCase().replace(' ', '-')}.jpg`;
 
-  // Function to check if the image exists 
   const imageExists = (url) => {
     return true;
   };
 
-  // Fallback for tooltip content
   const tooltipContent = indbug.assignee || 'Unknown Assignee';
 
+  const stringToColor = (string) => {
+    if (!string) return '#e5e7eb';
+
+    let hash = 0;
+    for (let i = 0; i < string.length; i++) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    const color = (hash & 0x00FFFFFF).toString(16).toUpperCase();
+    const hexColor = '#' + '00000'.substring(0, 6 - color.length) + color;
+
+    const r = parseInt(hexColor.slice(1, 3), 16);
+    const g = parseInt(hexColor.slice(3, 5), 16);
+    const b = parseInt(hexColor.slice(5, 7), 16);
+    let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+    if (brightness < 60) {
+      const factor = 1.8;
+      const newR = Math.min(255, Math.floor(r * factor)).toString(16).padStart(2, '0');
+      const newG = Math.min(255, Math.floor(g * factor)).toString(16).padStart(2, '0');
+      const newB = Math.min(255, Math.floor(b * factor)).toString(16).padStart(2, '0');
+      return `#${newR}${newG}${newB}`;
+    } else if (brightness > 90) {
+      const factor = 0.65;
+      const newR = Math.floor(r * factor).toString(16).padStart(2, '0');
+      const newG = Math.floor(g * factor).toString(16).padStart(2, '0');
+      const newB = Math.floor(b * factor).toString(16).padStart(2, '0');
+      return `#${newR}${newG}${newB}`;
+    }
+
+    return hexColor;
+  };
+
+  const shouldShowImage = imageExists(profilePicturePath);
+
+  const avatarBackgroundColor = shouldShowImage ? 'transparent' : stringToColor(indbug.assignee);
+
   return (
-    <tr onClick={() => handleRowClick(indbug.bug_id)} key={indbug.bug_id}>
-      {/* Bug description column */}
-      <td style={{ display: 'flex', alignItems: 'center' }}>
-        {/* Vertical section for priority */}
-        <div
-          style={{
-            width: '4px',
-            height: '50px',
-            backgroundColor: getPriorityColor(indbug.priority), // Priority color
-            marginRight: '10px'
-          }}
-        />
-        {/* Bug details */}
-        <div>
-          <div>{indbug.id}</div>
-          <div>{indbug.description}</div>
+    <tr onClick={() => handleRowClick(indbug.bug_id)} key={indbug.bug_id} className="bug-row">
+      <td className="bug-column">
+        <div className="priority-bar" style={{ width: '4px', height: '50px', backgroundColor: getPriorityColor(indbug.priority) }} />
+        <div className="bug-details">
+          <div className="bug-id">{indbug.id}</div>
+          <div className="bug-description">{indbug.description}</div>
         </div>
       </td>
-
-      {/* Scenario column */}
-      <td>{indbug.scenario}</td>
-
-      {/* Status column with colored badge */}
-      <td>
-        {getStatusBadge(indbug.status)}
-      </td>
-
-      {/* Assignee column */}
-      <td>
-        <div className="avatar-circle">
-          {imageExists(profilePicturePath) ? (
+      <td className="scenario-column">{indbug.scenario}</td>
+      <td className="status-column">{getStatusBadge(indbug.status)}</td>
+      <td className="assignee-column">
+        <div className="avatar-circle" style={{ backgroundColor: avatarBackgroundColor }}>
+          {shouldShowImage ? (
             <img
               src={profilePicturePath}
               alt={indbug.assignee}
@@ -98,12 +112,13 @@ export default function Bug({ indbug }) {
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'flex';
+                e.target.parentElement.style.backgroundColor = stringToColor(indbug.assignee);
               }}
             />
           ) : null}
           <span
             style={{
-              display: imageExists(profilePicturePath) ? 'none' : 'flex',
+              display: shouldShowImage ? 'none' : 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               width: '100%',
@@ -122,6 +137,7 @@ export default function Bug({ indbug }) {
           <span className="tooltip">{tooltipContent}</span>
         </div>
       </td>
+      <td className="d-none d-lg-table-cell"></td>
     </tr>
   );
 }

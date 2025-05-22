@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
 import SignIn from "./components/SignIn.jsx";
 import BugsListScreen from "./components/BugsListScreen.jsx";
 import CreateBug from "./components/CreateBug/CreateBug.jsx";
@@ -14,6 +15,10 @@ import Error404Page from "./components/Error404Page";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import TestCasesList from "./components/TestCasesList/TestCasesList.jsx";
 
+import allUrls from "./Baseurls.jsx";
+import { env } from "./EnvironmentMaintaince.js";
+
+// Create router outside component
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -32,10 +37,12 @@ const router = createBrowserRouter(
 );
 
 function App() {
+
+ 
   useEffect(() => {
     const handleStorageChange = (event) => {
       if (event.key === "logout") {
-        window.location.href = "/"; // Redirect to login page
+        window.location.href = "/";
       }
     };
 
@@ -49,6 +56,10 @@ function App() {
     <>
       <ToastContainer />
       <div className="app-container">
+        {/* Show current environment mode */}
+        <div style={{ padding: "0.5rem", fontSize: "0.9rem", color: "#555", background: "#f0f0f0", marginBottom: "1rem" }}>
+          Current Environment: <strong>{env.toUpperCase()}</strong>
+        </div> 
         <div className="main-content">
           <RouterProvider router={router} />
         </div>

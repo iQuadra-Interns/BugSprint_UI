@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    height: 100%;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    /* justify-content: center; */
+    margin: 20px 0;
+    align-items: anchor-center;
+}
+
+.col {
+    flex: 1;
+    max-width: 100%;
+    padding: 10px;
+}
+
+.logoLight {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+.SignInTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.SignInText {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.FormContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.FormCard {
+    background-color: #E0FED3;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logoLightSignInForm {
+    max-width: 100px;
+    height: auto;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.InputContainer {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.SignInIconsUser,
+.SignInIconsLock,
+.SignInIconsEye {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #50BB27;
+}
+
+.SignInIconsUser,
+.SignInIconsLock {
+    left: 10px;
+}
+
+.SignInIconsEye {
+    right: 10px;
+    cursor: pointer;
+}
+
+.SignInFormInput {
+    width: 100%;
+    padding: 10px 40px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.SignInFormInput:focus {
+    outline: none;
+    border-color: #50BB27;
+}
+
+.SignInFormSubmit {
+    width: 100%;
+    padding: 10px;
+    background-color: #1CCA38;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.SignInFormSubmit:hover {
+    background-color: #309D06;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.SignInFormForgotPassword {
+    text-align: right;
+    color: #50BB27;
+    font-size: 0.9rem;
+    cursor: pointer;
+}

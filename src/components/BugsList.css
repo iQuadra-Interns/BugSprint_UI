@@ -1,0 +1,209 @@
+/* General styles for the table */
+.bug-list-container {
+  padding: 20px;
+  overflow-x: auto; /* Allow horizontal scrolling on very small screens as a fallback */
+}
+
+/* Desktop and larger screens */
+.bug-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bug-table th,
+.bug-table td {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.bug-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.bug-row:hover {
+  background-color: #f1f3f5;
+  cursor: pointer;
+}
+
+.bug-column {
+  display: flex;
+  align-items: center;
+}
+
+.priority-bar {
+  margin-right: 10px;
+}
+
+.bug-details {
+  flex: 1;
+}
+
+.bug-id {
+  font-weight: bold;
+}
+
+.bug-description {
+  color: #6c757d;
+}
+
+/* Profile circle styles */
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #ffffff;
+  position: relative;
+  overflow: visible;
+}
+
+.avatar-circle .tooltip {
+  visibility: hidden;
+  background-color: #1f2937;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 4px 8px;
+  position: absolute;
+  z-index: 10;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.avatar-circle:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Tablet (768px to 991px) */
+@media (max-width: 991px) {
+  .bug-table th,
+  .bug-table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .avatar-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  .priority-bar {
+    height: 40px;
+  }
+}
+
+/* Mobile (below 768px) */
+@media (max-width: 767px) {
+  .bug-table {
+    border: 0;
+  }
+
+  .bug-table thead {
+    display: none; /* Hide table header on mobile */
+  }
+
+  .bug-table tbody {
+    display: block;
+  }
+
+  .bug-row {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .bug-row:hover {
+    background-color: #f8f9fa;
+  }
+
+  .bug-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border: 0;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  /* Add labels for each column */
+  .bug-column::before {
+    content: "Bug";
+    font-weight: bold;
+    color: #495057;
+    flex: 0 0 80px;
+  }
+
+  .scenario-column::before {
+    content: "Scenario";
+    font-weight: bold;
+    color: #495057;
+    flex: 0 0 80px;
+  }
+
+  .status-column::before {
+    content: "Status";
+    font-weight: bold;
+    color: #495057;
+    flex: 0 0 80px;
+  }
+
+  .assignee-column::before {
+    content: "Assignee";
+    font-weight: bold;
+    color: #495057;
+    flex: 0 0 80px;
+  }
+
+  /* Adjust the Bug column layout */
+  .bug-column {
+    display: flex;
+    align-items: center;
+  }
+
+  .priority-bar {
+    height: 30px;
+    margin-right: 8px;
+  }
+
+  .bug-details {
+    display: block;
+  }
+
+  .bug-id {
+    font-size: 14px;
+  }
+
+  .bug-description {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  /* Increase avatar size for touch */
+  .avatar-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  /* Adjust tooltip position for mobile */
+  .avatar-circle .tooltip {
+    top: -50px;
+    font-size: 12px;
+  }
+}

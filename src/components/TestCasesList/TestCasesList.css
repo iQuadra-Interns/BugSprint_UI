@@ -1,0 +1,84 @@
+/* Wrapper */
+.testcase-list-wrapper {
+  margin: 20px;
+}
+
+/* Header Row */
+.testcase-header-row {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 12px 15px;
+  border-bottom: 2px solid #e0e0e0;
+  font-weight: 600;
+  color: #202124;
+  font-size: 16px;
+}
+
+/* Header Cells */
+.testcase-header {
+  padding: 0 10px;
+}
+
+/* Row Styling */
+.testcase-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f5f5f5;
+  transition: background-color 0.2s ease;
+}
+
+.testcase-row:hover {
+  background-color: #fafafa;
+}
+
+/* Scenario Title */
+.testcase-title {
+  flex: 2;
+  font-weight: 600;
+  color: #1a73e8;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.testcase-title:hover {
+  text-decoration: underline;
+}
+
+/* Test Steps */
+.testcase-scenario {
+  flex: 3;
+  color: #2e58ca;
+  font-size: 15px;
+}
+
+/* Result Badge */
+.testcase-result {
+  flex: 1;
+  text-align: center;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.testcase-result.pass {
+  background-color: #52c41a;
+}
+
+.testcase-result.fail {
+  background-color: #ff4d4f;
+}
+
+/* Developer Comment */
+.testcase-developer {
+  flex: 2;
+  color: #333333;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

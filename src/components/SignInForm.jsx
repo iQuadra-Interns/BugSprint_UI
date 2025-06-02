@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
  const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ import { useNavigate } from 'react-router-dom';
 
     const handleSubmit = async (values, { setSubmitting }) => {
         setLoading(true);
-        setErrorMessage('');  
+        // setErrorMessage('');  
         try {
             const response = await axios.post('https://c2r3hnk5frqsa6l7zbl43je7cu0lqjyy.lambda-url.us-east-1.on.aws/api/sign-in', {
                 email: values.email,
@@ -63,60 +63,60 @@ import { useNavigate } from 'react-router-dom';
     };
 
     return (
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {({ handleChange, handleBlur, values }) => (
-                <Container className="FormContainer">
-                    <Card className="FormCard">
-                        <Form>
-                            <img src={logoLight} className="logoLightSignInForm" alt="logo" />
-
-                            <div className="InputContainer">
-                                <FiUser className="SignInIconsUser" />
-                                <Field
-                                    type="text"
-                                    name="email"
-                                    placeholder="Email Id"
-                                    className="SignInFormInput"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                            <ErrorMessage name="email" component="div" className="error" />
-
-                            <div className="InputContainer">
-                                <PiLockOpen className="SignInIconsLock" />
-                                <Field
-                                    type={showPassword ? 'text' : 'password'}
-                                    name="password"
-                                    placeholder="Password"
-                                    className="SignInFormInput"
-                                    value={values.password}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                {showPassword ? (
-                                    <AiOutlineEye className="SignInIconsEye" onClick={togglePasswordVisibility} />
-                                ) : (
-                                    <AiOutlineEyeInvisible className="SignInIconsEye" onClick={togglePasswordVisibility} />
-                                )}
-                            </div>
-                            <ErrorMessage name="password" component="div" className="error" />
-
-                            <div className="form-group">
-                                <label className="SignInFormForgotPassword">Forgot Password?</label>
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="SignInFormSubmit" disabled={loading}>
-                                    {loading ? 'Signing in...' : 'Sign In'}
-                                </button>
-                            </div>
-                            {errorMessage && <div className="error">{errorMessage}</div>}
-                        </Form>
-                    </Card>
-                </Container>
-            )}
-        </Formik>
+        <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+        validateOnBlur={false}
+        validateOnChange={false}
+      >
+        {({ errors, isSubmitting }) => (
+          <Container className="FormContainer">
+            <Card className="FormCard">
+              <Form noValidate>
+                <img src={logoLight} className="logoLightSignInForm" alt="logo" />
+  
+                {/* Email */}
+                <div className="InputContainer">
+                  <FiUser className="SignInIconsUser" />
+                  <Field
+                    name="email"
+                    type="email"
+                    placeholder="Email Id"
+                    className="SignInFormInput"
+                  />
+                </div>
+                {errors.email && <div className="error">{errors.email}</div>}
+  
+                {/* Password */}
+                <div className="InputContainer">
+                  <PiLockOpen className="SignInIconsLock" />
+                  <Field
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                    className="SignInFormInput"
+                  />
+                  {showPassword ? (
+                    <AiOutlineEye className="SignInIconsEye" onClick={togglePasswordVisibility} />
+                  ) : (
+                    <AiOutlineEyeInvisible className="SignInIconsEye" onClick={togglePasswordVisibility} />
+                  )}
+                </div>
+                {errors.password && <div className="error">{errors.password}</div>}
+  
+                <label className="SignInFormForgotPassword">Forgot Password?</label>
+  
+                <button type="submit" className="SignInFormSubmit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Signing in…' : 'Sign In'}
+                </button>
+  
+                {errorMessage && <div className="error">{errorMessage}</div>}
+              </Form>
+            </Card>
+          </Container>
+        )}
+      </Formik>
     );
 };
 

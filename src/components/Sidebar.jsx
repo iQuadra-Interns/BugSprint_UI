@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Nav } from 'react-bootstrap';
 import BSLogo from "../images/450_BS_Main-Light.png";
 import profile_pic from "../images/profile_pic.png";
-import { Grid, User, FileText, Settings, LogOut, Menu, X } from 'lucide-react'; // Added Menu and X icons
+import { Grid, User, FileText, Settings, LogOut, Menu, X, PackagePlusIcon} from 'lucide-react'; // Added Menu and X icons
 import { logout } from '../store/authActions';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
@@ -34,6 +34,7 @@ export default function SideBar() {
   const firstName = roleDetails?.first_name || "Guest";
   const lastName = roleDetails?.last_name || "";
   const userCategory = user?.usr?.user_category || "Unknown";
+  const isAdmin = userCategory === "ADM";
 
   return (
     <>
@@ -77,6 +78,16 @@ export default function SideBar() {
         >
           <User size={18} className="me-2" /> My Profile
         </Nav.Link>
+        {/* Manage Constraints - Only for Admins */}
+        {isAdmin && (
+          <Nav.Link
+            href="/ManageConstraints"
+            className="d-flex align-items-center px-3 py-2"
+            onClick={() => setIsOpen(false)}
+          >
+            <PackagePlusIcon size={18} className="me-2" /> Manage Constraints
+          </Nav.Link>
+        )}
         <Nav.Link
           href="/Settings"
           className="d-flex align-items-center px-3 py-2"

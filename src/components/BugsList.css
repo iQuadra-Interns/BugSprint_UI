@@ -1,122 +1,209 @@
-/* General Row Styling */
-.bug-row {
-  display: flex;
-  align-items: center;
-  padding: 12px 15px;
-  border-bottom: 1px solid #f5f5f5; /* Light gray for row separation */
-  transition: background-color 0.2s ease;
+/* General styles for the table */
+.bug-list-container {
+  padding: 20px;
+  overflow-x: auto; /* Allow horizontal scrolling on very small screens as a fallback */
+}
+
+/* Desktop and larger screens */
+.bug-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bug-table th,
+.bug-table td {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.bug-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
 }
 
 .bug-row:hover {
-  background-color: #fafafa; /* Light background on hover */
+  background-color: #f1f3f5;
+  cursor: pointer;
 }
 
-/* Bug Title Styling */
-.bug-title {
-  font-weight: 600;
-  flex: 2;
-  color: #1a73e8; /* Blue color for bug title links */
-  font-size: 16px;
-  text-decoration: none;
+.bug-column {
+  display: flex;
+  align-items: center;
 }
 
-.bug-title:hover {
-  text-decoration: underline;
+.priority-bar {
+  margin-right: 10px;
 }
 
-/* Scenario Column Styling */
-.bug-scenario {
-  flex: 3;
-  color: #2e58ca; /* Gray for scenario description */
-  font-size: 15px;
-}
-
-/* Status Styling */
-.bug-status {
+.bug-details {
   flex: 1;
-  text-align: center;
-  border-radius: 20px; /* Rounded corners for pill-shaped badges */
-  padding: 5px 12px;
-  font-weight: 600;
-  color: #fff;
-  font-size: 13px;
-  text-transform: capitalize;
 }
 
-/* Assignee Styling */
-.bug-assignee {
-  flex: 1;
-  color: #333333;
-  font-size: 15px;
+.bug-id {
+  font-weight: bold;
+}
+
+.bug-description {
+  color: #6c757d;
+}
+
+/* Profile circle styles */
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Status Color Coding */
-.bug-status.open {
-  background-color: #ff4d4f; /* Red for "Open" */
-}
-
-.bug-status.wip {
-  background-color: #ffa940; /* Orange for "WIP" */
-}
-
-.bug-status.fixed {
-  background-color: #52c41a; /* Light green for "Fixed" */
-}
-
-.bug-status.closed {
-  background-color: #52c41a; /* Same green for "Closed" */
-}
-
-.bug-status.deferred {
-  background-color: #faad14; /* Yellow for "Deferred" */
-}
-
-.bug-status.rejected {
-  background-color: #8c8c8c; /* Gray for "Rejected" */
-}
-
-.bug-status.medium {
-  background-color: #ff85c0; /* Pink for "Medium" */
-}
-
-.bug-status.low {
-  background-color: #a3b5ff; /* Light blue for "Low" */
-}
-
-.bug-status.high {
-  background-color: #ff7875; /* Red for "High" */
-}
-
-/* Table Header Styling */
-table thead th {
-  font-size: 16px;
-  font-weight: 600;
-  color: #202124; /* Darker gray for headers */
-  padding: 10px 15px;
-  background-color: #f8f9fa; /* Light gray background for header */
-  border-bottom: 2px solid #e0e0e0;
-  text-align: left;
-}
-
-/* Assignee Initials Badge */
-.bug-assignee .initials-badge {
-  background-color: #d3adf7; /* Purple for user initials badge */
-  color: white;
   font-size: 12px;
-  font-weight: 700;
-  padding: 5px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
+  color: #ffffff;
+  position: relative;
+  overflow: visible;
 }
 
-/* Table Hover Effect */
-table tbody tr:hover {
-  background-color: #f1f3f4; /* Slightly darker hover effect */
+.avatar-circle .tooltip {
+  visibility: hidden;
+  background-color: #1f2937;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 4px 8px;
+  position: absolute;
+  z-index: 10;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.avatar-circle:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Tablet (768px to 991px) */
+@media (max-width: 991px) {
+  .bug-table th,
+  .bug-table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .avatar-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  .priority-bar {
+    height: 40px;
+  }
+}
+
+/* Mobile (below 768px) */
+@media (max-width: 767px) {
+  .bug-table {
+    border: 0;
+  }
+
+  .bug-table thead {
+    display: none; /* Hide table header on mobile */
+  }
+
+  .bug-table tbody {
+    display: block;
+  }
+
+  .bug-row {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .bug-row:hover {
+    background-color: #f8f9fa;
+  }
+
+  .bug-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border: 0;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  /* Add labels for each column */
+  .bug-column::before {
+    content: "Bug";
+    font-weight: bold;
+    color: #495057;
+    flex: 0 0 80px;
+  }
+
+  .scenario-column::before {
+    content: "Scenario";
+    font-weight: bold;
+    color: #495057;
+    flex: 0 0 80px;
+  }
+
+  .status-column::before {
+    content: "Status";
+    font-weight: bold;
+    color: #495057;
+    flex: 0 0 80px;
+  }
+
+  .assignee-column::before {
+    content: "Assignee";
+    font-weight: bold;
+    color: #495057;
+    flex: 0 0 80px;
+  }
+
+  /* Adjust the Bug column layout */
+  .bug-column {
+    display: flex;
+    align-items: center;
+  }
+
+  .priority-bar {
+    height: 30px;
+    margin-right: 8px;
+  }
+
+  .bug-details {
+    display: block;
+  }
+
+  .bug-id {
+    font-size: 14px;
+  }
+
+  .bug-description {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  /* Increase avatar size for touch */
+  .avatar-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  /* Adjust tooltip position for mobile */
+  .avatar-circle .tooltip {
+    top: -50px;
+    font-size: 12px;
+  }
 }

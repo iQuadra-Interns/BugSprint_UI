@@ -26,7 +26,7 @@ const BugList = ({ filters }) => {
 
     const updatedFilteredBugs = bugs.filter((bug) =>
       Object.entries(filters).every(([key, value]) => {
-        if (!value) return true; // Ignore empty filters
+        if (!value) return true;
 
         const bugValue = bug[key]?.toString().toLowerCase().trim() || "";
         const filterValue = value.toString().toLowerCase().trim();
@@ -44,14 +44,14 @@ const BugList = ({ filters }) => {
 
   return (
     <div className="bug-list-container">
-      <Table hover>
+      <Table hover className="bug-table">
         <thead>
           <tr>
             <th>Bug</th>
             <th>Scenario</th>
             <th>Status</th>
             <th>Assignee</th>
-            <th></th>
+            <th className="d-none d-lg-table-cell"></th> {/* Hide on screens smaller than lg */}
           </tr>
         </thead>
         <tbody>

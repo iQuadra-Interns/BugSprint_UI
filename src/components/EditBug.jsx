@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Spinner } from 'react-bootstrap';
 import SideBar from "./Sidebar";
 import DropDown from "./DropDown";
 import Box from "./Box";
@@ -16,9 +17,11 @@ import CreateNotificationContainer from "./Notifications";
 import { GETAPI, POSTAPI } from "./Api";
 import { useSelector } from "react-redux";
 function EditBug() {
+
   const navigate = useNavigate();
   // const {id} = useParams()
   const bugId = sessionStorage.getItem("bugId"); // Retrieve bugId
+  const [rephraseLoading, setRephraseLoading] = useState(false);
   // sessionStorage.removeItem("bugId"); // Remove it after retrieving
 
   const reported = useSelector((state) => state.auth.user.usr.user_id);
@@ -50,7 +53,7 @@ function EditBug() {
     rootCauseLocationOptions: [],
   });
 
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(true);
   const [loading, setLoading] = useState(false);
   const [popup, setPopUp] = useState({});
 
@@ -256,6 +259,32 @@ function EditBug() {
   const handleCancel = () => {
     setIsEditMode(false);
   };
+
+  // ─── NEW: call AWS Lambda to rephrase the description ───────────────────
+ const handleRephrase = async () => {
+    if (!baseData.description) return;
+    setRephraseLoading(true);
+    try {
+      const { data } = await axios.post(
+        'https://n2k6xeku5a35vvvptxcmn3vara0egiba.lambda-url.us-east-1.on.aws/rephrase',
+        { description: baseData.description }
+      );
+      // update with the AI‐rephrased text
+      handleBaseDataChange('description', data.rephrased);
+    } catch (err) {
+      console.error('Rephrase failed', err);
+      setPopUp({
+        notification: true,
+        type: 'danger',
+        data: 'Rephrase error',
+        message: 'Could not rephrase description',
+      });
+    } finally {
+      setRephraseLoading(false);
+    }
+  };
+  // ─────────────────────────────────────────────────────────────────────────
+
   return (
     <Container fluid className="mainContainerrr">
       {popup?.notification === true && (
@@ -514,6 +543,19 @@ function EditBug() {
                   {isEditMode && (
                     <Box>
                       <h5>Description</h5>
+                       {/** AI Rephrase button **/}
+                      <Button
+                        variant="outline-secondary"
+                        size="sm"
+                        onClick={handleRephrase}
+                        disabled={rephraseLoading}
+                        className="mb-2"
+                      >
+                      {rephraseLoading
+                        ? <Spinner as="span" animation="border" size="sm" />
+                        : 'AI Rephrase'}
+                      </Button>
+
                       <Form.Control
                         as="textarea"
                         rows={4}

@@ -50,7 +50,7 @@ function EditBug() {
     rootCauseLocationOptions: [],
   });
 
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(true);
   const [loading, setLoading] = useState(false);
   const [popup, setPopUp] = useState({});
 
@@ -256,6 +256,32 @@ function EditBug() {
   const handleCancel = () => {
     setIsEditMode(false);
   };
+
+  // ─── NEW: call AWS Lambda to rephrase the description ───────────────────
+ const handleRephrase = async () => {
+    if (!baseData.description) return;
+    setLoading(true);
+    try {
+      const { data } = await axios.post(
+        'https://n2k6xeku5a35vvvptxcmn3vara0egiba.lambda-url.us-east-1.on.aws/rephrase',
+        { description: baseData.description }
+      );
+      // update with the AI‐rephrased text
+      handleBaseDataChange('description', data.rephrased);
+    } catch (err) {
+      console.error('Rephrase failed', err);
+      setPopUp({
+        notification: true,
+        type: 'danger',
+        data: 'Rephrase error',
+        message: 'Could not rephrase description',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  // ─────────────────────────────────────────────────────────────────────────
+
   return (
     <Container fluid className="mainContainerrr">
       {popup?.notification === true && (
@@ -514,6 +540,16 @@ function EditBug() {
                   {isEditMode && (
                     <Box>
                       <h5>Description</h5>
+                       {/** AI Rephrase button **/}
+                        <Button
+                          variant="outline-secondary"
+                          size="sm"
+                          onClick={handleRephrase}
+                          className="mb-2"
+                        >
+                        AI Rephrase
+                      </Button>
+
                       <Form.Control
                         as="textarea"
                         rows={4}

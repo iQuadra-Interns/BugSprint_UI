@@ -9,6 +9,7 @@ const BASE_URL = "http://127.0.0.1:8000/admin/api/admin";
 const ManageConstraints = () => {
   // Product state
   const [products, setProducts] = useState([]);
+  const [productShortCodeInput, setProductShortCodeInput] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Scenario state
@@ -70,12 +71,14 @@ const ManageConstraints = () => {
   const openAddProductModal = () => {
     setProductModalType("add");
     setProductInput("");
+    setProductShortCodeInput("");
     setShowProductModal(true);
   };
 
   const openEditProductModal = (product) => {
     setProductModalType("edit");
     setProductInput(product.product_name);
+    setProductShortCodeInput(product.product_short_code || "");
     setShowProductModal(true);
   };
 
@@ -83,10 +86,10 @@ const ManageConstraints = () => {
     if (!productInput.trim()) return;
     try {
       if (productModalType === "add") {
-        await axios.post(`${BASE_URL}/product`, { product_name: productInput });
+        await axios.post(`${BASE_URL}/product`, { product_name: productInput, product_short_code: productShortCodeInput});
         alert("Product added");
       } else if (productModalType === "edit" && selectedProduct) {
-        await axios.put(`${BASE_URL}/product/${selectedProduct.product_id}`, { product_name: productInput });
+        await axios.put(`${BASE_URL}/product/${selectedProduct.product_id}`, { product_name: productInput, product_short_code: productShortCodeInput });
         alert("Product updated");
       }
       setShowProductModal(false);
@@ -319,6 +322,16 @@ const ManageConstraints = () => {
                 aria-required="true"
               />
             </Form.Group>
+            <Form.Group controlId="productShortCode" className="mt-3">
+              <Form.Label>Product Short Code</Form.Label>
+              <Form.Control
+                type="text"
+                value={productShortCodeInput}
+                onChange={(e) => setProductShortCodeInput(e.target.value)}
+                placeholder="Enter short code"
+                aria-required="true"
+              />
+            </Form.Group>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -331,7 +344,7 @@ const ManageConstraints = () => {
             <Button
               variant="primary"
               onClick={handleProductSubmit}
-              disabled={!productInput.trim()}
+              disabled={!productInput.trim() || !productShortCodeInput.trim()}
               aria-label={productModalType === "add" ? "Add product" : "Update product"}
             >
               {productModalType === "add" ? "Add" : "Update"}

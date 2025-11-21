@@ -21,7 +21,14 @@ export default function SideBar() {
   };
 
   const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+    const next = !isOpen;
+    setIsOpen(next);
+    try {
+      if (next) document.body.classList.add('sidebar-open');
+      else document.body.classList.remove('sidebar-open');
+    } catch (e) {
+      // ignore (server-side rendering or restricted env)
+    }
   };
 
   // Extract user details dynamically
@@ -60,21 +67,21 @@ export default function SideBar() {
         <Nav.Link
           href="/MyDashboard"
           className="d-flex align-items-center px-3 py-2"
-          onClick={() => setIsOpen(false)}
+          onClick={() => { setIsOpen(false); try { document.body.classList.remove('sidebar-open'); } catch(e){} }}
         >
           <Grid size={18} className="me-2" /> Dashboard
         </Nav.Link>
         <Nav.Link
           href="/TestCases"
           className="d-flex align-items-center px-3 py-2"
-          onClick={() => setIsOpen(false)}
+          onClick={() => { setIsOpen(false); try { document.body.classList.remove('sidebar-open'); } catch(e){} }}
         >
           <FileText size={18} className="me-2" /> Test Cases
         </Nav.Link>
         <Nav.Link
           href="/MyProfile"
           className="d-flex align-items-center px-3 py-2"
-          onClick={() => setIsOpen(false)}
+          onClick={() => { setIsOpen(false); try { document.body.classList.remove('sidebar-open'); } catch(e){} }}
         >
           <User size={18} className="me-2" /> My Profile
         </Nav.Link>
@@ -83,7 +90,7 @@ export default function SideBar() {
           <Nav.Link
             href="/ManageConstraints"
             className="d-flex align-items-center px-3 py-2"
-            onClick={() => setIsOpen(false)}
+            onClick={() => { setIsOpen(false); try { document.body.classList.remove('sidebar-open'); } catch(e){} }}
           >
             <PackagePlusIcon size={18} className="me-2" /> Manage Constraints
           </Nav.Link>
@@ -97,9 +104,10 @@ export default function SideBar() {
         </Nav.Link>
         <Nav.Link
           onClick={() => {
-            handleLogout();
-            setIsOpen(false);
-          }}
+              handleLogout();
+              setIsOpen(false);
+              try { document.body.classList.remove('sidebar-open'); } catch(e){}
+            }}
           className="d-flex align-items-center px-3 py-2"
         >
           <LogOut size={18} className="me-2" /> Logout

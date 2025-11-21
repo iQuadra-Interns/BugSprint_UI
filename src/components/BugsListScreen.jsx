@@ -14,10 +14,10 @@ function BugsListScreen() {
   return (
     <Container fluid className="mainContainer">
       <Row className="h-100">
-        <Col xs={2} className="p-0 sidebar-container">
+        <Col xs={12} md="auto" className="p-0 sidebar-container">
           <SideBar />
         </Col>
-        <Col xs={10} className="content-container">
+        <Col xs={12} md className="content-container">
           <div className="controls-container">
             <Controls applyFilters={applyFilters} />
           </div>

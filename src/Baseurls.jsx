@@ -1,4 +1,13 @@
 const allUrls = {
+  LOCAL: {
+    ai_tasks: "http://127.0.0.1:8001/",
+    common: "http://127.0.0.1:8001/",
+    bugs: "http://127.0.0.1:8001/",
+    signin: "http://127.0.0.1:8001/signin/",
+    bug_search: "http://127.0.0.1:8001/",
+    admin: "http://127.0.0.1:8001/",
+    test_cases: "http://127.0.0.1:8001/",
+  },
   DEV: {
     ai_tasks: "https://n2k6xeku5a35vvvptxcmn3vara0egiba.lambda-url.us-east-1.on.aws/",
     common: "https://xjhkkap5tmpwr3yjiw7nvadwra0jyiav.lambda-url.us-east-1.on.aws/",

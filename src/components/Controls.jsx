@@ -58,8 +58,8 @@ function Controls({ applyFilters }) {
 
   return (
     <>
-      <Row className="mb-3 mt-5 align-items-center">
-        <Col xs={12} md={6} lg={4}>
+      <Row className="controls-row mb-3 mt-5 align-items-center">
+        <Col xs={12} md={5} lg={4}>
           <InputGroup className="mb-3">
             <InputGroup.Text className="bg-white border-end-0">
               <Search />
@@ -71,7 +71,7 @@ function Controls({ applyFilters }) {
             />
           </InputGroup>
         </Col>
-        <Col xs={12} md={6} lg={8} className="d-flex justify-content-md-end">
+        <Col xs={12} md={7} lg={8} className="d-flex justify-content-md-end">
           {/* Filter Button */}
           <Button
             variant="outline-secondary"

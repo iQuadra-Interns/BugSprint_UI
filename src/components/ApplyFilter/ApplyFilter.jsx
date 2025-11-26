@@ -75,7 +75,7 @@ const ApplyFilter = ({ showFilterModal, setShowFilterModal, applyFilters, dropdo
             </select>
             <select name="product" value={filterData.product} onChange={handleChange}>
               <option value="">Product</option>
-              {(dropdownData?.products || [])
+              {(dropdownData?.products ||[])
                 .filter(p => p && p.product_name && p.product_name.toString().trim())
                 .map(product => {
                   const name = product.product_name.toString().trim();

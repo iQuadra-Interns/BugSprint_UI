@@ -24,16 +24,34 @@ const BugList = ({ filters }) => {
       return;
     }
 
-    const updatedFilteredBugs = bugs.filter((bug) =>
-      Object.entries(filters).every(([key, value]) => {
+    const updatedFilteredBugs = bugs.filter((bug) => {
+      // For each filter key, determine whether the bug matches
+      return Object.entries(filters).every(([key, value]) => {
         if (!value) return true;
 
-        const bugValue = bug[key]?.toString().toLowerCase().trim() || "";
         const filterValue = value.toString().toLowerCase().trim();
 
+        if (key === "search") {
+          // partial search across multiple fields
+          const haystack = [
+            bug.description,
+            bug.scenario,
+            bug.assignee,
+            bug.bug_code,
+            bug.id,
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toString()
+            .toLowerCase();
+
+          return haystack.includes(filterValue);
+        }
+
+        const bugValue = bug[key]?.toString().toLowerCase().trim() || "";
         return bugValue === filterValue;
-      })
-    );
+      });
+    });
 
     console.log("Filtered Bugs:", updatedFilteredBugs);
     setFilteredBugs(updatedFilteredBugs);
@@ -59,7 +77,7 @@ const BugList = ({ filters }) => {
             filteredBugs.map((bug) => <Bug key={bug.bug_id} indbug={bug} />)
           ) : (
             <tr>
-              <td colSpan="5" className="text-center">No bugs found.</td>
+              <td colSpan="5" className="text-center">No results found.</td>
             </tr>
           )}
         </tbody>

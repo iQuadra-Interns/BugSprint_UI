@@ -30,18 +30,33 @@
     text-align: center;
   }
   
+
   .apply-filter-form .form-row {
-    display: flex;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
     margin-bottom: 20px;
   }
-  
+
   .apply-filter-form select {
-    flex: 1;
-    padding: 12px;
-    font-size: 16px;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
     border: 1px solid #ddd;
     border-radius: 6px;
+    box-sizing: border-box;
+  }
+
+  /* Compact dropdown option styling to avoid large vertical gaps in option list */
+  .apply-filter-form select option {
+    padding: 6px 8px;
+    line-height: 1.2;
+    font-size: 14px;
+  }
+
+  /* Make certain controls span the full width (e.g., Root Cause Location) */
+  .apply-filter-form .full-width {
+    grid-column: 1 / -1;
   }
   
   .apply-button {

@@ -9,6 +9,7 @@ import axios from "axios";
 function Controls({ applyFilters }) {
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showCreateBugModal, setShowCreateBugModal] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const [dropdownData, setDropdownData] = useState({
     bugStatus: [],
     environments: [],
@@ -66,6 +67,13 @@ function Controls({ applyFilters }) {
             </InputGroup.Text>
             <Form.Control
               placeholder="Search"
+              value={searchText}
+              onChange={(e) => {
+                const v = e.target.value;
+                setSearchText(v);
+                // emit search filter; parent will merge filters
+                applyFilters({ search: v });
+              }}
               className="border-start-0"
               style={{ boxShadow: "none", borderRight: "none" }}
             />

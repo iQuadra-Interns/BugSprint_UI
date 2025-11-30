@@ -56,13 +56,10 @@ html, body, #root {
   margin: 0;
 }
 
-/* Reduce gap between sidebar and content while preserving columns */
-/* Sidebar column already has p-0; ensure it doesn't add right padding */
 .sidebar-container {
   padding-right: 0 !important;
 }
 
-/* Pull content slightly left on medium+ screens so gap is smaller */
 @media (min-width: 768px) {
   .content-container {
     padding-left: 0.6rem !important; /* ~9.6px */
@@ -78,16 +75,16 @@ html, body, #root {
 /* Sidebar styles */
 .sideBar {
   height: 100vh !important;
-  position: sticky; /* Fixed the typo */
+  position: sticky; 
   top: 0;
   left: 0;
-  width: 100%; /* fill the column by default */
-  max-width: 280px; /* visual max width on larger screens */
-  background-color: white; /* Matches MyProfile.css */
-  box-shadow: 0 4px 10px 0 #AAEEC2; /* Matches MyProfile.css */
+  width: 100%; 
+  max-width: 280px; 
+  background-color: white; 
+  box-shadow: 0 4px 10px 0 #AAEEC2; 
   border-top-right-radius: 5vh;
   border-bottom-right-radius: 5vh;
-  transition: transform 0.3s ease-in-out; /* For mobile toggle animation */
+  transition: transform 0.3s ease-in-out; 
   z-index: 1000;
 }
 

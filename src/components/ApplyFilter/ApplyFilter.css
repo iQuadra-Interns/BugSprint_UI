@@ -30,18 +30,32 @@
     text-align: center;
   }
   
+
   .apply-filter-form .form-row {
-    display: flex;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
     margin-bottom: 20px;
   }
-  
+
   .apply-filter-form select {
-    flex: 1;
-    padding: 12px;
-    font-size: 16px;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
     border: 1px solid #ddd;
     border-radius: 6px;
+    box-sizing: border-box;
+    color: #333;
+  }
+
+  .apply-filter-form select option {
+    padding: 6px 8px;
+    line-height: 1.2;
+    font-size: 14px;
+  }
+
+  .apply-filter-form .full-width {
+    grid-column: 1 / -1;
   }
   
   .apply-button {
@@ -56,5 +70,45 @@
   
   .apply-button:hover {
     background-color: darkgreen;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+    align-items: center;
+  }
+
+  .cancel-button {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px 18px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .cancel-button:hover {
+    background-color: #e9ecef;
+  }
+
+  .apply-button, .cancel-button {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 576px) {
+    .button-group {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .apply-button, .cancel-button {
+      width: 100%;
+    }
   }
   

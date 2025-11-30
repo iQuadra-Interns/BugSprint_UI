@@ -8,7 +8,8 @@ function BugsListScreen() {
   const [filters, setFilters] = useState({});
 
   const applyFilters = (selectedFilters) => {
-    setFilters(selectedFilters);
+    // merge incoming filters with existing ones so Controls and Filter modal can cooperate
+    setFilters((prev) => ({ ...(prev || {}), ...(selectedFilters || {}) }));
   };
 
   return (

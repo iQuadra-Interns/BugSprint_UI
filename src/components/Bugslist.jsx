@@ -25,20 +25,20 @@ const BugList = ({ filters }) => {
     }
 
     const updatedFilteredBugs = bugs.filter((bug) => {
-      // For each filter key, determine whether the bug matches
       return Object.entries(filters).every(([key, value]) => {
-        if (!value) return true;
+        if (!value || key?.toString().startsWith("sort")) return true;
 
         const filterValue = value.toString().toLowerCase().trim();
 
         if (key === "search") {
-          // partial search across multiple fields
           const haystack = [
             bug.description,
             bug.scenario,
             bug.assignee,
             bug.bug_code,
-            bug.id,
+            bug.bug_id,
+            bug.title,
+            bug.product,
           ]
             .filter(Boolean)
             .join(" ")
@@ -53,8 +53,48 @@ const BugList = ({ filters }) => {
       });
     });
 
-    console.log("Filtered Bugs:", updatedFilteredBugs);
-    setFilteredBugs(updatedFilteredBugs);
+    const sortedBugs = [...updatedFilteredBugs];
+
+    const priorityWeight = (p) => {
+      if (p === null || p === undefined) return 0;
+      const s = p.toString().toLowerCase().trim();
+
+      const map = { critical: 5, highest: 4, high: 4, medium: 3, med: 3, low: 2, lowest: 1 };
+      for (const key of Object.keys(map)) if (s.includes(key)) return map[key];
+
+      const m = s.match(/\d+/);
+      if (m) {
+        const num = Number(m[0]);
+        if (!Number.isNaN(num)) return Math.max(0, 100 - num); 
+      }
+
+      return s.charCodeAt(0) || 0;
+    };
+
+    if (filters.sortPriority) {
+      if (filters.sortPriority === "high-low") {
+        sortedBugs.sort((a, b) => priorityWeight(b.priority) - priorityWeight(a.priority));
+      } else if (filters.sortPriority === "low-high") {
+        sortedBugs.sort((a, b) => priorityWeight(a.priority) - priorityWeight(b.priority));
+      }
+    }
+
+    const dateValue = (bug) => {
+      const d = bug.createdAt || bug.created_at || bug.created || bug.reported_date || bug.date_reported;
+      const parsed = Date.parse(d);
+      return Number.isNaN(parsed) ? 0 : parsed;
+    };
+
+    if (filters.sortDate) {
+      if (filters.sortDate === "oldest-newest") {
+        sortedBugs.sort((a, b) => dateValue(a) - dateValue(b));
+      } else if (filters.sortDate === "newest-oldest") {
+        sortedBugs.sort((a, b) => dateValue(b) - dateValue(a));
+      }
+    }
+
+    console.log("Filtered Bugs:", sortedBugs);
+    setFilteredBugs(sortedBugs);
   }, [filters, bugs]);
 
   if (loading) return <div className="text-center">Loading...</div>;
@@ -69,7 +109,7 @@ const BugList = ({ filters }) => {
             <th>Scenario</th>
             <th>Status</th>
             <th>Assignee</th>
-            <th className="d-none d-lg-table-cell"></th> {/* Hide on screens smaller than lg */}
+            <th className="d-none d-lg-table-cell"></th>
           </tr>
         </thead>
         <tbody>

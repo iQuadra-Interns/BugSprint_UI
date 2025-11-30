@@ -88,7 +88,7 @@ function Controls({ applyFilters }) {
           >
             Filter
           </Button>
-          <SortButton />
+          <SortButton applyFilters={applyFilters} />
           <Button variant="success" onClick={() => setShowCreateBugModal(true)}>
             + Create Bug
           </Button>

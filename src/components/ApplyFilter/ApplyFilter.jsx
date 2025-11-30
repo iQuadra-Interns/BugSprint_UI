@@ -17,11 +17,25 @@ const ApplyFilter = ({ showFilterModal, setShowFilterModal, applyFilters, dropdo
     reported_by: "",
   });
 
+  const sanitize = (raw) => {
+    if (raw === undefined || raw === null) return "";
+    try {
+      return raw
+        .toString()
+        .replace(/\u00A0/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    } catch (e) {
+      return raw;
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const normalized = sanitize(value);
     setFilterData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: normalized || "",
     }));
   };
 
@@ -34,8 +48,18 @@ const ApplyFilter = ({ showFilterModal, setShowFilterModal, applyFilters, dropdo
       }
     });
 
-    console.log("Filters sent to BugList:", formattedFilters);
-    applyFilters(formattedFilters);
+    const keyMap = {
+      bug_status: "status",
+    };
+
+    const mappedFilters = {};
+    Object.entries(formattedFilters).forEach(([k, v]) => {
+      const mappedKey = keyMap[k] || k;
+      mappedFilters[mappedKey] = v;
+    });
+
+    console.log("Filters sent to BugList:", mappedFilters);
+    applyFilters(mappedFilters);
     setShowFilterModal(false);
     toast.success("Filters applied successfully!");
   };
